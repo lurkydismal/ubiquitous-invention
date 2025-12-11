@@ -1,4 +1,4 @@
-import { createRoot } from 'react-dom/client';
+import * as ReactDOM from 'react-dom/client';
 
 // project imports
 import App from 'App';
@@ -6,10 +6,15 @@ import * as serviceWorker from 'serviceWorker';
 import reportWebVitals from 'reportWebVitals';
 import { ConfigProvider } from 'contexts/ConfigContext';
 
+// std imports
+import { log } from './stdlog';
+import { isDev } from './stdvar';
+
 // style + assets
+import './index.css';
 import 'assets/scss/style.scss';
 
-// google-fonts
+// fonts
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/300.css';
@@ -25,14 +30,12 @@ import '@fontsource/poppins/500.css';
 import '@fontsource/poppins/600.css';
 import '@fontsource/poppins/700.css';
 
-// ==============================|| REACT DOM RENDER ||============================== //
+log.info(`Running ${isDev ? 'DEVELOPMENT' : 'PRODUCTION'} build`);
 
-const container = document.getElementById('root');
-const root = createRoot(container);
-root.render(
-  <ConfigProvider>
-    <App />
-  </ConfigProvider>
+ReactDOM.createRoot(document.getElementById('root')!).render(
+    < ConfigProvider >
+        <App />
+    </ConfigProvider >
 );
 
 // If you want your app to work offline and load faster, you can change
@@ -44,3 +47,11 @@ serviceWorker.unregister();
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+/*
+<React.StrictMode>
+    <StyledEngineProvider injectFirst>
+        <App />
+    </StyledEngineProvider>
+</React.StrictMode>,
+*/
