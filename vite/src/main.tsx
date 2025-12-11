@@ -1,10 +1,12 @@
 import * as ReactDOM from 'react-dom/client';
+import * as React from 'react';
+import { StyledEngineProvider } from '@mui/material/styles';
 
 // project imports
-import App from 'App';
-import * as serviceWorker from 'serviceWorker';
-import reportWebVitals from 'reportWebVitals';
-import { ConfigProvider } from 'contexts/ConfigContext';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
+import reportWebVitals from './reportWebVitals';
+import { ConfigProvider } from './contexts/ConfigContext';
 
 // std imports
 import { log } from './stdlog';
@@ -33,9 +35,13 @@ import '@fontsource/poppins/700.css';
 log.info(`Running ${isDev ? 'DEVELOPMENT' : 'PRODUCTION'} build`);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-    < ConfigProvider >
-        <App />
-    </ConfigProvider >
+    <React.StrictMode>
+        <StyledEngineProvider injectFirst>
+            < ConfigProvider >
+                <App />
+            </ConfigProvider >
+        </StyledEngineProvider>
+    </React.StrictMode>,
 );
 
 // If you want your app to work offline and load faster, you can change
