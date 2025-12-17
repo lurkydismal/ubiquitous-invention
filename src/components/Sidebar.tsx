@@ -5,13 +5,9 @@ import {
     GlobalStyles,
     Avatar,
     Box,
-    Button,
-    Card,
     Chip,
     Divider,
     IconButton,
-    Input,
-    LinearProgress,
     List,
     ListItem,
     ListItemButton,
@@ -19,28 +15,26 @@ import {
     ListItemContent,
     Typography,
     Sheet,
-    Stack,
 } from "@mui/joy";
-import Link from "next/link";
+import NextLink from "next/link";
 import {
-    SearchRounded as SearchRoundedIcon,
-    HomeRounded as HomeRoundedIcon,
     DashboardRounded as DashboardRoundedIcon,
-    ShoppingCartRounded as ShoppingCartRoundedIcon,
     AssignmentRounded as AssignmentRoundedIcon,
     QuestionAnswerRounded as QuestionAnswerRoundedIcon,
-    GroupRounded as GroupRoundedIcon,
-    SupportRounded as SupportRoundedIcon,
-    SettingsRounded as SettingsRoundedIcon,
-    CloseRounded as CloseRoundedIcon,
     LogoutRounded as LogoutRoundedIcon,
     PendingActionsRounded as PendingActionsRoundedIcon,
     KeyboardArrowDown as KeyboardArrowDownIcon,
 } from "@mui/icons-material";
 import { usePathname } from "next/navigation";
+import {
+    FormatListBulleted as AllIcon,
+    PendingOutlined as InProgressIcon,
+    CheckCircleOutline as FinishedIcon,
+    CancelOutlined as CancelledIcon,
+    ScheduleOutlined as OutdatedIcon,
+} from "@mui/icons-material";
 
 // import ColorSchemeToggle from "./ColorSchemeToggle";
-import { closeSidebar } from "@/stdfunc";
 
 function Toggler(props: {
     defaultExpanded?: boolean;
@@ -81,21 +75,12 @@ export default function Sidebar() {
     // normalize (remove trailing slash)
     const pathname = pathnameRaw.replace(/\/+$/, "") || "/";
 
-    // open Tasks group if current route is /tasks or a subroute
-    const [tasksOpen, setTasksOpen] = React.useState(() =>
-        pathname.startsWith("/tasks"),
-    );
-
-    // keep it open when user navigates to a tasks route
-    React.useEffect(() => {
-        if (pathname.startsWith("/tasks")) setTasksOpen(true);
-    }, [pathname]);
-
     const taskLinks = [
-        { label: "All tasks", href: "/tasks" },
-        { label: "In progress", href: "/tasks/in-progress" },
-        { label: "Done", href: "/tasks/done" },
-        { label: "Cancelled", href: "/tasks/cancelled" },
+        { label: "All tasks", icon: AllIcon, href: "/tasks" },
+        { label: "In progress", icon: InProgressIcon, href: "/tasks/in-progress" },
+        { label: "Finished", icon: FinishedIcon, href: "/tasks/finished" },
+        { label: "Cancelled", icon: CancelledIcon, href: "/tasks/cancelled" },
+        { label: "Outdated", icon: OutdatedIcon, href: "/tasks/outdated" },
     ];
 
     const menu = [
@@ -159,32 +144,13 @@ export default function Sidebar() {
                     },
                 })}
             />
-            <Box
-                className="Sidebar-overlay"
-                sx={{
-                    position: "fixed",
-                    zIndex: 9998,
-                    top: 0,
-                    left: 0,
-                    width: "100vw",
-                    height: "100vh",
-                    opacity: "var(--SideNavigation-slideIn)",
-                    backgroundColor: "var(--joy-palette-background-backdrop)",
-                    transition: "opacity 0.4s",
-                    transform: {
-                        xs: "translateX(calc(100% * (var(--SideNavigation-slideIn, 0) - 1) + var(--SideNavigation-slideIn, 0) * var(--Sidebar-width, 0px)))",
-                        lg: "translateX(-100%)",
-                    },
-                }}
-                onClick={() => closeSidebar()}
-            />
             <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-                <Link href="/">
+                <NextLink href="/">
                     <IconButton variant="soft" color="primary" size="sm">
                         <PendingActionsRoundedIcon />
                     </IconButton>
-                </Link>
-                <Typography level="title-lg" href="/" component={Link}>
+                </NextLink>
+                <Typography level="title-lg" href="/" component={NextLink}>
                     Tasker
                 </Typography>
                 {/*<ColorSchemeToggle sx={{ ml: "auto" }} />*/}
@@ -218,7 +184,7 @@ export default function Sidebar() {
                                 <ListItem
                                     key={item.key}
                                     href={item.href}
-                                    component={Link}
+                                    component={NextLink}
                                 >
                                     <ListItemButton
                                         selected={item.isSelected(pathname)}
@@ -266,13 +232,13 @@ export default function Sidebar() {
                                                     sx={[
                                                         open
                                                             ? {
-                                                                  transform:
-                                                                      "rotate(180deg)",
-                                                              }
+                                                                transform:
+                                                                    "rotate(180deg)",
+                                                            }
                                                             : {
-                                                                  transform:
-                                                                      "none",
-                                                              },
+                                                                transform:
+                                                                    "none",
+                                                            },
                                                     ]}
                                                 />
                                             </ListItemButton>
@@ -280,28 +246,32 @@ export default function Sidebar() {
                                     }}
                                 >
                                     <List>
-                                        {item.children.map((c, index) => (
-                                            <ListItem
-                                                key={c.href}
-                                                sx={
-                                                    index === 0
+                                        {item.children.map((c, index) => {
+                                            const Icon = c.icon;
+
+                                            return (
+                                                <ListItem
+                                                    key={c.href}
+                                                    sx={index === 0
                                                         ? { mt: 0.5 }
-                                                        : null
-                                                }
-                                                href={c.href}
-                                                component={Link}
-                                            >
-                                                <ListItemButton>
-                                                    {c.label}
-                                                </ListItemButton>
-                                            </ListItem>
-                                        ))}
+                                                        : null}
+                                                    href={c.href}
+                                                    component={NextLink}
+                                                >
+                                                    <ListItemButton>
+                                                        <Icon />
+                                                        {c.label}
+                                                    </ListItemButton>
+                                                </ListItem>
+                                            );
+                                        })}
                                     </List>
                                 </Toggler>
                             </ListItem>
                         );
                     })}
                 </List>
+                {/*
                 <List
                     size="sm"
                     sx={{
@@ -318,6 +288,7 @@ export default function Sidebar() {
                         </ListItemButton>
                     </ListItem>
                 </List>
+                */}
                 {/*
                     <Card
                         suppressHydrationWarning

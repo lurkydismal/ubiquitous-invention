@@ -1,7 +1,6 @@
 import "./globals.css";
 import * as React from "react";
 import Box from "@mui/joy/Box";
-import Header from "@/components/Header";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import Sidebar from "@/components/Sidebar";
 import theme from "@/theme";
@@ -33,7 +32,6 @@ export default function RootLayout({
 
                         <Box sx={{ display: "flex", minHeight: "100dvh" }}>
                             <Sidebar />
-                            <Header />
 
                             {children}
                         </Box>

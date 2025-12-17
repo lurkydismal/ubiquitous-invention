@@ -1,48 +1,36 @@
-"use client";
+import Stack from "@mui/material/Stack";
+import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
+import CustomDatePicker from "./CustomDatePicker";
+import NavbarBreadcrumbs from "./NavbarBreadcrumbs";
+import MenuButton from "./MenuButton";
 
-import GlobalStyles from "@mui/joy/GlobalStyles";
-import IconButton from "@mui/joy/IconButton";
-import Sheet from "@mui/joy/Sheet";
-import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
-import { toggleSidebar } from "@/stdfunc";
+import Search from "./Search";
 
 export default function Header() {
     return (
-        <Sheet
+        <Stack
+            direction="row"
             sx={{
-                display: { sm: "flex", md: "none" },
-                alignItems: "center",
+                display: { xs: "none", md: "flex" },
+                width: "100%",
+                alignItems: { xs: "flex-start", md: "center" },
                 justifyContent: "space-between",
-                position: "fixed",
-                top: 0,
-                width: "100vw",
-                height: "var(--Header-height)",
-                zIndex: 9995,
-                p: 2,
-                gap: 1,
-                borderBottom: "1px solid",
-                borderColor: "background.level1",
-                boxShadow: "sm",
+                maxWidth: { sm: "100%", md: "1700px" },
+                pt: 1.5,
             }}
+            spacing={2}
         >
-            <GlobalStyles
-                styles={(theme) => ({
-                    ":root": {
-                        "--Header-height": "52px",
-                        [theme.breakpoints.up("lg")]: {
-                            "--Header-height": "0px",
-                        },
-                    },
-                })}
-            />
-            <IconButton
-                onClick={() => toggleSidebar()}
-                variant="outlined"
-                color="neutral"
-                size="sm"
-            >
-                <MenuRoundedIcon />
-            </IconButton>
-        </Sheet>
+            <NavbarBreadcrumbs />
+            {/*
+            <Stack direction="row" sx={{ gap: 1 }}>
+                {/*<Search />
+                <CustomDatePicker />
+                {/*
+                <MenuButton showBadge aria-label="Open notifications">
+                    <NotificationsRoundedIcon />
+                </MenuButton>
+            </Stack>
+            */}
+        </Stack>
     );
 }

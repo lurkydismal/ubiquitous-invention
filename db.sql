@@ -73,14 +73,14 @@ CREATE TABLE tasks (
     public_id UUID UNIQUE NOT NULL DEFAULT gen_random_uuid(),
     author_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     tracker_id INTEGER REFERENCES users(id) ON DELETE SET NULL, -- who tracks completion
-    task_id INTEGER REFERENCES tags(id) ON DELETE SET NULL,
+    tag_id INTEGER REFERENCES tags(id) ON DELETE SET NULL,
     title VARCHAR(80) NOT NULL,
     content TEXT,
     content_format content_format NOT NULL DEFAULT 'plain',
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     end_date TIMESTAMPTZ,
-    completed_at TIMESTAMPTZ,
+    is_completed BOOLEAN NOT NULL DEFAULT false,
     is_cancelled BOOLEAN NOT NULL DEFAULT false,
     CHECK (title <> '')
 );
@@ -96,10 +96,11 @@ FOR EACH ROW
 EXECUTE FUNCTION set_default_tracker();
 
 CREATE INDEX idx_tasks_author_id ON tasks(author_id);
+CREATE INDEX idx_tasks_tag_id ON tasks(tag_id);
 CREATE INDEX idx_tasks_created_at ON tasks(created_at DESC);
 CREATE INDEX idx_tasks_incomplete_recent ON tasks(created_at DESC)
-    WHERE completed_at IS NULL AND is_cancelled = false;
-CREATE INDEX idx_tasks_completed_at ON tasks(completed_at);
+    WHERE is_completed = false AND is_cancelled = false;
+CREATE INDEX idx_tasks_is_completed ON tasks(is_completed);
 CREATE INDEX idx_tasks_is_cancelled ON tasks(is_cancelled);
 
 CREATE TABLE task_assignees (
@@ -118,7 +119,7 @@ CREATE TABLE task_history (
     id BIGSERIAL PRIMARY KEY,
     task_id INTEGER NOT NULL REFERENCES tasks(id) ON DELETE CASCADE,
     editor_id INTEGER REFERENCES users(id) ON DELETE SET NULL,
-    field TEXT NOT NULL,    -- e.g., 'title', 'completed_at'
+    field TEXT NOT NULL,    -- e.g., 'title', 'is_completed'
     old_value TEXT,
     new_value TEXT,
     changed_at TIMESTAMPTZ NOT NULL DEFAULT NOW()

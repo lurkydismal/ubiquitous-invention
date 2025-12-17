@@ -1,12 +1,78 @@
-import { Fragment } from "react";
-import OrderTable from "@/components/OrderTable";
-import OrderList from "@/components/OrderList";
+"use client";
 
-export default function Home() {
+import type { } from "@mui/x-date-pickers/themeAugmentation";
+import type { } from "@mui/x-charts/themeAugmentation";
+import type { } from "@mui/x-data-grid-pro/themeAugmentation";
+import type { } from "@mui/x-tree-view/themeAugmentation";
+import { alpha } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import Box from "@mui/material/Box";
+import CustomizedDataGrid from "@/components/CustomizedDataGrid";
+import AppTheme from "@/shared-theme/AppTheme";
+import {
+    chartsCustomizations,
+    dataGridCustomizations,
+    datePickersCustomizations,
+    treeViewCustomizations,
+} from "@/theme/customizations";
+import { columns, rows } from "./testData";
+import { useParams } from "next/navigation";
+
+const xThemeComponents = {
+    ...chartsCustomizations,
+    ...dataGridCustomizations,
+    ...datePickersCustomizations,
+    ...treeViewCustomizations,
+};
+
+/*
+    <Box
+        sx={{
+            display: "flex",
+            mb: 1,
+            gap: 1,
+            flexDirection: { xs: "column", sm: "row" },
+            alignItems: { xs: "start", sm: "center" },
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+        }}
+    >
+        <Button
+            color="primary"
+            startDecorator={<DownloadRoundedIcon />}
+            size="sm"
+        >
+            Download PDF
+        </Button>
+    </Box>
+*/
+
+export default function Page() {
+    const params = useParams();
+    const filterSegment = params.filter; // undefined | "done" | "pending", etc.
+
+    const routeToStatusMap: Record<string, string> = {
+        'in-progress': 'In Progress',
+        finished: 'Finished',
+        cancelled: 'Cancelled',
+        outdated: 'Outdated',
+    };
+    const statusFilter = filterSegment ? routeToStatusMap[filterSegment] : undefined;
+
     return (
-        <Fragment>
-            <OrderTable />
-            <OrderList />
-        </Fragment>
+        <AppTheme themeComponents={xThemeComponents}>
+            <CssBaseline enableColorScheme />
+            <Box
+                sx={(theme) => ({
+                    backgroundColor: theme.vars
+                        ? `rgba(${theme.vars.palette.background.defaultChannel} / 1)`
+                        : alpha(theme.palette.background.default, 1),
+                    overflow: "auto",
+                })}
+                width="100%"
+            >
+                <CustomizedDataGrid statusSearchFilter={statusFilter} isClickable={true} columns={columns} rows={rows} />
+            </Box>
+        </AppTheme >
     );
 }

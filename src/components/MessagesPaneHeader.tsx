@@ -9,7 +9,7 @@ import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRound
 import PhoneInTalkRoundedIcon from "@mui/icons-material/PhoneInTalkRounded";
 import MoreVertRoundedIcon from "@mui/icons-material/MoreVertRounded";
 import { UserProps } from "@/types";
-import { toggleMessagesPane } from "@/stdfunc";
+// import { toggleMessagesPane } from "@/stdfunc";
 
 type MessagesPaneHeaderProps = {
     sender: UserProps;
@@ -41,11 +41,10 @@ export default function MessagesPaneHeader(props: MessagesPaneHeaderProps) {
                     color="neutral"
                     size="sm"
                     sx={{ display: { xs: "inline-flex", sm: "none" } }}
-                    onClick={() => toggleMessagesPane()}
                 >
                     <ArrowBackIosNewRoundedIcon />
                 </IconButton>
-                <Avatar size="lg" alt={sender.name} src={sender.avatar} />
+                <Avatar size="lg" alt={sender.name} src={sender.name} />
                 <Typography
                     component="h2"
                     noWrap

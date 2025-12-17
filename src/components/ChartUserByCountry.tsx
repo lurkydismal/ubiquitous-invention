@@ -12,44 +12,43 @@ import Stack from "@mui/material/Stack";
 import LinearProgress, {
     linearProgressClasses,
 } from "@mui/material/LinearProgress";
-
 import {
-    IndiaFlag,
-    UsaFlag,
-    BrazilFlag,
-    GlobeFlag,
-} from "@/components/CustomIcons";
+    PendingOutlined as InProgressIcon,
+    CheckCircleOutline as FinishedIcon,
+    CancelOutlined as CancelledIcon,
+    ScheduleOutlined as OutdatedIcon,
+} from "@mui/icons-material";
 
 const data = [
-    { label: "India", value: 50000 },
-    { label: "USA", value: 35000 },
-    { label: "Brazil", value: 10000 },
-    { label: "Other", value: 5000 },
+    { label: "In Progress", value: 50000 },
+    { label: "Finished", value: 35000 },
+    { label: "Cancelled", value: 10000 },
+    { label: "Outdated", value: 5000 },
 ];
 
 const countries = [
     {
-        name: "India",
+        name: "In Progress",
         value: 50,
-        flag: <IndiaFlag />,
+        flag: <InProgressIcon />,
         color: "hsl(220, 25%, 65%)",
     },
     {
-        name: "USA",
+        name: "Finished",
         value: 35,
-        flag: <UsaFlag />,
+        flag: <FinishedIcon />,
         color: "hsl(220, 25%, 45%)",
     },
     {
-        name: "Brazil",
+        name: "Cancelled",
         value: 10,
-        flag: <BrazilFlag />,
+        flag: <CancelledIcon />,
         color: "hsl(220, 25%, 30%)",
     },
     {
-        name: "Other",
+        name: "Outdated",
         value: 5,
-        flag: <GlobeFlag />,
+        flag: <OutdatedIcon />,
         color: "hsl(220, 25%, 20%)",
     },
 ];
@@ -138,7 +137,7 @@ export default function ChartUserByCountry() {
         >
             <CardContent>
                 <Typography component="h2" variant="subtitle2">
-                    Users by country
+                    Tasks total
                 </Typography>
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                     <PieChart

@@ -5,21 +5,43 @@ import CardContent from "@mui/material/CardContent";
 import Chip from "@mui/material/Chip";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-import { BarChart } from "@mui/x-charts/BarChart";
+import { BarChart, BarSeries } from "@mui/x-charts/BarChart";
 import { useTheme } from "@mui/material/styles";
 
 export default function PageViewsBarChart() {
     const theme = useTheme();
     const colorPalette = [
         (theme.vars || theme).palette.primary.dark,
-        (theme.vars || theme).palette.primary.main,
-        (theme.vars || theme).palette.primary.light,
+        (theme.vars || theme).palette.secondary.dark,
+        (theme.vars || theme).palette.success.dark,
     ];
+
+    const series: readonly BarSeries[] = [
+        {
+            data: [4051, 2275, 3129, 4693, 3904, 2038, 2275],
+            id: "tasks-changed",
+            label: "Tasks changed",
+            stack: "A",
+        },
+        {
+            data: [2234, 3872, 2998, 4125, 3357, 2789, 2998],
+            id: "messages-sended",
+            label: "Messages sended",
+            stack: "A",
+        },
+        {
+            data: [3098, 4215, 2384, 2101, 4752, 3593, 2384],
+            id: "users-online",
+            label: "Users online",
+            stack: "A",
+        },
+    ];
+
     return (
         <Card variant="outlined" sx={{ width: "100%" }}>
             <CardContent>
                 <Typography component="h2" variant="subtitle2" gutterBottom>
-                    Page views and downloads
+                    Tasks changed and users activity
                 </Typography>
                 <Stack sx={{ justifyContent: "space-between" }}>
                     <Stack
@@ -39,7 +61,8 @@ export default function PageViewsBarChart() {
                         variant="caption"
                         sx={{ color: "text.secondary" }}
                     >
-                        Page views and downloads for the last 6 months
+                        Tasks changed and users activity for
+                        the last 6 months
                     </Typography>
                 </Stack>
                 <BarChart
@@ -62,26 +85,7 @@ export default function PageViewsBarChart() {
                         },
                     ]}
                     yAxis={[{ width: 50 }]}
-                    series={[
-                        {
-                            id: "page-views",
-                            label: "Page views",
-                            data: [2234, 3872, 2998, 4125, 3357, 2789, 2998],
-                            stack: "A",
-                        },
-                        {
-                            id: "downloads",
-                            label: "Downloads",
-                            data: [3098, 4215, 2384, 2101, 4752, 3593, 2384],
-                            stack: "A",
-                        },
-                        {
-                            id: "conversions",
-                            label: "Conversions",
-                            data: [4051, 2275, 3129, 4693, 3904, 2038, 2275],
-                            stack: "A",
-                        },
-                    ]}
+                    series={series}
                     height={250}
                     margin={{ left: 0, right: 0, top: 20, bottom: 0 }}
                     grid={{ horizontal: true }}

@@ -8,7 +8,7 @@ import Typography from "@mui/joy/Typography";
 import CircleIcon from "@mui/icons-material/Circle";
 import AvatarWithStatus from "./AvatarWithStatus";
 import { ChatProps, MessageProps, UserProps } from "@/types";
-import { toggleMessagesPane } from "@/stdfunc";
+// import { toggleMessagesPane } from "@/stdfunc";
 
 type ChatListItemProps = ListItemButtonProps & {
     id: string;
@@ -27,7 +27,7 @@ export default function ChatListItem(props: ChatListItemProps) {
             <ListItem>
                 <ListItemButton
                     onClick={() => {
-                        toggleMessagesPane();
+                        // toggleMessagesPane();
                         setSelectedChat({ id, sender, messages });
                     }}
                     selected={selected}
@@ -42,14 +42,14 @@ export default function ChatListItem(props: ChatListItemProps) {
                         <AvatarWithStatus
                             online={sender.online}
                             alt={sender.name}
-                            src={sender.avatar}
+                            src={sender.name}
                         />
                         <Box sx={{ flex: 1 }}>
                             <Typography level="title-sm">
                                 {sender.name}
                             </Typography>
                             <Typography level="body-sm">
-                                {sender.username}
+                                {sender.name}
                             </Typography>
                         </Box>
                         <Box sx={{ lineHeight: 1.5, textAlign: "right" }}>

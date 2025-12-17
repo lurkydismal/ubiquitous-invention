@@ -1,22 +1,35 @@
 "use client";
 
 import { DataGrid } from "@mui/x-data-grid";
-import { columns, rows } from "../testData";
+import { GridRowsProp, GridColDef } from "@mui/x-data-grid";
 
-export default function CustomizedDataGrid() {
+export default function CustomizedDataGrid({ columns, rows, statusSearchFilter, isClickable }: { columns: GridColDef[], rows: GridRowsProp, statusSearchFilter?: string, isClickable?: boolean }) {
     return (
         <DataGrid
-            checkboxSelection
             rows={rows}
             columns={columns}
-            getRowClassName={(params) =>
-                params.indexRelativeToCurrentPage % 2 === 0 ? "even" : "odd"
-            }
-            initialState={{
-                pagination: { paginationModel: { pageSize: 20 } },
-            }}
-            pageSizeOptions={[10, 20, 50]}
+            {...(isClickable
+                ? {
+                    sx: {
+                        '& .MuiDataGrid-row': {
+                            cursor: 'pointer',
+                        },
+                    },
+                    onRowClick: (params, _) => {
+                        console.log('Row clicked', params);
+                    }
+                } : {})}
+            initialState={
+                statusSearchFilter ? {
+                    filter: {
+                        filterModel: {
+                            items: [{ field: 'status', operator: 'equals', value: statusSearchFilter }],
+                        },
+                    },
+                } : {}}
             disableColumnResize
+            disableRowSelectionOnClick
+            autoPageSize
             density="compact"
             slotProps={{
                 filterPanel: {

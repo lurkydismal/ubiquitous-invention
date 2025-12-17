@@ -1,19 +1,16 @@
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { CopyrightAligned as Copyright } from "@/components/Copyright";
+import { GridRowsProp, GridColDef } from "@mui/x-data-grid";
 import ChartUserByCountry from "./ChartUserByCountry";
-import CustomizedTreeView from "./CustomizedTreeView";
 import CustomizedDataGrid from "./CustomizedDataGrid";
-import HighlightedCard from "./HighlightedCard";
 import PageViewsBarChart from "./PageViewsBarChart";
 import SessionsChart from "./SessionsChart";
 import StatCard, { StatCardProps } from "./StatCard";
 
 const data: StatCardProps[] = [
     {
-        title: "Users",
+        title: "Created",
         value: "14k",
         interval: "Last 30 days",
         trend: "up",
@@ -24,7 +21,7 @@ const data: StatCardProps[] = [
         ],
     },
     {
-        title: "Conversions",
+        title: "Finished",
         value: "325",
         interval: "Last 30 days",
         trend: "down",
@@ -35,7 +32,7 @@ const data: StatCardProps[] = [
         ],
     },
     {
-        title: "Event count",
+        title: "Cancelled",
         value: "200k",
         interval: "Last 30 days",
         trend: "neutral",
@@ -46,7 +43,7 @@ const data: StatCardProps[] = [
         ],
     },
     {
-        title: "TEXT",
+        title: "Outdated",
         value: "200k",
         interval: "Last 30 days",
         trend: "neutral",
@@ -58,12 +55,12 @@ const data: StatCardProps[] = [
     },
 ];
 
-export default function MainGrid() {
+export default function MainGrid({ columns, rows }: { columns: GridColDef[], rows: GridRowsProp }) {
     return (
         <Box sx={{ width: "100%", maxWidth: { sm: "100%", md: "1700px" } }}>
             {/* cards */}
-            <Typography component="h2" variant="h6" sx={{ mb: 2 }}>
-                Overview
+            <Typography component="h2" variant="h6" sx={{ mt: 2, mb: 2 }}>
+                Tasks overview
             </Typography>
             <Grid
                 container
@@ -76,11 +73,6 @@ export default function MainGrid() {
                         <StatCard {...card} />
                     </Grid>
                 ))}
-                {/*
-                <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
-                    <HighlightedCard />
-                </Grid>
-                */}
                 <Grid size={{ xs: 12, md: 6 }}>
                     <SessionsChart />
                 </Grid>
@@ -93,19 +85,22 @@ export default function MainGrid() {
             </Typography>
             <Grid container spacing={2} columns={12}>
                 <Grid size={{ xs: 12, lg: 9 }}>
-                    <CustomizedDataGrid />
+                    <CustomizedDataGrid columns={columns} rows={rows} />
                 </Grid>
                 <Grid size={{ xs: 12, lg: 3 }}>
+                    {/*
                     <Stack
                         gap={2}
                         direction={{ xs: "column", sm: "row", lg: "column" }}
                     >
-                        <CustomizedTreeView />
-                        <ChartUserByCountry />
+                    */}
+                    {/*<CustomizedTreeView />*/}
+                    <ChartUserByCountry />
+                    {/*
                     </Stack>
+                    */}
                 </Grid>
             </Grid>
-            {/*<Copyright />*/}
         </Box>
     );
 }

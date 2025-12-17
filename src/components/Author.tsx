@@ -1,13 +1,12 @@
 import * as React from "react";
-import * as ReactRouter from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import AvatarGroup from "@mui/material/AvatarGroup";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
+import NextLink from "next/link";
 import Typography from "@mui/material/Typography";
 import { TypographyVariant } from "@mui/material/styles";
-import FollowButton from "../shared/FollowButton";
-import { log } from "../stdlog";
+import { log } from "@/stdlog";
 
 export interface Author {
     id: number;
@@ -69,7 +68,7 @@ function AuthorInfo({
         >
             <Avatar
                 alt={author.name}
-                src={author.avatar}
+                src={author.name}
                 sx={{ width: avatarWidth, height: avatarHeight }}
             />
             <Typography variant={variant}>{author.name}</Typography>
@@ -107,7 +106,7 @@ function AuthorsInfo({
                     <Avatar
                         key={author.id}
                         alt={author.name}
-                        src={author.avatar}
+                        src={author.name}
                         sx={{ width: avatarWidth, height: avatarHeight }}
                     />
                 ))}
@@ -213,6 +212,39 @@ export function AuthorWithDate({
     );
 }
 
+export function AuthorWithLink({
+    author,
+    variant,
+    avatarWidth,
+    avatarHeight,
+}: {
+    author: Author;
+    variant?: TypographyVariant;
+    avatarWidth?: number;
+    avatarHeight?: number;
+}) {
+    log.trace(`Rendering AuthorWithDateAndLink: ${{ author }}`);
+
+    return (
+        <AuthorRow
+            left={
+                <Link
+                    component={NextLink}
+                    underline="none"
+                    href={`/profile/${author.id}`}
+                >
+                    <AuthorInfo
+                        author={author}
+                        variant={variant}
+                        avatarWidth={avatarWidth}
+                        avatarHeight={avatarHeight}
+                    />
+                </Link>
+            }
+        />
+    );
+}
+
 export function AuthorWithDateAndLink({
     author,
     date = new Date(),
@@ -228,15 +260,13 @@ export function AuthorWithDateAndLink({
 }) {
     log.trace(`Rendering AuthorWithDateAndLink: ${{ author, date }}`);
 
-    const navigate = ReactRouter.useNavigate();
-
     return (
         <AuthorRow
             left={
                 <Link
-                    onClick={() => navigate(`/profile/${author.id}`)}
+                    component={NextLink}
                     underline="none"
-                    href="#"
+                    href={`/profile/${author.id}`}
                 >
                     <AuthorInfo
                         author={author}
@@ -274,8 +304,6 @@ export function AuthorsWithDateAndLink({
 }) {
     log.trace(`Rendering AuthorsWithDateAndLink: ${{ authors, date }}`);
 
-    const navigate = ReactRouter.useNavigate();
-
     return (
         <AuthorRow
             left={
@@ -293,7 +321,7 @@ export function AuthorsWithDateAndLink({
                             <Avatar
                                 key={author.id}
                                 alt={author.name}
-                                src={author.avatar}
+                                src={author.name}
                                 sx={{
                                     width: avatarWidth,
                                     height: avatarHeight,
@@ -306,11 +334,9 @@ export function AuthorsWithDateAndLink({
                         {authors.map((author, index) => (
                             <React.Fragment key={author.id}>
                                 <Link
-                                    onClick={() =>
-                                        navigate(`/profile/${author.id}`)
-                                    }
+                                    component={NextLink}
                                     underline="none"
-                                    href="#"
+                                    href={`/profile/${author.id}`}
                                 >
                                     {author.name}
                                 </Link>
@@ -366,86 +392,6 @@ export function AuthorsWithDate({
                         year: "numeric",
                     })}
                 </Typography>
-            }
-        />
-    );
-}
-
-export function AuthorWithFollow({
-    author,
-    variant,
-    avatarWidth,
-    avatarHeight,
-    doesFollow,
-}: {
-    author: Author;
-    variant?: TypographyVariant;
-    avatarWidth?: number;
-    avatarHeight?: number;
-    doesFollow: boolean;
-}) {
-    log.trace(`Rendering AuthorWithFollow: ${{ author, doesFollow }}`);
-
-    return (
-        <AuthorRow
-            left={
-                <AuthorInfo
-                    author={author}
-                    variant={variant}
-                    avatarWidth={avatarWidth}
-                    avatarHeight={avatarHeight}
-                />
-            }
-            right={
-                <FollowButton
-                    id={author.id}
-                    doesFollow={doesFollow}
-                    size="large"
-                />
-            }
-        />
-    );
-}
-
-export function AuthorWithFollowAndLink({
-    author,
-    variant,
-    avatarWidth,
-    avatarHeight,
-    doesFollow,
-}: {
-    author: Author;
-    variant?: TypographyVariant;
-    avatarWidth?: number;
-    avatarHeight?: number;
-    doesFollow: boolean;
-}) {
-    log.trace(`Rendering AuthorWithFollowAndLink: ${{ author, doesFollow }}`);
-
-    const navigate = ReactRouter.useNavigate();
-
-    return (
-        <AuthorRow
-            left={
-                <Link
-                    onClick={() => navigate(`/profile/${author.id}`)}
-                    underline="none"
-                    href="#"
-                >
-                    <AuthorInfo
-                        author={author}
-                        variant={variant}
-                        avatarWidth={avatarWidth}
-                        avatarHeight={avatarHeight}
-                    />
-                </Link>
-            }
-            right={
-                <FollowButton
-                    id={author.id}
-                    doesFollow={doesFollow}
-                    size="large"
-                />
             }
         />
     );

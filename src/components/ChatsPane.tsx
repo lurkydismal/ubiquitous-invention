@@ -8,7 +8,7 @@ import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import ChatListItem from "./ChatListItem";
 import { ChatProps } from "@/types";
-import { toggleMessagesPane } from "@/stdfunc";
+// import { toggleMessagesPane } from "@/stdfunc";
 
 type ChatsPaneProps = {
     chats: ChatProps[];
@@ -65,9 +65,7 @@ export default function ChatsPane(props: ChatsPaneProps) {
                     aria-label="edit"
                     color="neutral"
                     size="sm"
-                    onClick={() => {
-                        toggleMessagesPane();
-                    }}
+                    onClick={() => {}}
                     sx={{ display: { sm: "none" } }}
                 >
                     <CloseRoundedIcon />

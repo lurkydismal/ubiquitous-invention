@@ -64,7 +64,7 @@ export default function MessagesPane(props: MessagesPaneProps) {
                                         <AvatarWithStatus
                                             online={message.sender.online}
                                             alt={message.sender.name}
-                                            src={message.sender.avatar}
+                                            src={message.sender.name}
                                         />
                                     )}
                                     <ChatBubble
