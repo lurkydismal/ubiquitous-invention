@@ -18,32 +18,30 @@ export interface AppThemeProps {
 
 export default function AppTheme(props: AppThemeProps) {
     const { children, themeComponents } = props;
-    const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+    // const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+    const prefersDarkMode = true;
 
-    const theme = React.useMemo(() => {
-        return createTheme({
-            palette: {
-                mode: prefersDarkMode ? "dark" : "light",
-            },
-            // For more details about CSS variables configuration, see https://mui.com/material-ui/customization/css-theme-variables/configuration/
-            cssVariables: {
-                colorSchemeSelector: "data-mui-color-scheme",
-                cssVarPrefix: "template",
-            },
-            colorSchemes,
-            shadows,
-            shape,
-            typography,
-            components: {
-                ...inputsCustomizations,
-                ...dataDisplayCustomizations,
-                ...feedbackCustomizations,
-                ...navigationCustomizations,
-                ...surfacesCustomizations,
-                ...themeComponents,
-            },
-        });
-    }, [themeComponents]);
+    const theme = createTheme({
+        palette: {
+            mode: prefersDarkMode ? "dark" : "light",
+        },
+        // For more details about CSS variables configuration, see https://mui.com/material-ui/customization/css-theme-variables/configuration/
+        cssVariables: {
+            colorSchemeSelector: "data",
+        },
+        colorSchemes,
+        shadows,
+        shape,
+        typography,
+        components: {
+            ...inputsCustomizations,
+            ...dataDisplayCustomizations,
+            ...feedbackCustomizations,
+            ...navigationCustomizations,
+            ...surfacesCustomizations,
+            ...themeComponents,
+        },
+    });
 
     return (
         <ThemeProvider theme={theme} disableTransitionOnChange>

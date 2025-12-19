@@ -61,8 +61,7 @@ export default function PageViewsBarChart() {
                         variant="caption"
                         sx={{ color: "text.secondary" }}
                     >
-                        Tasks changed and users activity for
-                        the last 6 months
+                        Tasks changed and users activity for the last 6 months
                     </Typography>
                 </Stack>
                 <BarChart

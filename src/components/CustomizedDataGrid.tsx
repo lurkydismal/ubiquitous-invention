@@ -1,24 +1,69 @@
 "use client";
 
-import { DataGrid } from "@mui/x-data-grid";
+import * as React from "react";
+import { DataGrid, GridFilterModel } from "@mui/x-data-grid";
 import { GridRowsProp, GridColDef } from "@mui/x-data-grid";
 
-export default function CustomizedDataGrid({ columns, rows, statusSearchFilter, isClickable }: { columns: GridColDef[], rows: GridRowsProp, statusSearchFilter?: string, isClickable?: boolean }) {
+export default function CustomizedDataGrid({
+    columns,
+    rows,
+    statusSearchFilter,
+    isClickable,
+}: {
+    columns: GridColDef[];
+    rows: GridRowsProp;
+    statusSearchFilter?: string;
+    isClickable?: boolean;
+}) {
+    const [filterModel, setFilterModel] = React.useState<GridFilterModel>(() =>
+        statusSearchFilter
+            ? {
+                  items: [
+                      {
+                          field: "status",
+                          operator: "equals",
+                          value: statusSearchFilter,
+                      },
+                  ],
+              }
+            : { items: [] },
+    );
+
+    React.useEffect(() => {
+        if (statusSearchFilter) {
+            setFilterModel({
+                items: [
+                    {
+                        field: "status",
+                        operator: "equals",
+                        value: statusSearchFilter,
+                    },
+                ],
+            });
+        } else {
+            setFilterModel({ items: [] });
+        }
+    }, [statusSearchFilter]);
+
     return (
         <DataGrid
             rows={rows}
             columns={columns}
             {...(isClickable
                 ? {
-                    sx: {
-                        '& .MuiDataGrid-row': {
-                            cursor: 'pointer',
-                        },
-                    },
-                    onRowClick: (params, _) => {
-                        console.log('Row clicked', params);
-                    }
-                } : {})}
+                      sx: {
+                          "& .MuiDataGrid-row": {
+                              cursor: "pointer",
+                          },
+                      },
+                      onRowClick: (params, _) => {
+                          console.log("Row clicked", params);
+                      },
+                  }
+                : {})}
+            filterModel={filterModel}
+            onFilterModelChange={setFilterModel}
+            /*
             initialState={
                 statusSearchFilter ? {
                     filter: {
@@ -27,6 +72,7 @@ export default function CustomizedDataGrid({ columns, rows, statusSearchFilter, 
                         },
                     },
                 } : {}}
+            */
             disableColumnResize
             disableRowSelectionOnClick
             autoPageSize

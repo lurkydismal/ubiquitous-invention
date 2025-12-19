@@ -1,24 +1,16 @@
 "use client";
 
 import { extendTheme } from "@mui/joy/styles";
-import { Geist } from "next/font/google";
-
-const font = Geist({
-    weight: ["300", "400", "500", "700"],
-    variable: "--font-geist",
-    subsets: ["latin"],
-    display: "swap",
-});
 
 export default extendTheme({
     colorSchemes: {
-        light: {},
+        // light: {},
         dark: {},
     },
     fontFamily: {
-        body: font.style.fontFamily,
-        display: font.style.fontFamily,
-        code: font.style.fontFamily,
+        body: 'var(--font-main)',
+        display: 'var(--font-main)',
+        code: 'var(--font-main)',
     },
 });
 

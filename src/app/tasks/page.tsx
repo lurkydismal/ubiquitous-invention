@@ -1,12 +1,10 @@
 "use client";
 
-import type { } from "@mui/x-date-pickers/themeAugmentation";
 import type { } from "@mui/x-charts/themeAugmentation";
 import type { } from "@mui/x-data-grid-pro/themeAugmentation";
-import type { } from "@mui/x-tree-view/themeAugmentation";
+import * as React from 'react';
 import { alpha } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
+import { CssBaseline, Box, Skeleton } from "@mui/material";
 import CustomizedDataGrid from "@/components/CustomizedDataGrid";
 import AppTheme from "@/shared-theme/AppTheme";
 import {
@@ -16,7 +14,7 @@ import {
     treeViewCustomizations,
 } from "@/theme/customizations";
 import { columns, rows } from "./testData";
-import { useParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 const xThemeComponents = {
     ...chartsCustomizations,
@@ -47,18 +45,31 @@ const xThemeComponents = {
     </Box>
 */
 
-export default function Page() {
-    const params = useParams();
-    const filterSegment = params.filter; // undefined | "done" | "pending", etc.
+function DataGrid() {
+    const params = useSearchParams();
 
     const routeToStatusMap: Record<string, string> = {
-        'in-progress': 'In Progress',
-        finished: 'Finished',
-        cancelled: 'Cancelled',
-        outdated: 'Outdated',
+        "in-progress": "In Progress",
+        finished: "Finished",
+        cancelled: "Cancelled",
+        outdated: "Outdated",
     };
-    const statusFilter = filterSegment ? routeToStatusMap[filterSegment] : undefined;
+    const filterParam = params?.get("filter") ?? undefined;
+    const statusFilter = filterParam
+        ? routeToStatusMap[filterParam]
+        : undefined;
 
+    return (
+        <CustomizedDataGrid
+            statusSearchFilter={statusFilter}
+            isClickable={true}
+            columns={columns}
+            rows={rows}
+        />
+    );
+}
+
+export default function Page() {
     return (
         <AppTheme themeComponents={xThemeComponents}>
             <CssBaseline enableColorScheme />
@@ -71,8 +82,10 @@ export default function Page() {
                 })}
                 width="100%"
             >
-                <CustomizedDataGrid statusSearchFilter={statusFilter} isClickable={true} columns={columns} rows={rows} />
+                <React.Suspense fallback={<Skeleton variant="rectangular" />}>
+                    <DataGrid />
+                </React.Suspense>
             </Box>
-        </AppTheme >
+        </AppTheme>
     );
 }

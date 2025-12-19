@@ -16,7 +16,7 @@ import {
     Typography,
     Sheet,
 } from "@mui/joy";
-import NextLink from "next/link";
+import NextLink from "@/components/Link";
 import {
     DashboardRounded as DashboardRoundedIcon,
     AssignmentRounded as AssignmentRoundedIcon,
@@ -77,10 +77,26 @@ export default function Sidebar() {
 
     const taskLinks = [
         { label: "All tasks", icon: AllIcon, href: "/tasks" },
-        { label: "In progress", icon: InProgressIcon, href: "/tasks/in-progress" },
-        { label: "Finished", icon: FinishedIcon, href: "/tasks/finished" },
-        { label: "Cancelled", icon: CancelledIcon, href: "/tasks/cancelled" },
-        { label: "Outdated", icon: OutdatedIcon, href: "/tasks/outdated" },
+        {
+            label: "In progress",
+            icon: InProgressIcon,
+            href: "/tasks?filter=in-progress",
+        },
+        {
+            label: "Finished",
+            icon: FinishedIcon,
+            href: "/tasks?filter=finished",
+        },
+        {
+            label: "Cancelled",
+            icon: CancelledIcon,
+            href: "/tasks?filter=cancelled",
+        },
+        {
+            label: "Outdated",
+            icon: OutdatedIcon,
+            href: "/tasks?filter=outdated",
+        },
     ];
 
     const menu = [
@@ -252,9 +268,11 @@ export default function Sidebar() {
                                             return (
                                                 <ListItem
                                                     key={c.href}
-                                                    sx={index === 0
-                                                        ? { mt: 0.5 }
-                                                        : null}
+                                                    sx={
+                                                        index === 0
+                                                            ? { mt: 0.5 }
+                                                            : null
+                                                    }
                                                     href={c.href}
                                                     component={NextLink}
                                                 >

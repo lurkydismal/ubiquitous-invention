@@ -428,7 +428,7 @@ export default function OrderTable() {
                                     }}
                                     color={
                                         selected.length > 0 ||
-                                            selected.length === rows.length
+                                        selected.length === rows.length
                                             ? "primary"
                                             : undefined
                                     }
@@ -459,16 +459,16 @@ export default function OrderTable() {
                                         },
                                         order === "desc"
                                             ? {
-                                                "& svg": {
-                                                    transform: "rotate(0deg)",
-                                                },
-                                            }
+                                                  "& svg": {
+                                                      transform: "rotate(0deg)",
+                                                  },
+                                              }
                                             : {
-                                                "& svg": {
-                                                    transform:
-                                                        "rotate(180deg)",
-                                                },
-                                            },
+                                                  "& svg": {
+                                                      transform:
+                                                          "rotate(180deg)",
+                                                  },
+                                              },
                                     ]}
                                 >
                                     Invoice
@@ -513,10 +513,10 @@ export default function OrderTable() {
                                                     event.target.checked
                                                         ? ids.concat(row.id)
                                                         : ids.filter(
-                                                            (itemId) =>
-                                                                itemId !==
-                                                                row.id,
-                                                        ),
+                                                              (itemId) =>
+                                                                  itemId !==
+                                                                  row.id,
+                                                          ),
                                                 );
                                             }}
                                             slotProps={{
@@ -558,7 +558,7 @@ export default function OrderTable() {
                                                     Refunded: "neutral",
                                                     Cancelled: "danger",
                                                 }[
-                                                row.status
+                                                    row.status
                                                 ] as ColorPaletteProp
                                             }
                                         >

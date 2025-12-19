@@ -3,7 +3,7 @@ import Avatar from "@mui/material/Avatar";
 import AvatarGroup from "@mui/material/AvatarGroup";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
-import NextLink from "next/link";
+import NextLink from "@/components/Link";
 import Typography from "@mui/material/Typography";
 import { TypographyVariant } from "@mui/material/styles";
 import { log } from "@/stdlog";
