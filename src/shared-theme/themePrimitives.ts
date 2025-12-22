@@ -19,7 +19,7 @@ declare module "@mui/material/styles" {
         900: string;
     }
 
-    interface PaletteColor extends ColorRange { }
+    interface PaletteColor extends ColorRange {}
 
     interface Palette {
         baseShadow: string;
@@ -190,7 +190,7 @@ export const getDesignTokens = (mode: PaletteMode) => {
             },
         },
         typography: {
-            fontFamily: 'var(--font-main)',
+            fontFamily: "var(--font-main)",
             h1: {
                 fontSize: defaultTheme.typography.pxToRem(48),
                 fontWeight: 600,
@@ -348,7 +348,7 @@ export const colorSchemes = {
 };
 
 export const typography = {
-    fontFamily: 'var(--font-main)',
+    fontFamily: "var(--font-main)",
     h1: {
         fontSize: defaultTheme.typography.pxToRem(48),
         fontWeight: 600,

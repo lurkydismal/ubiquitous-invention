@@ -1,5 +1,5 @@
-'use client';
+"use client";
 
-import NextLink, { LinkProps } from 'next/link';
+import NextLink, { LinkProps } from "next/link";
 
 export default NextLink;

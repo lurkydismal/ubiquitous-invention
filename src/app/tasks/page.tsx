@@ -1,11 +1,11 @@
 "use client";
 
-import type { } from "@mui/x-charts/themeAugmentation";
-import type { } from "@mui/x-data-grid-pro/themeAugmentation";
-import * as React from 'react';
+// import type { } from "@mui/x-charts/themeAugmentation";
+// import type { } from "@mui/x-data-grid-pro/themeAugmentation";
+import * as React from "react";
 import { alpha } from "@mui/material/styles";
 import { CssBaseline, Box, Skeleton } from "@mui/material";
-import CustomizedDataGrid from "@/components/CustomizedDataGrid";
+import TasksGrid from "@/components/TasksGrid";
 import AppTheme from "@/shared-theme/AppTheme";
 import {
     chartsCustomizations,
@@ -60,9 +60,8 @@ function DataGrid() {
         : undefined;
 
     return (
-        <CustomizedDataGrid
+        <TasksGrid
             statusSearchFilter={statusFilter}
-            isClickable={true}
             columns={columns}
             rows={rows}
         />

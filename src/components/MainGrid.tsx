@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { GridRowsProp, GridColDef } from "@mui/x-data-grid";
 import ChartUserByCountry from "./ChartUserByCountry";
-import CustomizedDataGrid from "./CustomizedDataGrid";
+import TasksGrid from "./TasksGrid";
 import PageViewsBarChart from "./PageViewsBarChart";
 import SessionsChart from "./SessionsChart";
 import StatCard, { StatCardProps } from "./StatCard";
@@ -91,7 +91,7 @@ export default function MainGrid({
             </Typography>
             <Grid container spacing={2} columns={12}>
                 <Grid size={{ xs: 12, lg: 9 }}>
-                    <CustomizedDataGrid columns={columns} rows={rows} />
+                    <TasksGrid columns={columns} rows={rows} />
                 </Grid>
                 <Grid size={{ xs: 12, lg: 3 }}>
                     {/*

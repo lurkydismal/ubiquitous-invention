@@ -1,19 +1,21 @@
 "use client";
 
 import * as React from "react";
-import { DataGrid, GridFilterModel } from "@mui/x-data-grid";
-import { GridRowsProp, GridColDef } from "@mui/x-data-grid";
+import {
+    DataGrid,
+    GridFilterModel,
+    GridRowsProp,
+    GridColDef,
+} from "@mui/x-data-grid";
 
-export default function CustomizedDataGrid({
+export default function TasksGrid({
     columns,
     rows,
     statusSearchFilter,
-    isClickable,
 }: {
     columns: GridColDef[];
     rows: GridRowsProp;
     statusSearchFilter?: string;
-    isClickable?: boolean;
 }) {
     const [filterModel, setFilterModel] = React.useState<GridFilterModel>(() =>
         statusSearchFilter
@@ -49,18 +51,14 @@ export default function CustomizedDataGrid({
         <DataGrid
             rows={rows}
             columns={columns}
-            {...(isClickable
-                ? {
-                      sx: {
-                          "& .MuiDataGrid-row": {
-                              cursor: "pointer",
-                          },
-                      },
-                      onRowClick: (params, _) => {
-                          console.log("Row clicked", params);
-                      },
-                  }
-                : {})}
+            sx={{
+                "& .MuiDataGrid-row": {
+                    cursor: "pointer",
+                },
+            }}
+            onRowClick={(params, _) => {
+                console.log("Row clicked", params);
+            }}
             filterModel={filterModel}
             onFilterModelChange={setFilterModel}
             /*
@@ -77,32 +75,6 @@ export default function CustomizedDataGrid({
             disableRowSelectionOnClick
             autoPageSize
             density="compact"
-            slotProps={{
-                filterPanel: {
-                    filterFormProps: {
-                        logicOperatorInputProps: {
-                            variant: "outlined",
-                            size: "small",
-                        },
-                        columnInputProps: {
-                            variant: "outlined",
-                            size: "small",
-                            sx: { mt: "auto" },
-                        },
-                        operatorInputProps: {
-                            variant: "outlined",
-                            size: "small",
-                            sx: { mt: "auto" },
-                        },
-                        valueInputProps: {
-                            InputComponentProps: {
-                                variant: "outlined",
-                                size: "small",
-                            },
-                        },
-                    },
-                },
-            }}
         />
     );
 }

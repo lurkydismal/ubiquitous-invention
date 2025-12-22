@@ -8,9 +8,9 @@ export default extendTheme({
         dark: {},
     },
     fontFamily: {
-        body: 'var(--font-main)',
-        display: 'var(--font-main)',
-        code: 'var(--font-main)',
+        body: "var(--font-main)",
+        display: "var(--font-main)",
+        code: "var(--font-main)",
     },
 });
 

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import type { ThemeOptions } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
+// import useMediaQuery from "@mui/material/useMediaQuery";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { colorSchemes, shadows, shape, typography } from "./themePrimitives";
 import { dataDisplayCustomizations } from "./customizations/dataDisplay";
