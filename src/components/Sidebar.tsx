@@ -1,6 +1,9 @@
 "use client";
 
 import * as React from "react";
+import theme from "@/theme";
+import { CssBaseline } from "@mui/joy";
+import { CssVarsProvider } from "@mui/joy/styles";
 import {
     GlobalStyles,
     Avatar,
@@ -248,13 +251,13 @@ export default function Sidebar() {
                                                     sx={[
                                                         open
                                                             ? {
-                                                                  transform:
-                                                                      "rotate(180deg)",
-                                                              }
+                                                                transform:
+                                                                    "rotate(180deg)",
+                                                            }
                                                             : {
-                                                                  transform:
-                                                                      "none",
-                                                              },
+                                                                transform:
+                                                                    "none",
+                                                            },
                                                     ]}
                                                 />
                                             </ListItemButton>
@@ -351,5 +354,19 @@ export default function Sidebar() {
                 </IconButton>
             </Box>
         </Sheet>
+    );
+}
+
+export function SidebarWrapper() {
+    return (
+        <CssVarsProvider
+            defaultMode="dark"
+            theme={theme}
+            disableTransitionOnChange
+        >
+            <CssBaseline />
+
+            <Sidebar />
+        </CssVarsProvider>
     );
 }
