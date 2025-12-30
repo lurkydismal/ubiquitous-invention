@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import type { ThemeOptions },
-{
+import {
+    type ThemeOptions,
     createTheme,
     ThemeProvider,
     THEME_ID as MATERIAL_THEME_ID,

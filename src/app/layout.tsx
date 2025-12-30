@@ -5,6 +5,12 @@ import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import { SidebarWrapper } from "@/components/Sidebar";
 import type { Metadata } from "next";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v16-appRouter";
+import {
+    chartsCustomizations,
+    dataGridCustomizations,
+    datePickersCustomizations,
+    treeViewCustomizations,
+} from "@/theme/customizations";
 
 export const metadata: Metadata = {
     title: "Tasker",
