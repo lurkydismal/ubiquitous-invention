@@ -109,20 +109,17 @@ const columns = [
     {
         headerName: "Created At",
         valueGetter: (value: string) => new Date(value),
-        valueFormatter: (value: Date) =>
-            renderDate(value),
+        valueFormatter: (value: Date) => renderDate(value),
     },
     {
         headerName: "Updated At",
         valueGetter: (value: string) => new Date(value),
-        valueFormatter: (value: Date) =>
-            renderDate(value),
+        valueFormatter: (value: Date) => renderDate(value),
     },
     {
         headerName: "End Date",
         valueGetter: (value: string) => new Date(value),
-        valueFormatter: (value: Date) =>
-            formatDate(value),
+        valueFormatter: (value: Date) => formatDate(value),
     },
 ].map((item) => {
     return {

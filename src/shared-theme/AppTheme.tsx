@@ -1,9 +1,14 @@
 "use client";
 
 import * as React from "react";
-import type { ThemeOptions } from "@mui/material/styles";
-// import useMediaQuery from "@mui/material/useMediaQuery";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import type { ThemeOptions },
+{
+    createTheme,
+    ThemeProvider,
+    THEME_ID as MATERIAL_THEME_ID,
+} from '@mui/material/styles';
+import { CssVarsProvider as JoyCssVarsProvider } from '@mui/joy/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 import { colorSchemes, shadows, shape, typography } from "./themePrimitives";
 import { dataDisplayCustomizations } from "./customizations/dataDisplay";
 import { feedbackCustomizations } from "./customizations/feedback";
@@ -45,8 +50,12 @@ export default function AppTheme(props: AppThemeProps) {
     });
 
     return (
-        <ThemeProvider theme={theme} disableTransitionOnChange>
-            {children}
+        <ThemeProvider theme={{ [MATERIAL_THEME_ID]: theme }} disableTransitionOnChange>
+            <JoyCssVarsProvider disableTransitionOnChange>
+                <CssBaseline enableColorScheme />
+
+                {children}
+            </JoyCssVarsProvider>
         </ThemeProvider>
     );
 }
