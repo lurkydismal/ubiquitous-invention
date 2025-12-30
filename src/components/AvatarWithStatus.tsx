@@ -3,10 +3,11 @@ import Avatar, { AvatarProps } from "@mui/joy/Avatar";
 
 type AvatarWithStatusProps = AvatarProps & {
     online?: boolean;
+    username?: string;
 };
 
 export default function AvatarWithStatus(props: AvatarWithStatusProps) {
-    const { online = false, ...other } = props;
+    const { online = false, username = "", ...other } = props;
     return (
         <div>
             <Badge
@@ -16,7 +17,13 @@ export default function AvatarWithStatus(props: AvatarWithStatusProps) {
                 anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
                 badgeInset="4px 4px"
             >
-                <Avatar size="sm" {...other} />
+                <Avatar
+                    size="sm"
+                    alt={username}
+                    {...other}
+                >
+                    {username[0].toUpperCase()}
+                </Avatar>
             </Badge>
         </div>
     );

@@ -1,7 +1,5 @@
 "use client";
 
-// import type { } from "@mui/x-charts/themeAugmentation";
-// import type { } from "@mui/x-data-grid-pro/themeAugmentation";
 import * as React from "react";
 import { alpha } from "@mui/material/styles";
 import { CssBaseline, Box, Skeleton } from "@mui/material";
@@ -66,6 +64,7 @@ export default function Page() {
     return (
         <AppTheme themeComponents={xThemeComponents}>
             <CssBaseline enableColorScheme />
+
             <Box
                 sx={(theme) => ({
                     backgroundColor: theme.vars

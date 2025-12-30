@@ -41,8 +41,7 @@ export default function ChatListItem(props: ChatListItemProps) {
                     <Stack direction="row" spacing={1.5}>
                         <AvatarWithStatus
                             online={sender.online}
-                            alt={sender.name}
-                            src={sender.name}
+                            username={sender.name}
                         />
                         <Box sx={{ flex: 1 }}>
                             <Typography level="title-sm">

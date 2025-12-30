@@ -63,8 +63,7 @@ export default function MessagesPane(props: MessagesPaneProps) {
                                     {message.sender !== "You" && (
                                         <AvatarWithStatus
                                             online={message.sender.online}
-                                            alt={message.sender.name}
-                                            src={message.sender.name}
+                                            username={message.sender.name}
                                         />
                                     )}
                                     <ChatBubble

@@ -1,16 +1,9 @@
 import "./globals.css";
-import Box from "@mui/joy/Box";
 import { Inter } from "next/font/google";
-import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
+import { InitColorSchemeScript, Box } from "@mui/material";
 import { SidebarWrapper } from "@/components/Sidebar";
 import type { Metadata } from "next";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v16-appRouter";
-import {
-    chartsCustomizations,
-    dataGridCustomizations,
-    datePickersCustomizations,
-    treeViewCustomizations,
-} from "@/theme/customizations";
 
 export const metadata: Metadata = {
     title: "Tasker",
@@ -21,13 +14,6 @@ const font = Inter({
     subsets: ["latin"],
     display: "swap",
 });
-
-const xThemeComponents = {
-    ...chartsCustomizations,
-    ...dataGridCustomizations,
-    ...datePickersCustomizations,
-    ...treeViewCustomizations,
-};
 
 export default function RootLayout({
     children,

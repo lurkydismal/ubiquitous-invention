@@ -1,11 +1,13 @@
-import { Avatar } from "@mui/material";
+import { Avatar, AvatarProps } from "@mui/material";
+
+type AvatarWrapperProps = AvatarProps & {
+    username: string;
+};
 
 export default function AvatarWrapper({
     username,
     ...props
-}: {
-    username: string;
-}) {
+}: AvatarWrapperProps) {
     return (
         <Avatar {...props} alt={username}>
             {username[0].toUpperCase()}

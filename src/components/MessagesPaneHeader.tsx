@@ -44,7 +44,7 @@ export default function MessagesPaneHeader(props: MessagesPaneHeaderProps) {
                 >
                     <ArrowBackIosNewRoundedIcon />
                 </IconButton>
-                <Avatar size="lg" alt={sender.name} src={sender.name} />
+                <Avatar size="lg" alt={sender.name}>{sender.name[0].toUpperCase()}</Avatar>
                 <Typography
                     component="h2"
                     noWrap
