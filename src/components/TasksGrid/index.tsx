@@ -20,14 +20,14 @@ export default function TasksGrid({
     const [filterModel, setFilterModel] = React.useState<GridFilterModel>(() =>
         statusSearchFilter
             ? {
-                  items: [
-                      {
-                          field: "status",
-                          operator: "equals",
-                          value: statusSearchFilter,
-                      },
-                  ],
-              }
+                items: [
+                    {
+                        field: "status",
+                        operator: "equals",
+                        value: statusSearchFilter,
+                    },
+                ],
+            }
             : { items: [] },
     );
 
@@ -49,8 +49,15 @@ export default function TasksGrid({
 
     return (
         <DataGrid
+            disableColumnResize
+            disableRowSelectionOnClick
+            autoPageSize
+            showToolbar
+            density="compact"
             rows={rows}
             columns={columns}
+            filterModel={filterModel}
+            onFilterModelChange={setFilterModel}
             sx={{
                 "& .MuiDataGrid-row": {
                     cursor: "pointer",
@@ -59,22 +66,16 @@ export default function TasksGrid({
             onRowClick={(params, _) => {
                 console.log("Row clicked", params);
             }}
-            filterModel={filterModel}
-            onFilterModelChange={setFilterModel}
-            /*
-            initialState={
-                statusSearchFilter ? {
-                    filter: {
-                        filterModel: {
-                            items: [{ field: 'status', operator: 'equals', value: statusSearchFilter }],
-                        },
+        /*
+        initialState={
+            statusSearchFilter ? {
+                filter: {
+                    filterModel: {
+                        items: [{ field: 'status', operator: 'equals', value: statusSearchFilter }],
                     },
-                } : {}}
-            */
-            disableColumnResize
-            disableRowSelectionOnClick
-            autoPageSize
-            density="compact"
+                },
+            } : {}}
+        */
         />
     );
 }

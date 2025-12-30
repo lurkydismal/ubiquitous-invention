@@ -22,6 +22,7 @@ export default function AppTheme(props: AppThemeProps) {
     const prefersDarkMode = true;
 
     const theme = createTheme({
+        // TODO: Remove
         palette: {
             mode: prefersDarkMode ? "dark" : "light",
         },

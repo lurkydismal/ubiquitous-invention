@@ -24,7 +24,7 @@ export default function RootLayout({
     return (
         <html lang="en" className={font.variable} suppressHydrationWarning>
             <body>
-                <InitColorSchemeScript attribute="class" defaultMode="dark" />
+                <InitColorSchemeScript attribute="data" />
 
                 <AppRouterCacheProvider options={{ enableCssLayer: true }}>
                     <Box sx={{ display: "flex", minHeight: "100dvh" }}>

@@ -39,16 +39,21 @@ export default function CodeBlock({
             <Typography
                 {...props}
                 component="code"
-                sx={{
-                    fontSize: "0.875rem",
-                    backgroundColor:
-                        theme.palette.mode === "dark" ? "grey.800" : "grey.200",
-                    color:
-                        theme.palette.mode === "dark" ? "grey.100" : "grey.900",
-                    borderRadius: 1,
-                    px: 1,
-                    py: 0,
-                }}
+                sx={[
+                    (theme) => ({
+                        fontSize: "0.875rem",
+                        borderRadius: 1,
+                        px: 1,
+                        py: 0,
+                        backgroundColor: theme.vars.palette.grey[200],
+                        color: theme.vars.palette.grey[900],
+                    }),
+                    (theme) =>
+                        theme.applyStyles("dark", {
+                            backgroundColor: theme.vars.palette.grey[800],
+                            color: theme.vars.palette.grey[100],
+                        }),
+                ]}
             >
                 {children}
             </Typography>
@@ -107,18 +112,21 @@ export default function CodeBlock({
                         aria-label="Copy code"
                         onClick={() => copyToClipboard(trimmed)}
                         size="small"
-                        sx={{
-                            bgcolor:
-                                theme.palette.mode === "dark"
-                                    ? "rgba(255,255,255,0.04)"
-                                    : "rgba(0,0,0,0.04)",
-                            "&:hover": {
-                                bgcolor:
-                                    theme.palette.mode === "dark"
-                                        ? "rgba(255,255,255,0.06)"
-                                        : "rgba(0,0,0,0.08)",
-                            },
-                        }}
+                        sx={[
+                            (theme) => ({
+                                bgcolor: "rgba(0,0,0,0.04)",
+                                "&:hover": {
+                                    bgcolor: "rgba(0,0,0,0.08)",
+                                },
+                            }),
+                            (theme) =>
+                                theme.applyStyles("dark", {
+                                    bgcolor: "rgba(255,255,255,0.04)",
+                                    "&:hover": {
+                                        bgcolor: "rgba(255,255,255,0.06)",
+                                    },
+                                }),
+                        ]}
                     >
                         {copied ? (
                             <CheckIcon fontSize="small" />
@@ -133,7 +141,10 @@ export default function CodeBlock({
                 PreTag="div"
                 language={lang}
                 showLineNumbers={lineAmount > 1}
-                style={theme.palette.mode === "dark" ? darkTheme : lightTheme}
+                style={
+                    // TODO: Improve
+                    theme.palette.mode === "dark" ? darkTheme : lightTheme
+                }
             >
                 {trimmed}
             </SyntaxHighlighter>
@@ -145,22 +156,21 @@ export default function CodeBlock({
                 open={copied}
                 slotProps={{
                     content: {
-                        sx: {
-                            backgroundColor:
-                                theme.palette.mode === "dark"
-                                    ? theme.palette.grey[800]
-                                    : theme.palette.grey[200],
-                            color:
-                                theme.palette.mode === "dark"
-                                    ? theme.palette.grey[100]
-                                    : theme.palette.grey[900],
-                            border: `1px solid ${
-                                theme.palette.mode === "dark"
-                                    ? theme.palette.grey[700]
-                                    : theme.palette.grey[300]
-                            }`,
-                            fontWeight: 500,
-                        },
+                        sx: [
+                            (theme) => ({
+                                backgroundColor: theme.vars.palette.grey[200],
+                                color: theme.vars.palette.grey[900],
+                                border: `1px solid ${theme.vars.palette.grey[300]}`,
+                                fontWeight: 500,
+                            }),
+                            (theme) =>
+                                theme.applyStyles("dark", {
+                                    backgroundColor:
+                                        theme.vars.palette.grey[800],
+                                    color: theme.vars.palette.grey[100],
+                                    border: `1px solid ${theme.vars.palette.grey[700]}`,
+                                }),
+                        ],
                     },
                 }}
             />

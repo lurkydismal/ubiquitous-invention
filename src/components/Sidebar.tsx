@@ -251,13 +251,13 @@ export default function Sidebar() {
                                                     sx={[
                                                         open
                                                             ? {
-                                                                transform:
-                                                                    "rotate(180deg)",
-                                                            }
+                                                                  transform:
+                                                                      "rotate(180deg)",
+                                                              }
                                                             : {
-                                                                transform:
-                                                                    "none",
-                                                            },
+                                                                  transform:
+                                                                      "none",
+                                                              },
                                                     ]}
                                                 />
                                             </ListItemButton>
@@ -359,11 +359,7 @@ export default function Sidebar() {
 
 export function SidebarWrapper() {
     return (
-        <CssVarsProvider
-            defaultMode="dark"
-            theme={theme}
-            disableTransitionOnChange
-        >
+        <CssVarsProvider theme={theme} disableTransitionOnChange>
             <CssBaseline />
 
             <Sidebar />
