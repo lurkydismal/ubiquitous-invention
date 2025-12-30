@@ -1,4 +1,5 @@
 import * as React from "react";
+import CloseIcon from "@mui/icons-material/Close";
 import log from "@/utils/stdlog";
 import {
     DataGrid,
@@ -16,6 +17,8 @@ import {
     Typography,
     Box,
     Grid,
+    IconButton,
+    Divider,
 } from "@mui/material";
 import columns from "./columns";
 import Markdown from '@/components/Markdown';
@@ -174,7 +177,25 @@ export default function TasksGrid({
                     },
                 }}
             >
-                <DialogTitle>Row details</DialogTitle>
+                <DialogTitle>
+                    <Typography variant="h4">{selectedRow?.title}</Typography>
+
+                    {/* top-right close button */}
+                    <IconButton
+                        aria-label="Close"
+                        onClick={() => setDialogOpen(false)}
+                        size="small"
+                        sx={{
+                            position: "absolute",
+                            right: 8,
+                            top: 8,
+                            bgcolor: "action.hover",
+                            "&:hover": { bgcolor: "action.selected" },
+                        }}
+                    >
+                        <CloseIcon fontSize="small" />
+                    </IconButton>
+                </DialogTitle>
                 <DialogContent dividers>
                     {selectedRow && (
                         /*
@@ -203,15 +224,6 @@ export default function TasksGrid({
                         renderSelectedRow(selectedRow)
                     )}
                 </DialogContent>
-                <DialogActions>
-                    <Button
-                        onClick={handleClose}
-                        color="primary"
-                        variant="outlined"
-                    >
-                        Close
-                    </Button>
-                </DialogActions>
             </Dialog>
         </>
     );
