@@ -25,6 +25,19 @@ type TasksGridProps = Omit<DataGridProps, 'columns'> & {
     statusSearchFilter?: string;
 };
 
+type SelectedRow = {
+    id: string | number;
+    title: string;
+    status: string;
+    createdAt: string | Date;
+    updatedAt: string | Date;
+    endDate?: string | Date;
+    tag: string;
+    author: string;
+    tracker: string;
+    content: string;
+} | null;
+
 export default function TasksGrid({
     rows,
     statusSearchFilter,
@@ -60,16 +73,11 @@ export default function TasksGrid({
         }
     }, [statusSearchFilter]);
 
-    const [selectedRow, setSelectedRow] = React.useState<Record<
-        string,
-        any
-    > | null>(null);
+    const [selectedRow, setSelectedRow] = React.useState<SelectedRow>(null);
     const [dialogOpen, setDialogOpen] = React.useState(false);
 
     const handleRowClick = (params: GridRowParams) => {
-        log.info("Row clicked", params);
-        // store the whole row object
-        setSelectedRow(params.row as Record<string, any>);
+        setSelectedRow(params.row as SelectedRow);
         setDialogOpen(true);
     };
 
@@ -114,6 +122,23 @@ export default function TasksGrid({
         );
     };
 
+    const renderSelectedRow = (row: SelectedRow) => {
+        if (!row) return null;
+
+        return (
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                {/*<AuthorsWithDateAndLink {...properties} />*/}
+                <Typography variant="subtitle1" component="div">
+                    {row.tag}
+                </Typography>
+                <Typography gutterBottom tabIndex={0} variant="h3">
+                    {row.title}
+                </Typography>
+                <Markdown>{row.content}</Markdown>
+            </Box>
+        );
+    };
+
     return (
         <>
             <DataGrid
@@ -152,6 +177,7 @@ export default function TasksGrid({
                 <DialogTitle>Row details</DialogTitle>
                 <DialogContent dividers>
                     {selectedRow && (
+                        /*
                         <Box sx={{ mt: 1 }}>
                             <Grid container spacing={1}>
                                 {Object.entries(selectedRow).map(
@@ -173,6 +199,8 @@ export default function TasksGrid({
                                 )}
                             </Grid>
                         </Box>
+                        */
+                        renderSelectedRow(selectedRow)
                     )}
                 </DialogContent>
                 <DialogActions>
