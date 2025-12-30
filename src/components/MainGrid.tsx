@@ -56,10 +56,8 @@ const data: StatCardProps[] = [
 ];
 
 export default function MainGrid({
-    columns,
     rows,
 }: {
-    columns: GridColDef[];
     rows: GridRowsProp;
 }) {
     return (
@@ -91,7 +89,7 @@ export default function MainGrid({
             </Typography>
             <Grid container spacing={2} columns={12}>
                 <Grid size={{ xs: 12, lg: 9 }}>
-                    <TasksGrid columns={columns} rows={rows} />
+                    <TasksGrid rows={rows} />
                 </Grid>
                 <Grid size={{ xs: 12, lg: 3 }}>
                     {/*

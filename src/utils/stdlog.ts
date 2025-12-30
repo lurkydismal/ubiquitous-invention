@@ -1,10 +1,12 @@
 import { Logger } from "tslog";
-import { isDev, needTrace } from "./stdvar";
+import { isDev, needTrace } from "@/utils/stdvar";
 
 const logLevel = needTrace ? 1 : isDev ? 2 : 3;
 
-export const log = new Logger({
+const log = new Logger({
     type: "pretty",
     minLevel: logLevel,
     prettyLogTemplate: "{{logLevelName}}\t{{filePathWithLine}}\t",
 });
+
+export default log;

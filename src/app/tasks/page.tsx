@@ -13,7 +13,7 @@ import {
     datePickersCustomizations,
     treeViewCustomizations,
 } from "@/theme/customizations";
-import { columns, rows } from "./testData";
+import rows from "@/data/mockTasksRows";
 import { useSearchParams } from "next/navigation";
 
 const xThemeComponents = {
@@ -62,7 +62,6 @@ function DataGrid() {
     return (
         <TasksGrid
             statusSearchFilter={statusFilter}
-            columns={columns}
             rows={rows}
         />
     );

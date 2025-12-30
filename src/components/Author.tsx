@@ -6,7 +6,7 @@ import Link from "@mui/material/Link";
 import NextLink from "@/components/Link";
 import Typography from "@mui/material/Typography";
 import { TypographyVariant } from "@mui/material/styles";
-import { log } from "@/stdlog";
+import log from "@/utils/stdlog";
 
 export interface Author {
     id: number;

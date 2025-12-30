@@ -14,7 +14,7 @@ import {
     datePickersCustomizations,
     treeViewCustomizations,
 } from "@/theme/customizations";
-import { columns, rows } from "./testData";
+import rows from "@/data/mockTasksRows";
 
 const xThemeComponents = {
     ...chartsCustomizations,
@@ -47,7 +47,7 @@ export default function Page() {
                             mt: { xs: 8, md: 0 },
                         }}
                     >
-                        <MainGrid columns={columns} rows={rows} />
+                        <MainGrid rows={rows} />
                     </Stack>
                 </Box>
             </Box>

@@ -1,19 +1,18 @@
 "use client";
 
 import * as React from "react";
+import log from '@/utils/stdlog';
 import {
     DataGrid,
     GridFilterModel,
     GridRowsProp,
-    GridColDef,
 } from "@mui/x-data-grid";
+import columns from './columns';
 
 export default function TasksGrid({
-    columns,
     rows,
     statusSearchFilter,
 }: {
-    columns: GridColDef[];
     rows: GridRowsProp;
     statusSearchFilter?: string;
 }) {
@@ -64,7 +63,7 @@ export default function TasksGrid({
                 },
             }}
             onRowClick={(params, _) => {
-                console.log("Row clicked", params);
+                log.info("Row clicked", params);
             }}
         /*
         initialState={
