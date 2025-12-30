@@ -6,9 +6,9 @@ import {
     createTheme,
     ThemeProvider,
     THEME_ID as MATERIAL_THEME_ID,
-} from '@mui/material/styles';
-import { CssVarsProvider as JoyCssVarsProvider } from '@mui/joy/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+} from "@mui/material/styles";
+import { CssVarsProvider as JoyCssVarsProvider } from "@mui/joy/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 import { colorSchemes, shadows, shape, typography } from "./themePrimitives";
 import { dataDisplayCustomizations } from "./customizations/dataDisplay";
 import { feedbackCustomizations } from "./customizations/feedback";
@@ -50,7 +50,10 @@ export default function AppTheme(props: AppThemeProps) {
     });
 
     return (
-        <ThemeProvider theme={{ [MATERIAL_THEME_ID]: theme }} disableTransitionOnChange>
+        <ThemeProvider
+            theme={{ [MATERIAL_THEME_ID]: theme }}
+            disableTransitionOnChange
+        >
             <JoyCssVarsProvider disableTransitionOnChange>
                 <CssBaseline enableColorScheme />
 
