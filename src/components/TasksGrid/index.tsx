@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import log from "@/utils/stdlog";
 import {
@@ -20,6 +18,7 @@ import {
     Grid,
 } from "@mui/material";
 import columns from "./columns";
+import Markdown from '@/components/Markdown';
 
 type TasksGridProps = Omit<DataGridProps, 'columns'> & {
     rows: GridRowsProp;
@@ -77,8 +76,10 @@ export default function TasksGrid({
     const handleClose = () => setDialogOpen(false);
 
     const renderValue = (value: any) => {
-        if (value === null || value === undefined)
+        if (value === null || value === undefined) {
             return <Typography color="text.secondary">—</Typography>;
+        }
+
         if (typeof value === "object") {
             try {
                 return (
@@ -105,6 +106,7 @@ export default function TasksGrid({
                 );
             }
         }
+
         return (
             <Typography variant="body2" sx={{ fontFamily: "monospace" }}>
                 {String(value)}

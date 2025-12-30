@@ -1,7 +1,5 @@
 "use client";
 
-// import type { } from "@mui/x-charts/themeAugmentation";
-// import type { } from "@mui/x-data-grid-pro/themeAugmentation";
 import { alpha } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
