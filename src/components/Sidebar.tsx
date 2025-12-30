@@ -249,13 +249,13 @@ export default function Sidebar() {
                                                     sx={[
                                                         open
                                                             ? {
-                                                                transform:
-                                                                    "rotate(180deg)",
-                                                            }
+                                                                  transform:
+                                                                      "rotate(180deg)",
+                                                              }
                                                             : {
-                                                                transform:
-                                                                    "none",
-                                                            },
+                                                                  transform:
+                                                                      "none",
+                                                              },
                                                     ]}
                                                 />
                                             </ListItemButton>
@@ -338,11 +338,9 @@ export default function Sidebar() {
             </Box>
             <Divider />
             <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-                <Avatar
-                    variant="outlined"
-                    size="sm"
-                    alt="Siriwat K."
-                >{"Siriwat K."[0].toUpperCase()}</Avatar>
+                <Avatar variant="outlined" size="sm" alt="Siriwat K.">
+                    {"Siriwat K."[0].toUpperCase()}
+                </Avatar>
                 <Box sx={{ minWidth: 0, flex: 1 }}>
                     <Typography level="title-sm">Siriwat K.</Typography>
                 </Box>

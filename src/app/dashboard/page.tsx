@@ -27,6 +27,7 @@ export default function Page() {
     return (
         <AppTheme themeComponents={xThemeComponents}>
             <CssBaseline enableColorScheme />
+
             <Box sx={{ display: "flex" }}>
                 <Box
                     component="main"

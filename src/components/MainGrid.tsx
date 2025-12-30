@@ -1,7 +1,7 @@
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { GridRowsProp, GridColDef } from "@mui/x-data-grid";
+import { GridRowsProp } from "@mui/x-data-grid";
 import ChartUserByCountry from "./ChartUserByCountry";
 import TasksGrid from "./TasksGrid";
 import PageViewsBarChart from "./PageViewsBarChart";

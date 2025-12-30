@@ -57,7 +57,7 @@ function DataGrid() {
         ? routeToStatusMap[filterParam]
         : undefined;
 
-    return <TasksGrid statusSearchFilter={statusFilter} rows={rows} />;
+    return <TasksGrid showToolbar statusSearchFilter={statusFilter} rows={rows} />;
 }
 
 export default function Page() {

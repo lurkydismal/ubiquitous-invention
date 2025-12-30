@@ -16,6 +16,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
 import Mermaid from "./Mermaid";
+import { gray } from "@/shared-theme/themePrimitives";
 
 export default function CodeBlock({
     inline,
@@ -40,18 +41,18 @@ export default function CodeBlock({
                 {...props}
                 component="code"
                 sx={[
-                    (theme) => ({
+                    (_) => ({
                         fontSize: "0.875rem",
                         borderRadius: 1,
                         px: 1,
                         py: 0,
-                        backgroundColor: theme.vars.palette.grey[200],
-                        color: theme.vars.palette.grey[900],
+                        backgroundColor: gray[200],
+                        color: gray[900],
                     }),
                     (theme) =>
                         theme.applyStyles("dark", {
-                            backgroundColor: theme.vars.palette.grey[800],
-                            color: theme.vars.palette.grey[100],
+                            backgroundColor: gray[800],
+                            color: gray[100],
                         }),
                 ]}
             >
@@ -113,7 +114,7 @@ export default function CodeBlock({
                         onClick={() => copyToClipboard(trimmed)}
                         size="small"
                         sx={[
-                            (theme) => ({
+                            (_) => ({
                                 bgcolor: "rgba(0,0,0,0.04)",
                                 "&:hover": {
                                     bgcolor: "rgba(0,0,0,0.08)",
@@ -157,18 +158,18 @@ export default function CodeBlock({
                 slotProps={{
                     content: {
                         sx: [
-                            (theme) => ({
-                                backgroundColor: theme.vars.palette.grey[200],
-                                color: theme.vars.palette.grey[900],
-                                border: `1px solid ${theme.vars.palette.grey[300]}`,
+                            (_) => ({
+                                backgroundColor: gray[200],
+                                color: gray[900],
+                                border: `1px solid ${gray[300]}`,
                                 fontWeight: 500,
                             }),
                             (theme) =>
                                 theme.applyStyles("dark", {
                                     backgroundColor:
-                                        theme.vars.palette.grey[800],
-                                    color: theme.vars.palette.grey[100],
-                                    border: `1px solid ${theme.vars.palette.grey[700]}`,
+                                        gray[800],
+                                    color: gray[100],
+                                    border: `1px solid ${gray[700]}`,
                                 }),
                         ],
                     },

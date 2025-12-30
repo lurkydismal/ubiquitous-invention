@@ -17,11 +17,7 @@ export default function AvatarWithStatus(props: AvatarWithStatusProps) {
                 anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
                 badgeInset="4px 4px"
             >
-                <Avatar
-                    size="sm"
-                    alt={username}
-                    {...other}
-                >
+                <Avatar size="sm" alt={username} {...other}>
                     {username[0].toUpperCase()}
                 </Avatar>
             </Badge>
