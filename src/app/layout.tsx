@@ -1,5 +1,4 @@
 import "./globals.css";
-import * as React from "react";
 import Box from "@mui/joy/Box";
 import { Inter } from "next/font/google";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
@@ -12,7 +11,6 @@ export const metadata: Metadata = {
 };
 
 const font = Inter({
-    weight: ["300", "400", "500", "700"],
     variable: "--font-main",
     subsets: ["latin"],
     display: "swap",
