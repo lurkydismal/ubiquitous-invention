@@ -16,6 +16,29 @@ const font = Inter({
     display: "swap",
 });
 
+/*
+import {
+  createTheme,
+  ThemeProvider,
+  THEME_ID as MATERIAL_THEME_ID,
+} from '@mui/material/styles';
+import { CssVarsProvider as JoyCssVarsProvider } from '@mui/joy/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+
+const materialTheme = createTheme();
+
+export default function App() {
+  return (
+    <ThemeProvider theme={{ [MATERIAL_THEME_ID]: materialTheme }}>
+      <JoyCssVarsProvider>
+        <CssBaseline enableColorScheme />
+        ...Material UI and Joy UI components
+      </JoyCssVarsProvider>
+    </ThemeProvider>
+  );
+}
+*/
+
 export default function RootLayout({
     children,
 }: Readonly<{

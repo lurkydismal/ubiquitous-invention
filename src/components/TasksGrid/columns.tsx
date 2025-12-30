@@ -1,81 +1,145 @@
-import Chip from "@mui/material/Chip";
-import { GridColDef } from "@mui/x-data-grid";
+import { Chip } from "@mui/material";
+import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
+import {
+    CheckRounded as FinishedIcon,
+    AutorenewRounded as InProgressIcon,
+    Block as CancelledIcon,
+    HistoryRounded as OutdatedIcon,
+} from '@mui/icons-material';
+import AvatarChip from '@/components/AvatarChip';
 
-function renderStatus(status: "Online" | "Offline") {
-    const colors: { [index: string]: "success" | "default" } = {
-        Online: "success",
-        Offline: "default",
-    };
-
-    return <Chip label={status} color={colors[status]} size="small" />;
+function fieldFromHeader(headerName: string): string {
+    return (
+        headerName
+            .trim()
+            .toLowerCase()
+            // Remove special chars (keep spaces)
+            .replace(/[^a-z0-9 ]+/g, "")
+            .replace(/\s+([a-z0-9])/g, (_, c) => c.toUpperCase())
+    );
 }
 
-const columns: GridColDef[] = [
+type Status = "Finished" | "In Progress" | "Cancelled" | "Outdated";
+type StatusColor = 'default' | 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
+
+function renderStatus(status: Status) {
+    const config: Record<
+        Status,
+        { color: StatusColor, icon: React.ReactElement }
+    > = {
+        Finished: {
+            color: "success",
+            icon: <FinishedIcon />,
+        },
+        "In Progress": {
+            color: "default",
+            icon: <InProgressIcon />,
+        },
+        Cancelled: {
+            color: "warning",
+            icon: <CancelledIcon />,
+        },
+        Outdated: {
+            color: "error",
+            icon: <OutdatedIcon />,
+        },
+    };
+
+    const { color, icon } = config[status];
+
+    return (
+        <Chip
+            variant="outlined"
+            size="small"
+            icon={icon}
+            color={color}
+            label={status}
+        >
+        </Chip>
+    );
+}
+
+function renderUser(status: Status) {
+    const config: Record<
+        Status,
+        { color: StatusColor, icon: React.ReactElement }
+    > = {
+        Finished: {
+            color: "success",
+            icon: <FinishedIcon />,
+        },
+        "In Progress": {
+            color: "default",
+            icon: <InProgressIcon />,
+        },
+        Cancelled: {
+            color: "warning",
+            icon: <CancelledIcon />,
+        },
+        Outdated: {
+            color: "error",
+            icon: <OutdatedIcon />,
+        },
+    };
+
+    const { color, icon } = config[status];
+
+    return (
+        <Chip
+            variant="outlined"
+            size="small"
+            icon={icon}
+            color={color}
+            label={status}
+        >
+        </Chip>
+    );
+    // return <Chip label={status} color={colors[status]} size="small" />;
+}
+
+const columns = [
     {
         field: "title",
-        flex: 1.5,
         headerName: "Title",
         headerAlign: "center",
         align: "center",
-        minWidth: 200,
+        flex: 1,
+        minWidth: 100,
     },
     {
-        field: "status",
         headerName: "Status",
-        headerAlign: "center",
-        align: "center",
-        flex: 0.5,
-        minWidth: 100,
-        renderCell: (params) => renderStatus(params.value as any),
+        renderCell: (params: GridRenderCellParams) => renderStatus(params.value as any),
     },
     {
-        field: "tag",
         headerName: "Tag",
-        headerAlign: "center",
-        align: "center",
-        flex: 1,
-        minWidth: 80,
     },
     {
-        field: "author",
         headerName: "Author",
-        headerAlign: "center",
-        align: "center",
-        flex: 1,
-        minWidth: 100,
+        renderCell: (params: GridRenderCellParams) => renderUser(params.value as any),
     },
     {
-        field: "tracker",
         headerName: "Tracker",
-        headerAlign: "center",
-        align: "center",
-        flex: 1,
-        minWidth: 100,
     },
     {
-        field: "createdAt",
         headerName: "Created At",
-        headerAlign: "center",
-        align: "center",
-        flex: 1,
-        minWidth: 100,
     },
     {
-        field: "updatedAt",
         headerName: "Updated At",
-        headerAlign: "center",
-        align: "center",
-        flex: 1,
-        minWidth: 120,
     },
     {
-        field: "endDate",
         headerName: "End Date",
+    },
+].map((item) => {
+    return {
+        ...item,
         headerAlign: "center",
         align: "center",
-        flex: 1,
-        minWidth: 100,
-    },
-];
+        ...(item.flex == null ? { flex: 1 } : {}),
+        ...(item.minWidth == null ? { minWidth: 100 } : {}),
+        ...(item.field == null
+            ? { field: fieldFromHeader(item.headerName) }
+            : {}),
+    };
+}) as readonly GridColDef[];
 
 export default columns;
