@@ -1,14 +1,12 @@
 import { Chip, Avatar, Stack } from "@mui/material";
 
-export default function AvatarChips() {
+export default function AvatarChips({ username }: { username: string }) {
     return (
-        <Stack direction="row" spacing={1}>
-            <Chip avatar={<Avatar>M</Avatar>} label="Avatar" />
-            <Chip
-                avatar={<Avatar alt="Natacha" src="/static/images/avatar/1.jpg" />}
-                label="Avatar"
-                variant="outlined"
-            />
-        </Stack>
+        <Chip
+            variant="filled"
+            size="medium"
+            avatar={<Avatar alt={username} src={username} />}
+            label={username}
+        />
     );
 }

@@ -55,11 +55,7 @@ const data: StatCardProps[] = [
     },
 ];
 
-export default function MainGrid({
-    rows,
-}: {
-    rows: GridRowsProp;
-}) {
+export default function MainGrid({ rows }: { rows: GridRowsProp }) {
     return (
         <Box sx={{ width: "100%", maxWidth: { sm: "100%", md: "1700px" } }}>
             {/* cards */}

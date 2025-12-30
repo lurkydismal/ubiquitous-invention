@@ -55,7 +55,7 @@ export default function PageViewsBarChart() {
                         <Typography variant="h4" component="p">
                             1.3M
                         </Typography>
-                        <Chip size="small" color="error" label="-8%" />
+                        <Chip variant="filled" size="small" color="error" label="-8%" />
                     </Stack>
                     <Typography
                         variant="caption"
