@@ -206,35 +206,6 @@ export const dataDisplayCustomizations: Components<Theme> = {
     //         }),
     //     },
     // },
-    MuiChip: {
-        styleOverrides: {
-            root: ({ theme }) => ({
-                variants: [
-                    {
-                        props: {
-                            color: "error",
-                        },
-                        style: {
-                            // [`& .${chipClasses.label}`]: {
-                            //     color: red[500],
-                            // },
-                            // [`& .${chipClasses.icon}`]: {
-                            //     color: red[500],
-                            // },
-                            ...theme.applyStyles("dark", {
-                                [`& .${chipClasses.label}`]: {
-                                    color: "black",
-                                },
-                                // [`& .${chipClasses.icon}`]: {
-                                //     color: red[300],
-                                // },
-                            }),
-                        },
-                    },
-                ],
-            }),
-        },
-    },
     MuiTablePagination: {
         styleOverrides: {
             actions: {

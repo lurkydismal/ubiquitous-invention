@@ -7,7 +7,8 @@ import {
     HistoryRounded as OutdatedIcon,
 } from "@mui/icons-material";
 import AvatarChip from "@/components/AvatarChip";
-import dayjs from '@/utils/dayjs';
+import dayjs, { formatDate } from "@/utils/dayjs";
+import log from "@/utils/stdlog";
 
 function fieldFromHeader(headerName: string): string {
     return (
@@ -70,11 +71,12 @@ function renderUser(username: string) {
     return <AvatarChip username={username}></AvatarChip>;
 }
 
-function renderDate(_date: string) {
+function renderDate(_date: Date) {
     const date = dayjs(_date);
-    return date.isAfter(dayjs().subtract(1, 'hour'))
-        ? `🟢 ${date.format()}`
-        : date.format();
+    const formattedDate = formatDate(_date);
+    const isNew = date.isAfter(dayjs().subtract(1, "month"));
+
+    return isNew ? `🟢 ${formattedDate}` : formattedDate;
 }
 
 const columns = [
@@ -106,21 +108,21 @@ const columns = [
     },
     {
         headerName: "Created At",
-        valueGetter: (params: GridRenderCellParams) => new Date(params.value),
-        valueFormatter: (params: GridRenderCellParams) =>
-            renderDate(params.value),
+        valueGetter: (value: string) => new Date(value),
+        valueFormatter: (value: Date) =>
+            renderDate(value),
     },
     {
         headerName: "Updated At",
-        valueGetter: (params: GridRenderCellParams) => new Date(params.value),
-        valueFormatter: (params: GridRenderCellParams) =>
-            renderDate(params.value),
+        valueGetter: (value: string) => new Date(value),
+        valueFormatter: (value: Date) =>
+            renderDate(value),
     },
     {
         headerName: "End Date",
-        valueGetter: (params: GridRenderCellParams) => new Date(params.value),
-        valueFormatter: (params: GridRenderCellParams) =>
-            renderDate(params.value),
+        valueGetter: (value: string) => new Date(value),
+        valueFormatter: (value: Date) =>
+            formatDate(value),
     },
 ].map((item) => {
     return {

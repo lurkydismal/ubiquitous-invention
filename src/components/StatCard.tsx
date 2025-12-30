@@ -79,6 +79,14 @@ export default function StatCard({
     const chartColor = trendColors[trend];
     const trendValues = { up: "+25%", down: "-25%", neutral: "+5%" };
 
+    const classNames = {
+        up: "",
+        down: "text-black",
+        neutral: "",
+    };
+
+    const className = classNames[trend];
+
     return (
         <Card variant="outlined" sx={{ height: "100%", flexGrow: 1 }}>
             <CardContent>
@@ -108,6 +116,7 @@ export default function StatCard({
                                 size="small"
                                 color={color}
                                 label={trendValues[trend]}
+                                className={className}
                             />
                         </Stack>
                         <Typography
