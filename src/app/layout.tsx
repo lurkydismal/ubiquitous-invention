@@ -13,7 +13,7 @@
  * - Logs current build environment (development or production) using a custom logger.
  *
  * Notes:
- * - `font.variable` sets a CSS variable `--font-nain` for use across the app.
+ * - `font.variable` sets a CSS variable `--font-main` for use across the app.
  * - `InitColorSchemeScript` ensures proper MUI theme handling on first load.
  * - `AppRouterCacheProvider` is configured with `enableCssLayer: true` to optimize style insertion.
  */
@@ -21,15 +21,15 @@
 import type { Metadata } from "next";
 import { InitColorSchemeScript } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v16-appRouter";
-import { Geist_Mono } from "next/font/google";
+import { Inter as Font } from "next/font/google";
 import "./globals.css";
 import log from "@/utils/stdlog";
 import { isDev, appName, appVersion } from "@/utils/stdvar";
 import MuiLayout from "@/components/MuiLayout";
 
 // Configure Geist Mono font with CSS variable for global usage
-const font = Geist_Mono({
-    variable: "--font-nain",
+const font = Font({
+    variable: "--font-main",
     subsets: ["latin"],
     display: "swap",
 });
