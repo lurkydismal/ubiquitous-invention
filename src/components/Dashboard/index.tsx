@@ -1,6 +1,3 @@
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import { GridRowsProp } from "@mui/x-data-grid";
 import ChartUserByCountry from "./ChartUserByCountry";
 import TasksGrid from "./TasksGrid";
@@ -8,6 +5,7 @@ import PageViewsBarChart from "./PageViewsBarChart";
 import SessionsChart from "./SessionsChart";
 import StatCard from "./StatCard";
 import stats from "@/data/dashboard/stats";
+import { Box, Grid, Typography } from "@mui/material";
 
 export default function MainGrid({ rows }: { rows: GridRowsProp }) {
     return (

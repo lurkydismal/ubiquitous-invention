@@ -1,6 +1,4 @@
-import * as React from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import log from "@/utils/stdlog";
 import {
     DataGrid,
     DataGridProps,
@@ -12,16 +10,13 @@ import {
     Dialog,
     DialogTitle,
     DialogContent,
-    DialogActions,
-    Button,
     Typography,
     Box,
-    Grid,
     IconButton,
-    Divider,
 } from "@mui/material";
 import columns from "./columns";
 import Markdown from "@/components/Markdown";
+import { useState, useEffect } from "react";
 
 type TasksGridProps = Omit<DataGridProps, "columns"> & {
     rows: GridRowsProp;
@@ -46,21 +41,21 @@ export default function TasksGrid({
     statusSearchFilter,
     ...props
 }: TasksGridProps) {
-    const [filterModel, setFilterModel] = React.useState<GridFilterModel>(() =>
+    const [filterModel, setFilterModel] = useState<GridFilterModel>(() =>
         statusSearchFilter
             ? {
-                  items: [
-                      {
-                          field: "status",
-                          operator: "equals",
-                          value: statusSearchFilter,
-                      },
-                  ],
-              }
+                items: [
+                    {
+                        field: "status",
+                        operator: "equals",
+                        value: statusSearchFilter,
+                    },
+                ],
+            }
             : { items: [] },
     );
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (statusSearchFilter) {
             setFilterModel({
                 items: [
@@ -76,8 +71,8 @@ export default function TasksGrid({
         }
     }, [statusSearchFilter]);
 
-    const [selectedRow, setSelectedRow] = React.useState<SelectedRow>(null);
-    const [dialogOpen, setDialogOpen] = React.useState(false);
+    const [selectedRow, setSelectedRow] = useState<SelectedRow>(null);
+    const [dialogOpen, setDialogOpen] = useState(false);
 
     const handleRowClick = (params: GridRowParams) => {
         setSelectedRow(params.row as SelectedRow);
@@ -203,7 +198,7 @@ export default function TasksGrid({
                             <Grid container spacing={1}>
                                 {Object.entries(selectedRow).map(
                                     ([key, value]) => (
-                                        <React.Fragment key={key}>
+                                        <Fragment key={key}>
                                             <Grid size={{ xs: 4, sm: 3 }}>
                                                 <Typography
                                                     variant="subtitle2"
@@ -215,7 +210,7 @@ export default function TasksGrid({
                                             <Grid size={{ xs: 8, sm: 9 }}>
                                                 {renderValue(value)}
                                             </Grid>
-                                        </React.Fragment>
+                                        </Fragment>
                                     ),
                                 )}
                             </Grid>

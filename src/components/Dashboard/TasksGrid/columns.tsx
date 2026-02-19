@@ -1,4 +1,3 @@
-import { Chip } from "@mui/material";
 import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import {
     CheckRounded as FinishedIcon,
@@ -8,7 +7,7 @@ import {
 } from "@mui/icons-material";
 import AvatarChip from "@/components/AvatarChip";
 import dayjs, { formatDate } from "@/utils/dayjs";
-import log from "@/utils/stdlog";
+import { Chip } from "@mui/material";
 
 function fieldFromHeader(headerName: string): string {
     return (

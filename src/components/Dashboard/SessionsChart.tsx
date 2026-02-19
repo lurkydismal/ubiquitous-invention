@@ -1,12 +1,8 @@
 "use client";
 
-import { useTheme } from "@mui/material/styles";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Chip from "@mui/material/Chip";
-import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
-import { LineChart, LineSeries } from "@mui/x-charts/LineChart";
+import { LineChart } from "@mui/x-charts/LineChart";
+import sessions from "@/data/dashboard/sessions";
+import { Card, CardContent, Chip, Stack, Typography, useTheme } from "@mui/material";
 
 function AreaGradient({ color, id }: { color: string; id: string }) {
     return (
@@ -45,71 +41,13 @@ export default function SessionsChart() {
         theme.palette.error.dark,
     ];
 
-    const series: readonly LineSeries[] = [
-        {
-            area: true,
-            curve: "linear",
-            id: "created",
-            label: "Created",
-            showMark: false,
-            stack: "total",
-            stackOrder: "ascending",
-            data: [
-                300, 900, 600, 1200, 1500, 1800, 2400, 2100, 2700, 3000, 1800,
-                3300, 3600, 3900, 4200, 4500, 3900, 4800, 5100, 5400, 4800,
-                5700, 6000, 6300, 6600, 6900, 7200, 7500, 7800, 8100,
-            ],
-        },
-        {
-            area: true,
-            curve: "linear",
-            id: "finished",
-            label: "Finished",
-            showMark: false,
-            stack: "total",
-            stackOrder: "ascending",
-            data: [
-                1000, 1500, 1200, 1700, 1300, 2000, 2400, 2200, 2600, 2800,
-                2500, 3000, 3400, 3700, 3200, 3900, 4100, 3500, 4300, 4500,
-                4000, 4700, 5000, 5200, 4800, 5400, 5600, 5900, 6100, 6300,
-            ],
-        },
-        {
-            area: true,
-            curve: "linear",
-            id: "cancelled",
-            label: "Cancelled",
-            showMark: false,
-            stack: "total",
-            stackOrder: "ascending",
-            data: [
-                500, 900, 700, 1400, 1100, 1700, 2300, 2000, 2600, 2900, 2300,
-                3200, 3500, 3800, 4100, 4400, 2900, 4700, 5000, 5300, 5600,
-                5900, 6200, 6500, 5600, 6800, 7100, 7400, 7700, 8000,
-            ],
-        },
-        {
-            area: true,
-            curve: "linear",
-            id: "outdated",
-            label: "Outdated",
-            showMark: false,
-            stack: "total",
-            stackOrder: "ascending",
-            data: [
-                1000, 1500, 1200, 1700, 1300, 2000, 2400, 2200, 2600, 2800,
-                2500, 3000, 3400, 3700, 3200, 3900, 4100, 3500, 4300, 4500,
-                4000, 4700, 5000, 5200, 4800, 5400, 5600, 5900, 6100, 6300,
-            ],
-        },
-    ];
-
     return (
         <Card variant="outlined" sx={{ width: "100%" }}>
             <CardContent>
                 <Typography component="h2" variant="subtitle2" gutterBottom>
                     Tasks
                 </Typography>
+
                 <Stack sx={{ justifyContent: "space-between" }}>
                     <Stack
                         direction="row"
@@ -122,8 +60,10 @@ export default function SessionsChart() {
                         <Typography variant="h4" component="p">
                             13,277
                         </Typography>
+
                         <Chip size="small" color="success" label="+35%" />
                     </Stack>
+
                     <Typography
                         variant="caption"
                         sx={{ color: "text.secondary" }}
@@ -131,6 +71,7 @@ export default function SessionsChart() {
                         Tasks information per day for the last 30 days
                     </Typography>
                 </Stack>
+
                 <LineChart
                     colors={colorPalette}
                     xAxis={[
@@ -142,7 +83,7 @@ export default function SessionsChart() {
                         },
                     ]}
                     yAxis={[{ width: 50 }]}
-                    series={series}
+                    series={sessions}
                     height={250}
                     margin={{ left: 0, right: 20, top: 20, bottom: 0 }}
                     grid={{ horizontal: true }}
@@ -166,14 +107,17 @@ export default function SessionsChart() {
                         color={theme.palette.primary.dark}
                         id="created"
                     />
+
                     <AreaGradient
                         color={theme.palette.success.dark}
                         id="finished"
                     />
+
                     <AreaGradient
                         color={theme.palette.secondary.dark}
                         id="cancelled"
                     />
+
                     <AreaGradient
                         color={theme.palette.error.dark}
                         id="outdated"

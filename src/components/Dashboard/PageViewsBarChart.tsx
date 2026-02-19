@@ -1,12 +1,8 @@
 "use client";
 
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Chip from "@mui/material/Chip";
-import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
-import { BarChart, BarSeries } from "@mui/x-charts/BarChart";
-import { useTheme } from "@mui/material/styles";
+import { BarChart } from "@mui/x-charts/BarChart";
+import views from "@/data/dashboard/views";
+import { Card, CardContent, Chip, Stack, Typography, useTheme } from "@mui/material";
 
 export default function PageViewsBarChart() {
     const theme = useTheme();
@@ -16,33 +12,13 @@ export default function PageViewsBarChart() {
         (theme.vars || theme).palette.success.dark,
     ];
 
-    const series: readonly BarSeries[] = [
-        {
-            data: [4051, 2275, 3129, 4693, 3904, 2038, 2275],
-            id: "tasks-changed",
-            label: "Tasks changed",
-            stack: "A",
-        },
-        {
-            data: [2234, 3872, 2998, 4125, 3357, 2789, 2998],
-            id: "messages-sended",
-            label: "Messages sended",
-            stack: "A",
-        },
-        {
-            data: [3098, 4215, 2384, 2101, 4752, 3593, 2384],
-            id: "users-online",
-            label: "Users online",
-            stack: "A",
-        },
-    ];
-
     return (
         <Card variant="outlined" sx={{ width: "100%" }}>
             <CardContent>
                 <Typography component="h2" variant="subtitle2" gutterBottom>
                     Tasks changed and users activity
                 </Typography>
+
                 <Stack sx={{ justifyContent: "space-between" }}>
                     <Stack
                         direction="row"
@@ -55,6 +31,7 @@ export default function PageViewsBarChart() {
                         <Typography variant="h4" component="p">
                             1.3M
                         </Typography>
+
                         <Chip
                             size="small"
                             color="error"
@@ -62,6 +39,7 @@ export default function PageViewsBarChart() {
                             className="text-black"
                         />
                     </Stack>
+
                     <Typography
                         variant="caption"
                         sx={{ color: "text.secondary" }}
@@ -69,6 +47,7 @@ export default function PageViewsBarChart() {
                         Tasks changed and users activity for the last 6 months
                     </Typography>
                 </Stack>
+
                 <BarChart
                     borderRadius={8}
                     colors={colorPalette}
@@ -89,7 +68,7 @@ export default function PageViewsBarChart() {
                         },
                     ]}
                     yAxis={[{ width: 50 }]}
-                    series={series}
+                    series={views}
                     height={250}
                     margin={{ left: 0, right: 0, top: 20, bottom: 0 }}
                     grid={{ horizontal: true }}
