@@ -81,44 +81,44 @@ export default function TasksGrid({
 
     const handleClose = () => setDialogOpen(false);
 
-    const renderValue = (value: any) => {
-        if (value === null || value === undefined) {
-            return <Typography color="text.secondary">—</Typography>;
-        }
-
-        if (typeof value === "object") {
-            try {
-                return (
-                    <Typography
-                        component="pre"
-                        variant="body2"
-                        sx={{
-                            whiteSpace: "pre-wrap",
-                            fontFamily: "monospace",
-                            m: 0,
-                        }}
-                    >
-                        {JSON.stringify(value, null, 2)}
-                    </Typography>
-                );
-            } catch {
-                return (
-                    <Typography
-                        variant="body2"
-                        sx={{ fontFamily: "monospace" }}
-                    >
-                        {String(value)}
-                    </Typography>
-                );
-            }
-        }
-
-        return (
-            <Typography variant="body2" sx={{ fontFamily: "monospace" }}>
-                {String(value)}
-            </Typography>
-        );
-    };
+    // const renderValue = (value: any) => {
+    //     if (value === null || value === undefined) {
+    //         return <Typography color="text.secondary">—</Typography>;
+    //     }
+    //
+    //     if (typeof value === "object") {
+    //         try {
+    //             return (
+    //                 <Typography
+    //                     component="pre"
+    //                     variant="body2"
+    //                     sx={{
+    //                         whiteSpace: "pre-wrap",
+    //                         fontFamily: "monospace",
+    //                         m: 0,
+    //                     }}
+    //                 >
+    //                     {JSON.stringify(value, null, 2)}
+    //                 </Typography>
+    //             );
+    //         } catch {
+    //             return (
+    //                 <Typography
+    //                     variant="body2"
+    //                     sx={{ fontFamily: "monospace" }}
+    //                 >
+    //                     {String(value)}
+    //                 </Typography>
+    //             );
+    //         }
+    //     }
+    //
+    //     return (
+    //         <Typography variant="body2" sx={{ fontFamily: "monospace" }}>
+    //             {String(value)}
+    //         </Typography>
+    //     );
+    // };
 
     const renderSelectedRow = (row: SelectedRow) => {
         if (!row) return null;
