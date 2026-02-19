@@ -9,11 +9,12 @@ import {
     Check as CheckIcon,
     ContentCopy as ContentCopyIcon,
 } from "@mui/icons-material";
-import { useTheme } from "@mui/material/styles";
+import { useColorScheme } from "@mui/material/styles";
 import Mermaid from "@/components/Mermaid";
 import { gray } from "@/theme/themePrimitives";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Box, IconButton, Snackbar, Tooltip, Typography } from "@mui/material";
+import { Box, IconButton, Tooltip, Typography } from "@mui/material";
+import { useSnackbar } from "@/components/SnackbarProvider";
 
 /**
  * CodeBlock component
@@ -37,8 +38,10 @@ export default function CodeBlock({
     children?: React.ReactNode;
     node?: unknown;
 }) {
+    const { showInfo } = useSnackbar();
+
     // Access Material UI theme for dynamic styling
-    const theme = useTheme();
+    const { mode } = useColorScheme();
 
     // Detect language dynamically
     const match = /language-(\w+)/.exec(className || "");
@@ -72,25 +75,27 @@ export default function CodeBlock({
      * Sets `copied` state to true if successful, false otherwise
      * @param s - Text to copy
      */
-    const copyToClipboard = useCallback(async (s: string) => {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            try {
-                await navigator.clipboard.writeText(s);
+    const copyToClipboard = useCallback(
+        async (s: string) => {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                try {
+                    await navigator.clipboard.writeText(s);
 
-                setCopied(true);
+                    setCopied(true);
 
-                return;
-            } catch {
-                setCopied(false);
+                    showInfo("Copied to clipboard");
+
+                    return;
+                } catch {
+                    setCopied(false);
+                }
             }
-        }
-    }, []);
+        },
+        [showInfo],
+    );
 
     // Memoize the syntax highlighting theme based on the current MUI theme mode
-    const syntaxTheme = useMemo(
-        () => (theme.palette.mode === "dark" ? darkTheme : lightTheme),
-        [theme.palette.mode],
-    );
+    const syntaxTheme = mode === "dark" ? darkTheme : lightTheme;
 
     // Inline code or unknown language fallback
     if (inline || !match) {
@@ -182,33 +187,6 @@ export default function CodeBlock({
             >
                 {trimmed}
             </SyntaxHighlighter>
-
-            {/* Snackbar for copy feedback */}
-            <Snackbar
-                anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-                autoHideDuration={2000}
-                message="Copied to clipboard"
-                onClose={() => setCopied(false)}
-                open={copied}
-                slotProps={{
-                    content: {
-                        sx: [
-                            () => ({
-                                backgroundColor: gray[200],
-                                color: gray[900],
-                                border: `1px solid ${gray[300]}`,
-                                fontWeight: 500,
-                            }),
-                            (theme) =>
-                                theme.applyStyles("dark", {
-                                    backgroundColor: gray[800],
-                                    color: gray[100],
-                                    border: `1px solid ${gray[700]}`,
-                                }),
-                        ],
-                    },
-                }}
-            />
         </Box>
     );
 }
