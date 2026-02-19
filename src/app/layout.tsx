@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     description: appVersion,
 };
 
-const xThemeComponents = {
+const themeComponents = {
     ...chartsCustomizations,
     ...dataGridCustomizations,
     ...datePickersCustomizations,
@@ -81,7 +81,7 @@ export default function RootLayout({
                 <InitColorSchemeScript attribute="data" />
 
                 <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-                    <MuiLayout>{children}</MuiLayout>
+                    <MuiLayout themeComponents={themeComponents}>{children}</MuiLayout>
                 </AppRouterCacheProvider>
             </body>
         </html>

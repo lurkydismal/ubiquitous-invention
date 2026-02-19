@@ -15,19 +15,21 @@
  * - `children`: React.ReactNode – all nested page content/components.
  */
 
-import AppTheme from "@/theme/theme";
+import AppTheme, { AppThemeProps } from "@/theme/theme";
 import { Box, CircularProgress, CssBaseline } from "@mui/material";
 import SnackbarProvider from "@/components/SnackbarProvider";
 import { Suspense } from "react";
 
 export default function MuiLayout({
     children,
+    themeComponents,
 }: Readonly<{
     children: React.ReactNode;
+    themeComponents?: AppThemeProps["themeComponents"];
 }>) {
     return (
         // Apply global theme to all child components
-        <AppTheme>
+        <AppTheme themeComponents={themeComponents}>
             <CssBaseline enableColorScheme />
 
             {/* Full viewport-height container */}
