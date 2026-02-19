@@ -26,6 +26,12 @@ import "./globals.css";
 import log from "@/utils/stdlog";
 import { isDev, appName, appVersion } from "@/utils/stdvar";
 import MuiLayout from "@/components/MuiLayout";
+import {
+    chartsCustomizations,
+    dataGridCustomizations,
+    datePickersCustomizations,
+    treeViewCustomizations,
+} from "@/theme/custom";
 
 // Configure Geist Mono font with CSS variable for global usage
 const font = Font({
@@ -38,6 +44,13 @@ const font = Font({
 export const metadata: Metadata = {
     title: appName,
     description: appVersion,
+};
+
+const xThemeComponents = {
+    ...chartsCustomizations,
+    ...dataGridCustomizations,
+    ...datePickersCustomizations,
+    ...treeViewCustomizations,
 };
 
 // Log the current build environment (development or production)
