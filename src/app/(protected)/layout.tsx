@@ -1,4 +1,4 @@
-import { SidebarWrapper } from "@/components/Sidebar";
+import Sidebar from "@/components/Sidebar";
 import { Box } from "@mui/material";
 
 export default function RootLayout({
@@ -8,7 +8,7 @@ export default function RootLayout({
 }>) {
     return (
         <Box sx={{ display: "flex", minHeight: "100dvh" }}>
-            <SidebarWrapper />
+            <Sidebar />
 
             {children}
         </Box>

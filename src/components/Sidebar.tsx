@@ -1,7 +1,5 @@
 "use client";
 
-import * as React from "react";
-import AppTheme from "@/shared-theme/AppTheme";
 import {
     GlobalStyles,
     Avatar,
@@ -25,31 +23,30 @@ import {
     LogoutRounded as LogoutRoundedIcon,
     PendingActionsRounded as PendingActionsRoundedIcon,
     KeyboardArrowDown as KeyboardArrowDownIcon,
-} from "@mui/icons-material";
-import { usePathname } from "next/navigation";
-import {
     FormatListBulleted as AllIcon,
     PendingOutlined as InProgressIcon,
     CheckCircleOutline as FinishedIcon,
     CancelOutlined as CancelledIcon,
     ScheduleOutlined as OutdatedIcon,
 } from "@mui/icons-material";
+import { usePathname } from "next/navigation";
+import { Dispatch, Fragment, ReactNode, SetStateAction, useState } from "react";
 
 // import ColorSchemeToggle from "./ColorSchemeToggle";
 
 function Toggler(props: {
     defaultExpanded?: boolean;
-    children: React.ReactNode;
+    children: ReactNode;
     renderToggle: (params: {
         open: boolean;
-        setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    }) => React.ReactNode;
+        setOpen: Dispatch<SetStateAction<boolean>>;
+    }) => ReactNode;
 }) {
     const { defaultExpanded = false, renderToggle, children } = props;
-    const [open, setOpen] = React.useState(defaultExpanded);
+    const [open, setOpen] = useState(defaultExpanded);
 
     return (
-        <React.Fragment>
+        <Fragment>
             {renderToggle({ open, setOpen })}
             <Box
                 sx={[
@@ -67,7 +64,7 @@ function Toggler(props: {
             >
                 {children}
             </Box>
-        </React.Fragment>
+        </Fragment>
     );
 }
 
@@ -249,13 +246,13 @@ export default function Sidebar() {
                                                     sx={[
                                                         open
                                                             ? {
-                                                                  transform:
-                                                                      "rotate(180deg)",
-                                                              }
+                                                                transform:
+                                                                    "rotate(180deg)",
+                                                            }
                                                             : {
-                                                                  transform:
-                                                                      "none",
-                                                              },
+                                                                transform:
+                                                                    "none",
+                                                            },
                                                     ]}
                                                 />
                                             </ListItemButton>
@@ -349,13 +346,5 @@ export default function Sidebar() {
                 </IconButton>
             </Box>
         </Sheet>
-    );
-}
-
-export function SidebarWrapper() {
-    return (
-        <AppTheme>
-            <Sidebar />
-        </AppTheme>
     );
 }
