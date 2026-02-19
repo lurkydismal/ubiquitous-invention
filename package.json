@@ -22,6 +22,7 @@
         "@mui/joy": "5.0.0-beta.52",
         "@mui/material": "^7.3.8",
         "@mui/material-nextjs": "^7.3.8",
+        "@mui/x-charts": "^8.27.0",
         "@mui/x-data-grid": "^8.27.1",
         "@mui/x-date-pickers": "^8.27.0",
         "@reactour/tour": "^3.8.0",

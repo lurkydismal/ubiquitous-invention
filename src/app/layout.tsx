@@ -30,7 +30,6 @@ import {
     chartsCustomizations,
     dataGridCustomizations,
     datePickersCustomizations,
-    treeViewCustomizations,
 } from "@/theme/custom";
 
 // Configure Geist Mono font with CSS variable for global usage
@@ -50,7 +49,6 @@ const themeComponents = {
     ...chartsCustomizations,
     ...dataGridCustomizations,
     ...datePickersCustomizations,
-    ...treeViewCustomizations,
 };
 
 // Log the current build environment (development or production)
@@ -81,7 +79,9 @@ export default function RootLayout({
                 <InitColorSchemeScript attribute="data" />
 
                 <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-                    <MuiLayout themeComponents={themeComponents}>{children}</MuiLayout>
+                    <MuiLayout themeComponents={themeComponents}>
+                        {children}
+                    </MuiLayout>
                 </AppRouterCacheProvider>
             </body>
         </html>
