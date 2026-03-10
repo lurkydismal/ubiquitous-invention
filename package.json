@@ -28,7 +28,6 @@
         "@mui/material-nextjs": "^7.3.9",
         "@mui/x-charts": "^8.27.4",
         "@mui/x-data-grid": "^8.27.4",
-        "@mui/x-date-pickers": "^8.27.2",
         "@reactour/tour": "^3.8.0",
         "@uiw/react-codemirror": "^4.25.8",
         "argon2": "^0.44.0",

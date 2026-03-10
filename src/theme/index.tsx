@@ -1,6 +1,5 @@
 "use client";
 
-import { ReactNode } from "react";
 import {
     colorSchemes,
     shadows,
@@ -8,20 +7,19 @@ import {
     typography,
 } from "@/theme/themePrimitives";
 import * as DG from "@mui/x-data-grid/locales";
-import * as DP from "@mui/x-date-pickers/locales";
 import * as MUI from "@mui/material/locale";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import {
     ThemeOptions,
     createTheme,
     ThemeProvider,
     useMediaQuery,
+    THEME_ID as MATERIAL_THEME_ID,
 } from "@mui/material";
+import { CssVarsProvider as JoyCssVarsProvider } from "@mui/joy/styles";
 
 // Props for AppTheme wrapper
 export interface AppThemeProps {
-    children?: ReactNode;
+    children?: React.ReactNode;
     themeComponents?: ThemeOptions["components"]; // Optional overrides for MUI component styles
 }
 
@@ -43,13 +41,10 @@ export default function AppTheme(props: AppThemeProps) {
         dg:
             (DG as unknown as Record<string, typeof DG.enUS>)[localeName] ||
             DG.enUS,
-        dp:
-            (DP as unknown as Record<string, typeof DP.enUS>)[localeName] ||
-            DP.enUS,
     });
 
     // Destructure the selected locales
-    const { mui, dg, dp } = getLocales(lang);
+    const { mui, dg } = getLocales(lang);
 
     // Create MUI theme with custom primitives, dark/light mode, and localization
     const theme = createTheme(
@@ -70,18 +65,14 @@ export default function AppTheme(props: AppThemeProps) {
         },
         mui, // apply MUI core locale
         dg, // apply DataGrid locale
-        dp, // apply DatePicker locale
     );
 
-    // Render ThemeProvider and LocalizationProvider wrapping the app's children
+    // Render ThemeProvider and JoyCssVarsProvider wrapping the app's children
     return (
-        <ThemeProvider theme={theme} disableTransitionOnChange>
-            <LocalizationProvider
-                dateAdapter={AdapterDayjs}
-                adapterLocale={lang}
-            >
+        <ThemeProvider theme={{ [MATERIAL_THEME_ID]: theme }} disableTransitionOnChange>
+            <JoyCssVarsProvider disableTransitionOnChange>
                 {children}
-            </LocalizationProvider>
+            </JoyCssVarsProvider>
         </ThemeProvider>
     );
 }

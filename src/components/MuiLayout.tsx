@@ -19,6 +19,17 @@ import AppTheme from "@/theme";
 import { Box, CircularProgress, CssBaseline } from "@mui/material";
 import SnackbarProvider from "@/providers/snackbar";
 import { Suspense } from "react";
+import {
+    chartsCustomizations,
+    dataGridCustomizations,
+    datePickersCustomizations,
+} from "@/theme/custom";
+
+const xThemeComponents = {
+    ...chartsCustomizations,
+    ...dataGridCustomizations,
+    ...datePickersCustomizations,
+};
 
 export default function MuiLayout({
     children,
@@ -27,7 +38,7 @@ export default function MuiLayout({
 }>) {
     return (
         // Apply global theme to all child components
-        <AppTheme>
+        <AppTheme themeComponents={themeComponents}>
             <CssBaseline enableColorScheme />
 
             {/* Full viewport-height container */}
