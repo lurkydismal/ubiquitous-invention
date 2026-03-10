@@ -2,7 +2,14 @@
 
 import { LineChart } from "@mui/x-charts/LineChart";
 import sessions from "@/data/dashboard/sessions";
-import { Card, CardContent, Chip, Stack, Typography, useTheme } from "@mui/material";
+import {
+    Card,
+    CardContent,
+    Chip,
+    Stack,
+    Typography,
+    useTheme,
+} from "@mui/material";
 
 function AreaGradient({ color, id }: { color: string; id: string }) {
     return (

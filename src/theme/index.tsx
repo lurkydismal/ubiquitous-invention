@@ -69,7 +69,10 @@ export default function AppTheme(props: AppThemeProps) {
 
     // Render ThemeProvider and JoyCssVarsProvider wrapping the app's children
     return (
-        <ThemeProvider theme={{ [MATERIAL_THEME_ID]: theme }} disableTransitionOnChange>
+        <ThemeProvider
+            theme={{ [MATERIAL_THEME_ID]: theme }}
+            disableTransitionOnChange
+        >
             <JoyCssVarsProvider disableTransitionOnChange>
                 {children}
             </JoyCssVarsProvider>

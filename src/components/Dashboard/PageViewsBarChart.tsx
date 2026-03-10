@@ -2,7 +2,14 @@
 
 import { BarChart } from "@mui/x-charts/BarChart";
 import views from "@/data/dashboard/views";
-import { Card, CardContent, Chip, Stack, Typography, useTheme } from "@mui/material";
+import {
+    Card,
+    CardContent,
+    Chip,
+    Stack,
+    Typography,
+    useTheme,
+} from "@mui/material";
 
 export default function PageViewsBarChart() {
     const theme = useTheme();

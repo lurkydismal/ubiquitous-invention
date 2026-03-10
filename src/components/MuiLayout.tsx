@@ -25,7 +25,7 @@ import * as custom from "@/theme/custom";
 
 const themeComponents: AppThemeProps["themeComponents"] = Object.assign(
     {},
-    ...Object.values(custom)
+    ...Object.values(custom),
 );
 
 export default function MuiLayout({

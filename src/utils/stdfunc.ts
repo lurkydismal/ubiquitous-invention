@@ -124,7 +124,7 @@ export function toPascalCase(text: string): string {
  * @param input - The value to check
  * @returns True if input is a plain object
  */
-export function isRecord(input: unknown): input is Record<string, any> {
+export function isRecord(input: unknown): input is Record<string, unknown> {
     if (typeof input !== "object" || input === null) return false;
 
     const proto = Object.getPrototypeOf(input);
@@ -150,7 +150,7 @@ export function isBlob(v: unknown): v is Blob {
  * @returns Extracted value or undefined
  */
 export function extractFromFormData<T = unknown>(
-    input: FormData | Record<string, any> | unknown,
+    input: FormData | Record<string, unknown> | unknown,
     key: string,
 ): T | undefined {
     if (input instanceof FormData) {
@@ -250,14 +250,14 @@ export function normalizeArrayOrValue<T>(item: T | T[]): T {
 /**
  * [TODO:description]
  */
-type AwaitedObject<T extends Record<PropertyKey, any>> = {
+type AwaitedObject<T extends Record<PropertyKey, unknown>> = {
     [K in keyof T]: Awaited<T[K]>;
 };
 
 /**
  * [TODO:class]
  */
-export async function awaitObject<T extends Record<PropertyKey, any>>(
+export async function awaitObject<T extends Record<PropertyKey, unknown>>(
     obj: T,
 ): Promise<AwaitedObject<T>> {
     const entries = Object.entries(obj);

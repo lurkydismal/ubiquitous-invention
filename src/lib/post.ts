@@ -1,18 +1,11 @@
 "use server";
 
 import db from "@/db";
-import { cacheTag, revalidateTag } from "next/cache";
+import { cacheTag } from "next/cache";
 import { posts } from "@/db/schema";
 import { desc } from "drizzle-orm";
-import {
-    postFullSchema,
-    postInsertSchema,
-    postNewSchema,
-} from "@/utils/validate/schemas";
+import { postFullSchema, postNewSchema } from "@/utils/validate/schemas";
 import log from "@/utils/stdlog";
-import { getSessionData } from "./auth";
-import { unauthorized } from "next/navigation";
-import { getUserId, requestUserId } from "./user";
 import z from "zod";
 
 export async function requestAllPosts() {

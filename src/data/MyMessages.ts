@@ -1,4 +1,4 @@
-import { ChatProps, UserProps } from "@/types";
+import { ChatProps, UserProps } from "@/components/MyMessages/types";
 
 export const users: UserProps[] = [
     {

@@ -1,6 +1,16 @@
 import { gridClasses } from "@mui/x-data-grid";
 import { gray } from "../themePrimitives";
-import { alpha, checkboxClasses, iconButtonClasses, listClasses, listItemIconClasses, menuItemClasses, paperClasses, tablePaginationClasses, Theme } from "@mui/material";
+import {
+    alpha,
+    checkboxClasses,
+    iconButtonClasses,
+    listClasses,
+    listItemIconClasses,
+    menuItemClasses,
+    paperClasses,
+    tablePaginationClasses,
+    Theme,
+} from "@mui/material";
 
 // Custom style overrides for MUI DataGrid and related components
 export const dataGridCustomizations = {

@@ -7,7 +7,6 @@ import { CategoriesRowPublic, PostsRow, UsersRowPublic } from "@/db/types";
 import { getSessionData } from "@/lib/auth";
 import { getUserId, requestUserId } from "@/lib/user";
 import { and, eq, sql, desc } from "drizzle-orm";
-import { cacheTag } from "next/cache";
 import { unauthorized } from "next/navigation";
 
 /** Result types */

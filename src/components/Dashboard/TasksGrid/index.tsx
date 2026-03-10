@@ -1,10 +1,6 @@
 "use client";
 
-import {
-    DataGrid,
-    DataGridProps,
-    GridRowsProp,
-} from "@mui/x-data-grid";
+import { DataGrid, DataGridProps, GridRowsProp } from "@mui/x-data-grid";
 import columns from "./columns";
 
 type TasksGridProps = Omit<DataGridProps, "columns"> & {
@@ -30,14 +26,14 @@ export default function TasksGrid({
                 filter: {
                     filterModel: statusSearchFilter
                         ? {
-                            items: [
-                                {
-                                    field: "status",
-                                    operator: "equals",
-                                    value: statusSearchFilter,
-                                },
-                            ],
-                        }
+                              items: [
+                                  {
+                                      field: "status",
+                                      operator: "equals",
+                                      value: statusSearchFilter,
+                                  },
+                              ],
+                          }
                         : { items: [] },
                 },
             }}

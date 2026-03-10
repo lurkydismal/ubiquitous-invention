@@ -90,7 +90,7 @@ const columns = [
     {
         headerName: "Status",
         renderCell: (params: GridRenderCellParams) =>
-            renderStatus(params.value as any),
+            renderStatus(params.value),
     },
     {
         headerName: "Tag",
@@ -98,12 +98,12 @@ const columns = [
     {
         headerName: "Author",
         renderCell: (params: GridRenderCellParams) =>
-            renderUser(params.value as any),
+            renderUser(params.value),
     },
     {
         headerName: "Tracker",
         renderCell: (params: GridRenderCellParams) =>
-            renderUser(params.value as any),
+            renderUser(params.value),
     },
     {
         headerName: "Created At",

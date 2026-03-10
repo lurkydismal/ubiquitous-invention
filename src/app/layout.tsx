@@ -71,9 +71,7 @@ export default function RootLayout({
                 <AppRouterCacheProvider options={{ enableCssLayer: true }}>
                     <MuiLayout>
                         {/* Suspense boundary for async content */}
-                        <Suspense>
-                            {children}
-                        </Suspense>
+                        <Suspense>{children}</Suspense>
                     </MuiLayout>
                 </AppRouterCacheProvider>
             </body>

@@ -2,8 +2,16 @@
 
 import { SparkLineChart } from "@mui/x-charts/SparkLineChart";
 import { areaElementClasses } from "@mui/x-charts/LineChart";
-import { StatCard as StatCardProps } from '@/data/dashboard/stats';
-import { Box, Card, CardContent, Chip, Stack, Typography, useTheme } from "@mui/material";
+import { StatCard as StatCardProps } from "@/data/dashboard/stats";
+import {
+    Box,
+    Card,
+    CardContent,
+    Chip,
+    Stack,
+    Typography,
+    useTheme,
+} from "@mui/material";
 
 function getDaysInMonth(month: number, year: number) {
     const date = new Date(year, month, 0);

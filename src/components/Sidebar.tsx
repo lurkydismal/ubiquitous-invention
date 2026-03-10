@@ -246,13 +246,13 @@ export default function Sidebar() {
                                                     sx={[
                                                         open
                                                             ? {
-                                                                transform:
-                                                                    "rotate(180deg)",
-                                                            }
+                                                                  transform:
+                                                                      "rotate(180deg)",
+                                                              }
                                                             : {
-                                                                transform:
-                                                                    "none",
-                                                            },
+                                                                  transform:
+                                                                      "none",
+                                                              },
                                                     ]}
                                                 />
                                             </ListItemButton>
