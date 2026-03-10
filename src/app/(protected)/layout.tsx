@@ -1,6 +1,5 @@
-import Footer from "@/components/Footer";
-import NavBar from "@/components/NavBar";
 import { Box, Container } from "@mui/material";
+import Sidebar from "@/components/Sidebar";
 
 export default async function Layout({
     children,
@@ -12,10 +11,9 @@ export default async function Layout({
             sx={{
                 minHeight: "100vh",
                 display: "flex",
-                flexDirection: "column",
             }}
         >
-            <NavBar />
+            <Sidebar />
 
             <Container
                 maxWidth="xl"
@@ -23,15 +21,10 @@ export default async function Layout({
                     flexGrow: 1,
                     display: "flex",
                     flexDirection: "column",
-                    mt: 11,
-                    mb: 4,
-                    gap: 4,
                 }}
             >
                 {children}
             </Container>
-
-            <Footer />
         </Box>
     );
 }
