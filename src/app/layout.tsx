@@ -13,7 +13,7 @@
  * - Logs current build environment (development or production) using a custom logger.
  *
  * Notes:
- * - `font.variable` sets a CSS variable `--font-main` for use across the app.
+ * - `font.variable` sets a CSS variable `--font-nain` for use across the app.
  * - `InitColorSchemeScript` ensures proper MUI theme handling on first load.
  * - `AppRouterCacheProvider` is configured with `enableCssLayer: true` to optimize style insertion.
  */
@@ -26,11 +26,8 @@ import "./globals.css";
 import log from "@/utils/stdlog";
 import { isDev, appName, appVersion } from "@/utils/stdvar";
 import MuiLayout from "@/components/MuiLayout";
-import {
-    chartsCustomizations,
-    dataGridCustomizations,
-    datePickersCustomizations,
-} from "@/theme/custom";
+import { Suspense } from "react";
+import SnackbarProvider from "@/providers/snackbar";
 
 // Configure Geist Mono font with CSS variable for global usage
 const font = Font({
@@ -43,12 +40,6 @@ const font = Font({
 export const metadata: Metadata = {
     title: appName,
     description: appVersion,
-};
-
-const themeComponents = {
-    ...chartsCustomizations,
-    ...dataGridCustomizations,
-    ...datePickersCustomizations,
 };
 
 // Log the current build environment (development or production)
@@ -79,8 +70,11 @@ export default function RootLayout({
                 <InitColorSchemeScript attribute="data" />
 
                 <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-                    <MuiLayout themeComponents={themeComponents}>
-                        {children}
+                    <MuiLayout>
+                        {/* Suspense boundary for async content */}
+                        <Suspense>
+                            <SnackbarProvider>{children}</SnackbarProvider>
+                        </Suspense>
                     </MuiLayout>
                 </AppRouterCacheProvider>
             </body>
