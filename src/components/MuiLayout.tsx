@@ -15,7 +15,7 @@
  * - `children`: React.ReactNode – all nested page content/components.
  */
 
-import AppTheme from "@/theme/theme";
+import AppTheme from "@/theme";
 import { Box, CircularProgress, CssBaseline } from "@mui/material";
 import SnackbarProvider from "@/providers/snackbar";
 import { Suspense } from "react";

@@ -2,11 +2,9 @@ import { getSessionData } from "@/lib/auth";
 import { permanentRedirect } from "next/navigation";
 
 export default async function Page() {
-    const user = await getSessionData();
+    const session = await getSessionData();
 
-    if (!user) {
-        permanentRedirect("/landing");
-    }
+    if (!session) permanentRedirect("/auth/login");
 
-    permanentRedirect("/posts");
+    permanentRedirect("/dashboard");
 }

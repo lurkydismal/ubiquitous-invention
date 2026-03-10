@@ -34,7 +34,7 @@ export default function SignUpPage() {
 
             setUser(user);
 
-            router.push("/posts");
+            router.push("");
         } catch (err) {
             showError(err);
         }

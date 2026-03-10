@@ -27,7 +27,6 @@ import log from "@/utils/stdlog";
 import { isDev, appName, appVersion } from "@/utils/stdvar";
 import MuiLayout from "@/components/MuiLayout";
 import { Suspense } from "react";
-import SnackbarProvider from "@/providers/snackbar";
 
 // Configure Geist Mono font with CSS variable for global usage
 const font = Font({
@@ -73,7 +72,7 @@ export default function RootLayout({
                     <MuiLayout>
                         {/* Suspense boundary for async content */}
                         <Suspense>
-                            <SnackbarProvider>{children}</SnackbarProvider>
+                            {children}
                         </Suspense>
                     </MuiLayout>
                 </AppRouterCacheProvider>

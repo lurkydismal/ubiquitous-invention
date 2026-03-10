@@ -36,7 +36,7 @@ export default function SignInPage() {
 
             setUser(user);
 
-            router.push("/posts");
+            router.push("/");
         } catch (err) {
             showError(err);
         }
