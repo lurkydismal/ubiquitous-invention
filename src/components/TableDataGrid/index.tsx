@@ -10,9 +10,9 @@ import React, {
 import CustomDataGrid from "@/components/CustomDataGrid";
 import columns from "@/data/table/columns";
 import RowDialog, { FieldConfig } from "./RowDialog";
-import { useSnackbar } from "@/components/SnackbarProvider";
 import CustomToolbar from "./Toolbar";
 import { useGridApiRef, GridRowsProp, GridRowParams } from "@mui/x-data-grid";
+import { useSnackbar } from "@/providers/snackbar";
 
 export default function TableDataGrid<
     R extends Record<string, any>,
@@ -123,9 +123,9 @@ export default function TableDataGrid<
     // If extraButtons is a React element, clone it and inject createRowAction + emptyRow
     const injectedExtraButtons = isValidElement(extraButtons)
         ? cloneElement(extraButtons as React.ReactElement<any>, {
-              createRowAction: createAndRefresh,
-              emptyRow,
-          })
+            createRowAction: createAndRefresh,
+            emptyRow,
+        })
         : extraButtons;
 
     return (
