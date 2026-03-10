@@ -97,13 +97,11 @@ const columns = [
     },
     {
         headerName: "Author",
-        renderCell: (params: GridRenderCellParams) =>
-            renderUser(params.value),
+        renderCell: (params: GridRenderCellParams) => renderUser(params.value),
     },
     {
         headerName: "Tracker",
-        renderCell: (params: GridRenderCellParams) =>
-            renderUser(params.value),
+        renderCell: (params: GridRenderCellParams) => renderUser(params.value),
     },
     {
         headerName: "Created At",

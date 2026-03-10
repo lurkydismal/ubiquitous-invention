@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { GridRowsProp } from "@mui/x-data-grid";
 import ChartUserByCountry from "./ChartUserByCountry";
-import TasksGrid from "./TasksGrid";
+import TasksGrid from "./Dashboard/TasksGrid";
 import PageViewsBarChart from "./PageViewsBarChart";
 import SessionsChart from "./SessionsChart";
 import StatCard, { StatCardProps } from "./StatCard";

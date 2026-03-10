@@ -18,8 +18,6 @@ import {
     profileHref,
 } from "./base";
 
-export { AuthorWithFollow, AuthorWithFollowAndLink } from "./WithFollow";
-
 /**
  * Styles used for author date links.
  */
