@@ -64,7 +64,7 @@ export const buildYear = buildDate.getFullYear();
  * Name of the application.
  * - Used in logging, UI, or headers.
  */
-export const appName = "vigilant funicular";
+export const appName = "ubiquitous invention";
 
 /**
  * Version of the application.
@@ -107,20 +107,6 @@ export const timeZone = "UTC";
  * - Example: `"14:30 07.01.2026"`.
  */
 export const dateTimeFormat = "HH:mm DD.MM.YYYY";
-
-/**
- * Maximum allowed image size for uploads.
- * - Set to 1 megabyte (1 MB) = 1 * 1024 * 1024 bytes.
- * - Used in file validation to prevent oversized uploads.
- */
-export const maxImageSize = 1 * 1024 * 1024; // 1 MB
-
-/**
- * Allowed MIME types for image uploads.
- * - Currently only supports JPEG images.
- * - Used in validation to reject unsupported formats.
- */
-export const allowedImageTypes = ["image/jpeg"];
 
 /**
  * Maximum number of retry attempts for network requests or operations.
