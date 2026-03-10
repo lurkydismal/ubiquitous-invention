@@ -1,11 +1,18 @@
-"use client";
-
 import TasksGrid from "@/components/Dashboard/TasksGrid";
 import rows from "@/data/mockTasksRows";
-import { useSearchParams } from "next/navigation";
 
-export default function Page() {
-    const params = useSearchParams();
+export default async function Page({ searchParams }: {
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+    const { filter } = await searchParams;
+
+    // Normalize filter: take the first string if it's an array, else undefined
+    const normalizedFilter =
+        typeof filter === "string"
+            ? filter
+            : Array.isArray(filter)
+                ? filter[0] // take the first value if multiple
+                : undefined;
 
     const routeToStatusMap: Record<string, string> = {
         "in-progress": "In Progress",
@@ -13,9 +20,8 @@ export default function Page() {
         cancelled: "Cancelled",
         outdated: "Outdated",
     };
-    const filterParam = params?.get("filter") ?? undefined;
-    const statusFilter = filterParam
-        ? routeToStatusMap[filterParam]
+    const statusFilter = normalizedFilter
+        ? routeToStatusMap[normalizedFilter]
         : undefined;
 
     return (
