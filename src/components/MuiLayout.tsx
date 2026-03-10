@@ -15,21 +15,16 @@
  * - `children`: React.ReactNode – all nested page content/components.
  */
 
-import AppTheme from "@/theme";
+import AppTheme, { AppThemeProps } from "@/theme";
 import { Box, CircularProgress, CssBaseline } from "@mui/material";
 import SnackbarProvider from "@/providers/snackbar";
 import { Suspense } from "react";
-import {
-    chartsCustomizations,
-    dataGridCustomizations,
-    datePickersCustomizations,
-} from "@/theme/custom";
+import * as custom from "@/theme/custom";
 
-const xThemeComponents = {
-    ...chartsCustomizations,
-    ...dataGridCustomizations,
-    ...datePickersCustomizations,
-};
+const themeComponents: AppThemeProps["themeComponents"] = Object.assign(
+    {},
+    ...Object.values(custom)
+);
 
 export default function MuiLayout({
     children,
