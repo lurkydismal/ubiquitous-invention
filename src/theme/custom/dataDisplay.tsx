@@ -1,5 +1,4 @@
-import { iconButtonClasses } from "@mui/material/IconButton";
-import { Components, Theme } from "@mui/material/styles";
+import { Components, iconButtonClasses, Theme } from "@mui/material";
 
 export const dataDisplayCustomizations: Components<Theme> = {
     // MuiList: {

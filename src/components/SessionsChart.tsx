@@ -1,12 +1,7 @@
 "use client";
 
-import { useTheme } from "@mui/material/styles";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Chip from "@mui/material/Chip";
-import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
-import { LineChart, LineSeries } from "@mui/x-charts/LineChart";
+import { Card, CardContent, Chip, Stack, Typography, useTheme } from "@mui/material";
+import { LineChart, LineSeries } from "@mui/x-charts";
 
 function AreaGradient({ color, id }: { color: string; id: string }) {
     return (
@@ -110,6 +105,7 @@ export default function SessionsChart() {
                 <Typography component="h2" variant="subtitle2" gutterBottom>
                     Tasks
                 </Typography>
+
                 <Stack sx={{ justifyContent: "space-between" }}>
                     <Stack
                         direction="row"
@@ -122,8 +118,10 @@ export default function SessionsChart() {
                         <Typography variant="h4" component="p">
                             13,277
                         </Typography>
+
                         <Chip size="small" color="success" label="+35%" />
                     </Stack>
+
                     <Typography
                         variant="caption"
                         sx={{ color: "text.secondary" }}
@@ -131,6 +129,7 @@ export default function SessionsChart() {
                         Tasks information per day for the last 30 days
                     </Typography>
                 </Stack>
+
                 <LineChart
                     colors={colorPalette}
                     xAxis={[
@@ -166,14 +165,17 @@ export default function SessionsChart() {
                         color={theme.palette.primary.dark}
                         id="created"
                     />
+
                     <AreaGradient
                         color={theme.palette.success.dark}
                         id="finished"
                     />
+
                     <AreaGradient
                         color={theme.palette.secondary.dark}
                         id="cancelled"
                     />
+
                     <AreaGradient
                         color={theme.palette.error.dark}
                         id="outdated"

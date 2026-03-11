@@ -1,12 +1,7 @@
 "use client";
 
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Chip from "@mui/material/Chip";
-import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
-import { BarChart, BarSeries } from "@mui/x-charts/BarChart";
-import { useTheme } from "@mui/material/styles";
+import { Card, CardContent, Chip, Stack, Typography, useTheme } from "@mui/material";
+import { BarChart, BarSeries } from "@mui/x-charts";
 
 export default function PageViewsBarChart() {
     const theme = useTheme();
@@ -43,6 +38,7 @@ export default function PageViewsBarChart() {
                 <Typography component="h2" variant="subtitle2" gutterBottom>
                     Tasks changed and users activity
                 </Typography>
+
                 <Stack sx={{ justifyContent: "space-between" }}>
                     <Stack
                         direction="row"
@@ -55,6 +51,7 @@ export default function PageViewsBarChart() {
                         <Typography variant="h4" component="p">
                             1.3M
                         </Typography>
+
                         <Chip
                             size="small"
                             color="error"
@@ -62,6 +59,7 @@ export default function PageViewsBarChart() {
                             className="text-black"
                         />
                     </Stack>
+
                     <Typography
                         variant="caption"
                         sx={{ color: "text.secondary" }}
@@ -69,6 +67,7 @@ export default function PageViewsBarChart() {
                         Tasks changed and users activity for the last 6 months
                     </Typography>
                 </Stack>
+
                 <BarChart
                     borderRadius={8}
                     colors={colorPalette}

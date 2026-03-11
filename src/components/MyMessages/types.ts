@@ -9,11 +9,6 @@ export type MessageProps = {
     timestamp: string;
     unread?: boolean;
     sender: UserProps | "You";
-    attachment?: {
-        fileName: string;
-        type: string;
-        size: string;
-    };
 };
 
 export type ChatProps = {

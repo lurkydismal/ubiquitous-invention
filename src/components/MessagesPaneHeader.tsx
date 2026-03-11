@@ -1,11 +1,6 @@
-import Avatar from "@mui/joy/Avatar";
-import Chip from "@mui/joy/Chip";
-import IconButton from "@mui/joy/IconButton";
-import Stack from "@mui/joy/Stack";
-import Typography from "@mui/joy/Typography";
-import CircleIcon from "@mui/icons-material/Circle";
-import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
+import { Circle as CircleIcon, ArrowBackIosNewRounded as ArrowBackIosNewRoundedIcon } from "@mui/icons-material";
 import { UserProps } from "./MyMessages/types";
+import { Avatar, Chip, IconButton, Stack, Typography } from "@mui/joy";
 // import { toggleMessagesPane } from "@/stdfunc";
 
 type MessagesPaneHeaderProps = {
@@ -41,9 +36,11 @@ export default function MessagesPaneHeader(props: MessagesPaneHeaderProps) {
                 >
                     <ArrowBackIosNewRoundedIcon />
                 </IconButton>
+
                 <Avatar size="lg" alt={sender.name}>
                     {sender.name[0].toUpperCase()}
                 </Avatar>
+
                 <Typography
                     component="h2"
                     noWrap
@@ -69,6 +66,7 @@ export default function MessagesPaneHeader(props: MessagesPaneHeaderProps) {
                     {sender.name}
                 </Typography>
             </Stack>
+
             {/*
             <Stack spacing={1} direction='row' sx={{ alignItems: 'center' }}>
                 <Button
@@ -80,6 +78,7 @@ export default function MessagesPaneHeader(props: MessagesPaneHeaderProps) {
                 >
                     Call
                 </Button>
+
                 <Button
                     color='neutral'
                     variant='outlined'
@@ -88,6 +87,7 @@ export default function MessagesPaneHeader(props: MessagesPaneHeaderProps) {
                 >
                     View profile
                 </Button>
+
                 <IconButton size='sm' variant='plain' color='neutral'>
                     <MoreVertRoundedIcon />
                 </IconButton>

@@ -1,5 +1,4 @@
-import Badge from "@mui/joy/Badge";
-import Avatar, { AvatarProps } from "@mui/joy/Avatar";
+import { Avatar, AvatarProps, Badge } from "@mui/joy";
 
 type AvatarWithStatusProps = AvatarProps & {
     online?: boolean;

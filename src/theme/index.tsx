@@ -14,11 +14,9 @@ import {
     ThemeProvider,
     useMediaQuery,
     THEME_ID as MATERIAL_THEME_ID,
+    useColorScheme as useMaterialColorScheme
 } from "@mui/material";
-import { CssVarsProvider as JoyCssVarsProvider } from "@mui/joy/styles";
-import log from "@/utils/stdlog";
-import { useColorScheme as useJoyColorScheme } from '@mui/joy/styles';
-import { useColorScheme as useMaterialColorScheme } from '@mui/material/styles';
+import { CssVarsProvider as JoyCssVarsProvider, useColorScheme as useJoyColorScheme } from "@mui/joy";
 import { useEffect } from "react";
 
 // Props for AppTheme wrapper

@@ -1,23 +1,14 @@
 "use client";
 
-import * as React from "react";
 import { PieChart } from "@mui/x-charts/PieChart";
 import { useDrawingArea } from "@mui/x-charts/hooks";
-import { styled } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import LinearProgress, {
-    linearProgressClasses,
-} from "@mui/material/LinearProgress";
 import {
     PendingOutlined as InProgressIcon,
     CheckCircleOutline as FinishedIcon,
     CancelOutlined as CancelledIcon,
     ScheduleOutlined as OutdatedIcon,
 } from "@mui/icons-material";
+import { Box, Card, CardContent, LinearProgress, linearProgressClasses, Stack, styled, Typography } from "@mui/material";
 
 const data = [
     { label: "In Progress", value: 50000 },
@@ -106,14 +97,15 @@ function PieCenterLabel({ primaryText, secondaryText }: PieCenterLabelProps) {
     const secondaryY = primaryY + 24;
 
     return (
-        <React.Fragment>
+        <>
             <StyledText variant="primary" x={left + width / 2} y={primaryY}>
                 {primaryText}
             </StyledText>
+
             <StyledText variant="secondary" x={left + width / 2} y={secondaryY}>
                 {secondaryText}
             </StyledText>
-        </React.Fragment>
+        </>
     );
 }
 
@@ -139,6 +131,7 @@ export default function ChartUserByCountry() {
                 <Typography component="h2" variant="subtitle2">
                     Tasks total
                 </Typography>
+
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                     <PieChart
                         colors={colors}
@@ -170,6 +163,7 @@ export default function ChartUserByCountry() {
                         />
                     </PieChart>
                 </Box>
+
                 {countries.map((country, index) => (
                     <Stack
                         key={index}
@@ -192,6 +186,7 @@ export default function ChartUserByCountry() {
                                 >
                                     {country.name}
                                 </Typography>
+
                                 <Typography
                                     variant="body2"
                                     sx={{ color: "text.secondary" }}
@@ -199,6 +194,7 @@ export default function ChartUserByCountry() {
                                     {country.value}%
                                 </Typography>
                             </Stack>
+
                             <LinearProgress
                                 variant="determinate"
                                 aria-label="Number of users by country"

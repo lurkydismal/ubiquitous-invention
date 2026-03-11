@@ -85,11 +85,6 @@ export const chats: ChatProps[] = [
                 timestamp: "Thursday 11:40am",
                 sender: users[0],
                 content: "Tech requirements.pdf",
-                attachment: {
-                    fileName: "Tech requirements.pdf",
-                    type: "pdf",
-                    size: "1.2 MB",
-                },
             },
             {
                 id: "8",

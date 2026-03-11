@@ -1,12 +1,9 @@
-import * as React from "react";
-import Box from "@mui/joy/Box";
-import Sheet from "@mui/joy/Sheet";
-import Stack from "@mui/joy/Stack";
+import { Box, Sheet, Stack } from "@mui/joy";
 import AvatarWithStatus from "./AvatarWithStatus";
 import ChatBubble from "./ChatBubble";
-import MessageInput from "./MessageInput";
 import MessagesPaneHeader from "./MessagesPaneHeader";
 import { ChatProps, MessageProps } from "./MyMessages/types";
+import { useEffect, useState } from "react";
 
 type MessagesPaneProps = {
     chat: ChatProps;
@@ -14,10 +11,9 @@ type MessagesPaneProps = {
 
 export default function MessagesPane(props: MessagesPaneProps) {
     const { chat } = props;
-    const [chatMessages, setChatMessages] = React.useState(chat.messages);
-    const [textAreaValue, setTextAreaValue] = React.useState("");
+    const [chatMessages, setChatMessages] = useState(chat.messages);
 
-    React.useEffect(() => {
+    useEffect(() => {
         setChatMessages(chat.messages);
     }, [chat.messages]);
 
@@ -34,6 +30,7 @@ export default function MessagesPane(props: MessagesPaneProps) {
             }}
         >
             <MessagesPaneHeader sender={chat.sender} />
+
             <Box
                 sx={{
                     display: "flex",
@@ -49,6 +46,7 @@ export default function MessagesPane(props: MessagesPaneProps) {
                     {chatMessages.map(
                         (message: MessageProps, index: number) => {
                             const isYou = message.sender === "You";
+
                             return (
                                 <Stack
                                     key={index}
@@ -66,6 +64,7 @@ export default function MessagesPane(props: MessagesPaneProps) {
                                             username={message.sender.name}
                                         />
                                     )}
+
                                     <ChatBubble
                                         variant={isYou ? "sent" : "received"}
                                         {...message}
@@ -76,23 +75,6 @@ export default function MessagesPane(props: MessagesPaneProps) {
                     )}
                 </Stack>
             </Box>
-            <MessageInput
-                textAreaValue={textAreaValue}
-                setTextAreaValue={setTextAreaValue}
-                onSubmit={() => {
-                    const newId = chatMessages.length + 1;
-                    const newIdString = newId.toString();
-                    setChatMessages([
-                        ...chatMessages,
-                        {
-                            id: newIdString,
-                            sender: "You",
-                            content: textAreaValue,
-                            timestamp: "Just now",
-                        },
-                    ]);
-                }}
-            />
         </Sheet>
     );
 }

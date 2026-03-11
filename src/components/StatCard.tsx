@@ -1,14 +1,7 @@
 "use client";
 
-import { useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Chip from "@mui/material/Chip";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
-import { SparkLineChart } from "@mui/x-charts/SparkLineChart";
-import { areaElementClasses } from "@mui/x-charts/LineChart";
+import { Box, Card, CardContent, Chip, Stack, Typography, useTheme } from "@mui/material";
+import { SparkLineChart, areaElementClasses } from "@mui/x-charts";
 
 export type StatCardProps = {
     title: string;
@@ -93,6 +86,7 @@ export default function StatCard({
                 <Typography component="h2" variant="subtitle2" gutterBottom>
                     {title}
                 </Typography>
+
                 <Stack
                     direction="column"
                     sx={{
@@ -112,6 +106,7 @@ export default function StatCard({
                             <Typography variant="h4" component="p">
                                 {value}
                             </Typography>
+
                             <Chip
                                 size="small"
                                 color={color}
@@ -119,6 +114,7 @@ export default function StatCard({
                                 className={className}
                             />
                         </Stack>
+
                         <Typography
                             variant="caption"
                             sx={{ color: "text.secondary" }}
@@ -126,6 +122,7 @@ export default function StatCard({
                             {interval}
                         </Typography>
                     </Stack>
+
                     <Box sx={{ width: "100%", height: 50 }}>
                         <SparkLineChart
                             color={chartColor}

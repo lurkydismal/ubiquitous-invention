@@ -1,13 +1,7 @@
-import * as React from "react";
-import Box from "@mui/joy/Box";
-import ListDivider from "@mui/joy/ListDivider";
-import ListItem from "@mui/joy/ListItem";
-import ListItemButton, { ListItemButtonProps } from "@mui/joy/ListItemButton";
-import Stack from "@mui/joy/Stack";
-import Typography from "@mui/joy/Typography";
-import CircleIcon from "@mui/icons-material/Circle";
+import { Circle as CircleIcon } from "@mui/icons-material";
 import AvatarWithStatus from "./AvatarWithStatus";
 import { ChatProps, MessageProps, UserProps } from "./MyMessages/types";
+import { Box, ListDivider, ListItem, ListItemButton, ListItemButtonProps, Stack, Typography } from "@mui/joy";
 // import { toggleMessagesPane } from "@/stdfunc";
 
 type ChatListItemProps = ListItemButtonProps & {
@@ -22,8 +16,9 @@ type ChatListItemProps = ListItemButtonProps & {
 export default function ChatListItem(props: ChatListItemProps) {
     const { id, sender, messages, selectedChatId, setSelectedChat } = props;
     const selected = selectedChatId === id;
+
     return (
-        <React.Fragment>
+        <>
             <ListItem>
                 <ListItemButton
                     onClick={() => {
@@ -43,14 +38,17 @@ export default function ChatListItem(props: ChatListItemProps) {
                             online={sender.online}
                             username={sender.name}
                         />
+
                         <Box sx={{ flex: 1 }}>
                             <Typography level="title-sm">
                                 {sender.name}
                             </Typography>
+
                             <Typography level="body-sm">
                                 {sender.name}
                             </Typography>
                         </Box>
+
                         <Box sx={{ lineHeight: 1.5, textAlign: "right" }}>
                             {messages[0].unread && (
                                 <CircleIcon
@@ -58,6 +56,7 @@ export default function ChatListItem(props: ChatListItemProps) {
                                     color="primary"
                                 />
                             )}
+
                             <Typography
                                 level="body-xs"
                                 noWrap
@@ -67,6 +66,7 @@ export default function ChatListItem(props: ChatListItemProps) {
                             </Typography>
                         </Box>
                     </Stack>
+
                     <Typography
                         level="body-sm"
                         sx={{
@@ -81,7 +81,8 @@ export default function ChatListItem(props: ChatListItemProps) {
                     </Typography>
                 </ListItemButton>
             </ListItem>
+
             <ListDivider sx={{ margin: 0 }} />
-        </React.Fragment>
+        </>
     );
 }
