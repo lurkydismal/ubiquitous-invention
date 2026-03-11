@@ -30,7 +30,7 @@ import {
     ScheduleOutlined as OutdatedIcon,
 } from "@mui/icons-material";
 import { unauthorized, usePathname } from "next/navigation";
-import { Dispatch, Fragment, ReactNode, SetStateAction, useState } from "react";
+import { Dispatch, ReactNode, SetStateAction, useState } from "react";
 import { getUser } from "@/utils/stduser";
 
 // import ColorSchemeToggle from "./ColorSchemeToggle";
@@ -47,8 +47,9 @@ function Toggler(props: {
     const [open, setOpen] = useState(defaultExpanded);
 
     return (
-        <Fragment>
+        <>
             {renderToggle({ open, setOpen })}
+
             <Box
                 sx={[
                     {
@@ -65,18 +66,18 @@ function Toggler(props: {
             >
                 {children}
             </Box>
-        </Fragment>
+        </>
     );
 }
 
 export default function Sidebar() {
-    const user = getUser();
-    if (!user) return unauthorized();
-    const username = user.username;
-
     const pathnameRaw = usePathname() ?? "/";
     // normalize (remove trailing slash)
     const pathname = pathnameRaw.replace(/\/+$/, "") || "/";
+
+    const user = getUser();
+    if (!user) return unauthorized();
+    const username = user.username;
 
     const taskLinks = [
         { label: "All tasks", icon: AllIcon, href: "/tasks" },

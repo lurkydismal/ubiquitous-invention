@@ -44,7 +44,7 @@ export default function MyProfile() {
                 />
             </Sheet>
 
-            <MessagesPane chat={selectedChat} />
+            <MessagesPane key={selectedChat.id} chat={selectedChat} />
         </Sheet>
     );
 }

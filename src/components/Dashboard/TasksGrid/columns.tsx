@@ -8,7 +8,6 @@ import {
 import AvatarChip from "@/components/AvatarChip";
 import dayjs, { formatDate } from "@/utils/dayjs";
 import { Chip } from "@mui/material";
-import log from "@/utils/stdlog";
 
 function fieldFromHeader(headerName: string): string {
     return (
