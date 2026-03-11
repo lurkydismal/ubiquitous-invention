@@ -1,6 +1,6 @@
 "use client";
 
-import { BarChart } from "@mui/x-charts/BarChart";
+import { BarChart } from "@mui/x-charts";
 import views from "@/data/dashboard/views";
 import {
     Card,

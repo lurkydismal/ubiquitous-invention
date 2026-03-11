@@ -1,8 +1,6 @@
 "use client";
 
 import { Fragment } from "react";
-import { PieChart } from "@mui/x-charts/PieChart";
-import { useDrawingArea } from "@mui/x-charts/hooks";
 import {
     PendingOutlined as InProgressIcon,
     CheckCircleOutline as FinishedIcon,
@@ -19,6 +17,7 @@ import {
     styled,
     Typography,
 } from "@mui/material";
+import { PieChart, useDrawingArea } from "@mui/x-charts";
 
 const data = [
     { label: "In Progress", value: 50000 },

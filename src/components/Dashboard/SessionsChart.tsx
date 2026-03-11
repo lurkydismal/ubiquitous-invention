@@ -1,6 +1,6 @@
 "use client";
 
-import { LineChart } from "@mui/x-charts/LineChart";
+import { LineChart } from "@mui/x-charts";
 import sessions from "@/data/dashboard/sessions";
 import {
     Card,

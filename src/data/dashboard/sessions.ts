@@ -1,4 +1,4 @@
-import { LineSeries } from "@mui/x-charts/LineChart";
+import { LineSeries } from "@mui/x-charts";
 
 const sessions: readonly LineSeries[] = [
     {

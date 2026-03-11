@@ -1,4 +1,4 @@
-import { BarSeries } from "@mui/x-charts/BarChart";
+import { BarSeries } from "@mui/x-charts";
 
 const views: readonly BarSeries[] = [
     {

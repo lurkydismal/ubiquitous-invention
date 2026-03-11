@@ -10,7 +10,6 @@ import { Box, Grid, Typography } from "@mui/material";
 export default function MainGrid({ rows }: { rows: GridRowsProp }) {
     return (
         <Box sx={{ width: "100%", maxWidth: { sm: "100%", md: "1700px" } }}>
-            {/* Cards */}
             <Typography component="h2" variant="h6" sx={{ mt: 2, mb: 2 }}>
                 Tasks overview
             </Typography>

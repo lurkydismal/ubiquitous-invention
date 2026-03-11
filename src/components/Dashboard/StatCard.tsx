@@ -1,7 +1,5 @@
 "use client";
 
-import { SparkLineChart } from "@mui/x-charts/SparkLineChart";
-import { areaElementClasses } from "@mui/x-charts/LineChart";
 import { StatCard as StatCardProps } from "@/data/dashboard/stats";
 import {
     Box,
@@ -12,6 +10,7 @@ import {
     Typography,
     useTheme,
 } from "@mui/material";
+import { areaElementClasses, SparkLineChart } from "@mui/x-charts";
 
 function getDaysInMonth(month: number, year: number) {
     const date = new Date(year, month, 0);
@@ -88,6 +87,7 @@ export default function StatCard({
                 <Typography component="h2" variant="subtitle2" gutterBottom>
                     {title}
                 </Typography>
+
                 <Stack
                     direction="column"
                     sx={{
@@ -107,6 +107,7 @@ export default function StatCard({
                             <Typography variant="h4" component="p">
                                 {value}
                             </Typography>
+
                             <Chip
                                 size="small"
                                 color={color}
@@ -114,6 +115,7 @@ export default function StatCard({
                                 className={className}
                             />
                         </Stack>
+
                         <Typography
                             variant="caption"
                             sx={{ color: "text.secondary" }}
@@ -121,6 +123,7 @@ export default function StatCard({
                             {interval}
                         </Typography>
                     </Stack>
+
                     <Box sx={{ width: "100%", height: 50 }}>
                         <SparkLineChart
                             color={chartColor}
