@@ -7,6 +7,7 @@ type AvatarWithStatusProps = AvatarProps & {
 
 export default function AvatarWithStatus(props: AvatarWithStatusProps) {
     const { online = false, username = "", ...other } = props;
+
     return (
         <div>
             <Badge
