@@ -1,4 +1,4 @@
-import { Box, Container } from "@mui/material";
+import { Box } from "@mui/material";
 import Sidebar from "@/components/Sidebar";
 
 export default async function Layout({
@@ -15,16 +15,16 @@ export default async function Layout({
         >
             <Sidebar />
 
-            <Container
-                maxWidth="xl"
+            <Box
                 sx={{
                     flexGrow: 1,
                     display: "flex",
                     flexDirection: "column",
+                    m: 0,
                 }}
             >
                 {children}
-            </Container>
+            </Box>
         </Box>
     );
 }
