@@ -1,8 +1,8 @@
 import { GridRowsProp } from "@mui/x-data-grid";
-import ChartUserByCountry from "./ChartUserByCountry";
+import ChartUserByCountry from "./PieChart";
 import TasksGrid from "./TasksGrid";
-import PageViewsBarChart from "./PageViewsBarChart";
-import SessionsChart from "./SessionsChart";
+import PageViewsBarChart from "./BarChart";
+import SessionsChart from "./LineChart";
 import StatCard from "./StatCard";
 import stats from "@/data/dashboard/stats";
 import { Box, Grid, Typography } from "@mui/material";
