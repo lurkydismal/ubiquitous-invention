@@ -8,6 +8,7 @@ import {
 import AvatarChip from "@/components/AvatarChip";
 import dayjs, { formatDate } from "@/utils/dayjs";
 import { Chip } from "@mui/material";
+import log from "@/utils/stdlog";
 
 function fieldFromHeader(headerName: string): string {
     return (
@@ -75,7 +76,14 @@ function renderDate(_date: Date) {
     const formattedDate = formatDate(_date);
     const isNew = date.isAfter(dayjs().subtract(1, "month"));
 
-    return isNew ? `🟢 ${formattedDate}` : formattedDate;
+    return (
+        <Chip
+            variant="outlined"
+            size="small"
+            color={isNew ? "success" : undefined}
+            label={formattedDate}
+        ></Chip>
+    );
 }
 
 const columns = [
@@ -106,12 +114,12 @@ const columns = [
     {
         headerName: "Created At",
         valueGetter: (value: string) => new Date(value),
-        valueFormatter: (value: Date) => renderDate(value),
+        renderCell: (params: GridRenderCellParams) => renderDate(params.value),
     },
     {
         headerName: "Updated At",
         valueGetter: (value: string) => new Date(value),
-        valueFormatter: (value: Date) => renderDate(value),
+        renderCell: (params: GridRenderCellParams) => renderDate(params.value),
     },
     {
         headerName: "End Date",

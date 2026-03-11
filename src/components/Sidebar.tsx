@@ -29,10 +29,9 @@ import {
     CancelOutlined as CancelledIcon,
     ScheduleOutlined as OutdatedIcon,
 } from "@mui/icons-material";
-import { unauthorized, usePathname, useRouter } from "next/navigation";
+import { unauthorized, usePathname } from "next/navigation";
 import { Dispatch, Fragment, ReactNode, SetStateAction, useState } from "react";
 import { getUser } from "@/utils/stduser";
-import { logoutAction } from "@/lib/logout";
 
 // import ColorSchemeToggle from "./ColorSchemeToggle";
 
@@ -74,8 +73,6 @@ export default function Sidebar() {
     const user = getUser();
     if (!user) return unauthorized();
     const username = user.username;
-
-    const router = useRouter();
 
     const pathnameRaw = usePathname() ?? "/";
     // normalize (remove trailing slash)
@@ -132,10 +129,6 @@ export default function Sidebar() {
             isSelected: (p: string) => p.includes("/messages"),
         },
     ];
-
-    const handleLogout = async () => {
-        logoutAction();
-    };
 
     return (
         <Sheet
@@ -266,13 +259,13 @@ export default function Sidebar() {
                                                     sx={[
                                                         open
                                                             ? {
-                                                                  transform:
-                                                                      "rotate(180deg)",
-                                                              }
+                                                                transform:
+                                                                    "rotate(180deg)",
+                                                            }
                                                             : {
-                                                                  transform:
-                                                                      "none",
-                                                              },
+                                                                transform:
+                                                                    "none",
+                                                            },
                                                     ]}
                                                 />
                                             </ListItemButton>
@@ -372,7 +365,6 @@ export default function Sidebar() {
                     size="sm"
                     variant="plain"
                     color="neutral"
-                    onClick={() => handleLogout}
                 >
                     <LogoutRoundedIcon />
                 </IconButton>
