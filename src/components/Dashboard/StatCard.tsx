@@ -20,8 +20,10 @@ export type StatCardProps = {
 function formatShort(n: number) {
     if (!isFinite(n)) return "—";
     const abs = Math.abs(n);
-    if (abs >= 1_000_000_000) return `${(n / 1_000_000_000).toFixed(1).replace(/\.0$/, "")}B`;
-    if (abs >= 1_000_000) return `${(n / 1_000_000).toFixed(1).replace(/\.0$/, "")}M`;
+    if (abs >= 1_000_000_000)
+        return `${(n / 1_000_000_000).toFixed(1).replace(/\.0$/, "")}B`;
+    if (abs >= 1_000_000)
+        return `${(n / 1_000_000).toFixed(1).replace(/\.0$/, "")}M`;
     if (abs >= 1_000) return `${(n / 1_000).toFixed(1).replace(/\.0$/, "")}k`;
     return String(n);
 }
@@ -59,8 +61,8 @@ export default function StatCard({ title, data }: StatCardProps) {
         const trend: "up" | "down" | "neutral" = isNeutral
             ? "neutral"
             : percent > 0
-                ? "up"
-                : "down";
+              ? "up"
+              : "down";
 
         const roundedPercent = Math.round(percent);
         const sign = roundedPercent > 0 ? "+" : "";
@@ -70,7 +72,7 @@ export default function StatCard({ title, data }: StatCardProps) {
         const intervalText = len === 1 ? "Last day" : `Last ${len} days`;
 
         // value text: show last value formatted
-        const sum = data.reduce((acc, v) => (acc + v), 0);
+        const sum = data.reduce((acc, v) => acc + v, 0);
         const valueText = formatShort(sum);
 
         // labels for sparkline: "Day 1" .. "Day N"
@@ -94,7 +96,12 @@ export default function StatCard({ title, data }: StatCardProps) {
                 : theme.palette.grey[700],
     };
 
-    const chipColor = derived.trend === "up" ? "success" : derived.trend === "down" ? "error" : "default";
+    const chipColor =
+        derived.trend === "up"
+            ? "success"
+            : derived.trend === "down"
+              ? "error"
+              : "default";
 
     const chartColor = trendColors[derived.trend];
 
@@ -105,17 +112,37 @@ export default function StatCard({ title, data }: StatCardProps) {
                     {title}
                 </Typography>
 
-                <Stack direction="column" sx={{ justifyContent: "space-between", flexGrow: 1, gap: 1 }}>
+                <Stack
+                    direction="column"
+                    sx={{
+                        justifyContent: "space-between",
+                        flexGrow: 1,
+                        gap: 1,
+                    }}
+                >
                     <Stack>
-                        <Stack direction="row" sx={{ justifyContent: "space-between", alignItems: "center" }}>
+                        <Stack
+                            direction="row"
+                            sx={{
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                            }}
+                        >
                             <Typography variant="h4" component="p">
                                 {derived.valueText}
                             </Typography>
 
-                            <Chip size="small" color={chipColor} label={derived.percentText} />
+                            <Chip
+                                size="small"
+                                color={chipColor}
+                                label={derived.percentText}
+                            />
                         </Stack>
 
-                        <Typography variant="caption" sx={{ color: "text.secondary" }}>
+                        <Typography
+                            variant="caption"
+                            sx={{ color: "text.secondary" }}
+                        >
                             {derived.intervalText}
                         </Typography>
                     </Stack>
@@ -139,15 +166,40 @@ export default function StatCard({ title, data }: StatCardProps) {
                                 }}
                             >
                                 <defs>
-                                    <linearGradient id={`area-gradient-${id}`} x1="50%" y1="0%" x2="50%" y2="100%">
-                                        <stop offset="0%" stopColor={chartColor} stopOpacity={0.3} />
-                                        <stop offset="100%" stopColor={chartColor} stopOpacity={0} />
+                                    <linearGradient
+                                        id={`area-gradient-${id}`}
+                                        x1="50%"
+                                        y1="0%"
+                                        x2="50%"
+                                        y2="100%"
+                                    >
+                                        <stop
+                                            offset="0%"
+                                            stopColor={chartColor}
+                                            stopOpacity={0.3}
+                                        />
+                                        <stop
+                                            offset="100%"
+                                            stopColor={chartColor}
+                                            stopOpacity={0}
+                                        />
                                     </linearGradient>
                                 </defs>
                             </SparkLineChart>
                         ) : (
-                            <Box sx={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", color: "text.disabled" }}>
-                                <Typography variant="caption">No chart data</Typography>
+                            <Box
+                                sx={{
+                                    width: "100%",
+                                    height: "100%",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    color: "text.disabled",
+                                }}
+                            >
+                                <Typography variant="caption">
+                                    No chart data
+                                </Typography>
                             </Box>
                         )}
                     </Box>

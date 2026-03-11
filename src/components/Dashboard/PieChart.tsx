@@ -1,5 +1,6 @@
 "use client";
 
+import pie from "@/data/dashboard/pie";
 import {
     PendingOutlined as InProgressIcon,
     CheckCircleOutline as FinishedIcon,
@@ -17,13 +18,6 @@ import {
     Typography,
 } from "@mui/material";
 import { PieChart, useDrawingArea } from "@mui/x-charts";
-
-const data = [
-    { label: "In Progress", value: 50000 },
-    { label: "Finished", value: 35000 },
-    { label: "Cancelled", value: 10000 },
-    { label: "Outdated", value: 5000 },
-];
 
 const countries = [
     {
@@ -151,7 +145,7 @@ export default function ChartUserByCountry() {
                         }}
                         series={[
                             {
-                                data,
+                                data: pie,
                                 innerRadius: 75,
                                 outerRadius: 100,
                                 paddingAngle: 0,

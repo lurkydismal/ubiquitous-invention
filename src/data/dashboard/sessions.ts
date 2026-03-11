@@ -1,6 +1,6 @@
-import { LineSeries } from "@mui/x-charts";
+import { StrictLineSeries } from "@/components/Dashboard/LineChart";
 
-const sessions: readonly LineSeries[] = [
+const sessions: readonly StrictLineSeries[] = [
     {
         area: true,
         curve: "linear",
@@ -53,7 +53,7 @@ const sessions: readonly LineSeries[] = [
         stackOrder: "ascending",
         data: [
             1000, 1500, 1200, 1700, 1300, 2000, 2400, 2200, 2600, 2800, 2500,
-            3000, 3400, 3700, 3200, 3900, 4100, 3500, 4300, 4500, 4000, 4700,
+            3000, 3401, 3700, 3200, 3900, 4100, 3500, 4300, 4500, 4000, 4700,
             5000, 5200, 4800, 5400, 5600, 5900, 6100, 6300,
         ],
     },

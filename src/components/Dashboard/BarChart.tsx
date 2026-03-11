@@ -14,15 +14,27 @@ import {
 import { BarChart } from "@mui/x-charts";
 
 const MONTHS = [
-    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
 ];
 
 function formatShort(n: number) {
     if (!isFinite(n)) return "—";
     const abs = Math.abs(n);
-    if (abs >= 1_000_000_000) return `${(n / 1_000_000_000).toFixed(1).replace(/\.0$/, "")}B`;
-    if (abs >= 1_000_000) return `${(n / 1_000_000).toFixed(1).replace(/\.0$/, "")}M`;
+    if (abs >= 1_000_000_000)
+        return `${(n / 1_000_000_000).toFixed(1).replace(/\.0$/, "")}B`;
+    if (abs >= 1_000_000)
+        return `${(n / 1_000_000).toFixed(1).replace(/\.0$/, "")}M`;
     if (abs >= 1_000) return `${(n / 1_000).toFixed(1).replace(/\.0$/, "")}k`;
     return String(n);
 }
@@ -64,7 +76,7 @@ export default function PageViewsBarChart() {
 
         // aggregate values per category index across all series
         const aggregated: number[] = Array.from({ length: len }, (_, idx) =>
-            views.reduce((acc, series) => acc + (series.data?.[idx] ?? 0), 0)
+            views.reduce((acc, series) => acc + (series.data?.[idx] ?? 0), 0),
         );
 
         const totalSum = aggregated.reduce((a, b) => a + b, 0);
@@ -77,10 +89,21 @@ export default function PageViewsBarChart() {
         const sign = rounded > 0 ? "+" : "";
         const percentText = `${sign}${rounded}%`;
 
-        const chipColor = Math.abs(percent) <= 5 ? "default" : percent > 0 ? "success" : "error";
+        const chipColor =
+            Math.abs(percent) <= 5
+                ? "default"
+                : percent > 0
+                  ? "success"
+                  : "error";
         const intervalText = len === 1 ? "Last month" : `Last ${len} months`;
 
-        return { categories, totalSumText, percentText, chipColor, intervalText };
+        return {
+            categories,
+            totalSumText,
+            percentText,
+            chipColor,
+            intervalText,
+        };
     }, []);
 
     return (
@@ -103,11 +126,19 @@ export default function PageViewsBarChart() {
                             {derived.totalSumText}
                         </Typography>
 
-                        <Chip size="small" color={derived.chipColor as ChipOwnProps["color"]} label={derived.percentText} />
+                        <Chip
+                            size="small"
+                            color={derived.chipColor as ChipOwnProps["color"]}
+                            label={derived.percentText}
+                        />
                     </Stack>
 
-                    <Typography variant="caption" sx={{ color: "text.secondary" }}>
-                        Tasks changed and users activity for the {derived.intervalText}
+                    <Typography
+                        variant="caption"
+                        sx={{ color: "text.secondary" }}
+                    >
+                        Tasks changed and users activity for the{" "}
+                        {derived.intervalText}
                     </Typography>
                 </Stack>
 
