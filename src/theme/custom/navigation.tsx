@@ -1,7 +1,17 @@
 import { UnfoldMoreRounded } from "@mui/icons-material";
 import { brand, gray } from "../themePrimitives";
 import { forwardRef } from "react";
-import { alpha, buttonBaseClasses, Components, dividerClasses, menuItemClasses, selectClasses, SvgIconProps, tabClasses, Theme } from "@mui/material";
+import {
+    alpha,
+    buttonBaseClasses,
+    Components,
+    dividerClasses,
+    menuItemClasses,
+    selectClasses,
+    SvgIconProps,
+    tabClasses,
+    Theme,
+} from "@mui/material";
 
 export const navigationCustomizations: Components<Theme> = {
     MuiMenuItem: {
@@ -59,11 +69,7 @@ export const navigationCustomizations: Components<Theme> = {
         defaultProps: {
             IconComponent: forwardRef<SVGSVGElement, SvgIconProps>(
                 (props, ref) => (
-                    <UnfoldMoreRounded
-                        fontSize="small"
-                        {...props}
-                        ref={ref}
-                    />
+                    <UnfoldMoreRounded fontSize="small" {...props} ref={ref} />
                 ),
             ),
         },

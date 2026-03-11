@@ -14,9 +14,12 @@ import {
     ThemeProvider,
     useMediaQuery,
     THEME_ID as MATERIAL_THEME_ID,
-    useColorScheme as useMaterialColorScheme
+    useColorScheme as useMaterialColorScheme,
 } from "@mui/material";
-import { CssVarsProvider as JoyCssVarsProvider, useColorScheme as useJoyColorScheme } from "@mui/joy";
+import {
+    CssVarsProvider as JoyCssVarsProvider,
+    useColorScheme as useJoyColorScheme,
+} from "@mui/joy";
 import { useEffect } from "react";
 
 // Props for AppTheme wrapper
@@ -38,7 +41,7 @@ function ColorSchemeSync({
         setJoyMode(mode ?? "system");
     }, [mode, setMaterialMode, setJoyMode]);
 
-    return (children);
+    return children;
 }
 
 // Main AppTheme component providing theme and localization
@@ -92,9 +95,7 @@ export default function AppTheme(props: AppThemeProps) {
             disableTransitionOnChange
         >
             <JoyCssVarsProvider disableTransitionOnChange>
-                <ColorSchemeSync>
-                    {children}
-                </ColorSchemeSync>
+                <ColorSchemeSync>{children}</ColorSchemeSync>
             </JoyCssVarsProvider>
         </ThemeProvider>
     );

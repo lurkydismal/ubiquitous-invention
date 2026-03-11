@@ -1,6 +1,14 @@
 "use client";
 
-import { Box, Card, CardContent, Chip, Stack, Typography, useTheme } from "@mui/material";
+import {
+    Box,
+    Card,
+    CardContent,
+    Chip,
+    Stack,
+    Typography,
+    useTheme,
+} from "@mui/material";
 import { SparkLineChart, areaElementClasses } from "@mui/x-charts";
 
 export type StatCardProps = {

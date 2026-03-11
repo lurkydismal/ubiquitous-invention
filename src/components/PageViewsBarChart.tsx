@@ -1,6 +1,13 @@
 "use client";
 
-import { Card, CardContent, Chip, Stack, Typography, useTheme } from "@mui/material";
+import {
+    Card,
+    CardContent,
+    Chip,
+    Stack,
+    Typography,
+    useTheme,
+} from "@mui/material";
 import { BarChart, BarSeries } from "@mui/x-charts";
 
 export default function PageViewsBarChart() {

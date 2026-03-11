@@ -6,12 +6,7 @@ type ChatBubbleProps = MessageProps & {
 };
 
 export default function ChatBubble(props: ChatBubbleProps) {
-    const {
-        content,
-        variant,
-        timestamp,
-        sender,
-    } = props;
+    const { content, variant, timestamp, sender } = props;
     const isYou = sender === "You";
     const isSent = variant === "sent";
     return (
@@ -39,26 +34,26 @@ export default function ChatBubble(props: ChatBubbleProps) {
                         },
                         isSent
                             ? {
-                                borderTopRightRadius: 0,
-                            }
+                                  borderTopRightRadius: 0,
+                              }
                             : {
-                                borderTopRightRadius: "lg",
-                            },
+                                  borderTopRightRadius: "lg",
+                              },
                         isSent
                             ? {
-                                borderTopLeftRadius: "lg",
-                            }
+                                  borderTopLeftRadius: "lg",
+                              }
                             : {
-                                borderTopLeftRadius: 0,
-                            },
+                                  borderTopLeftRadius: 0,
+                              },
                         isSent
                             ? {
-                                backgroundColor:
-                                    "var(--joy-palette-primary-solidBg)",
-                            }
+                                  backgroundColor:
+                                      "var(--joy-palette-primary-solidBg)",
+                              }
                             : {
-                                backgroundColor: "background.body",
-                            },
+                                  backgroundColor: "background.body",
+                              },
                     ]}
                 >
                     <Typography
@@ -67,11 +62,11 @@ export default function ChatBubble(props: ChatBubbleProps) {
                         sx={[
                             isSent
                                 ? {
-                                    color: "var(--joy-palette-common-white)",
-                                }
+                                      color: "var(--joy-palette-common-white)",
+                                  }
                                 : {
-                                    color: "var(--joy-palette-text-primary)",
-                                },
+                                      color: "var(--joy-palette-text-primary)",
+                                  },
                         ]}
                     >
                         {content}

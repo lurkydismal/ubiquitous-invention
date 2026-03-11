@@ -1,6 +1,13 @@
 "use client";
 
-import { Card, CardContent, Chip, Stack, Typography, useTheme } from "@mui/material";
+import {
+    Card,
+    CardContent,
+    Chip,
+    Stack,
+    Typography,
+    useTheme,
+} from "@mui/material";
 import { LineChart, LineSeries } from "@mui/x-charts";
 
 function AreaGradient({ color, id }: { color: string; id: string }) {

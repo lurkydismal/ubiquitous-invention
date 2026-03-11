@@ -1,7 +1,15 @@
 import { Circle as CircleIcon } from "@mui/icons-material";
 import AvatarWithStatus from "./AvatarWithStatus";
 import { ChatProps, MessageProps, UserProps } from "./MyMessages/types";
-import { Box, ListDivider, ListItem, ListItemButton, ListItemButtonProps, Stack, Typography } from "@mui/joy";
+import {
+    Box,
+    ListDivider,
+    ListItem,
+    ListItemButton,
+    ListItemButtonProps,
+    Stack,
+    Typography,
+} from "@mui/joy";
 // import { toggleMessagesPane } from "@/stdfunc";
 
 type ChatListItemProps = ListItemButtonProps & {

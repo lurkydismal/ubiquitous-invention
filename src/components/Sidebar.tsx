@@ -259,13 +259,13 @@ export default function Sidebar() {
                                                     sx={[
                                                         open
                                                             ? {
-                                                                transform:
-                                                                    "rotate(180deg)",
-                                                            }
+                                                                  transform:
+                                                                      "rotate(180deg)",
+                                                              }
                                                             : {
-                                                                transform:
-                                                                    "none",
-                                                            },
+                                                                  transform:
+                                                                      "none",
+                                                              },
                                                     ]}
                                                 />
                                             </ListItemButton>
@@ -361,11 +361,7 @@ export default function Sidebar() {
                     <Typography level="title-sm">{username}</Typography>
                 </Box>
 
-                <IconButton
-                    size="sm"
-                    variant="plain"
-                    color="neutral"
-                >
+                <IconButton size="sm" variant="plain" color="neutral">
                     <LogoutRoundedIcon />
                 </IconButton>
             </Box>

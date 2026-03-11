@@ -8,7 +8,16 @@ import {
     CancelOutlined as CancelledIcon,
     ScheduleOutlined as OutdatedIcon,
 } from "@mui/icons-material";
-import { Box, Card, CardContent, LinearProgress, linearProgressClasses, Stack, styled, Typography } from "@mui/material";
+import {
+    Box,
+    Card,
+    CardContent,
+    LinearProgress,
+    linearProgressClasses,
+    Stack,
+    styled,
+    Typography,
+} from "@mui/material";
 
 const data = [
     { label: "In Progress", value: 50000 },

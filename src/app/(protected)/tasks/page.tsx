@@ -13,8 +13,8 @@ export default async function Page({
         typeof filter === "string"
             ? filter
             : Array.isArray(filter)
-                ? filter[0] // take the first value if multiple
-                : undefined;
+              ? filter[0] // take the first value if multiple
+              : undefined;
 
     const routeToStatusMap: Record<string, string> = {
         "in-progress": "In Progress",
@@ -27,6 +27,11 @@ export default async function Page({
         : undefined;
 
     return (
-        <TasksGrid key={statusFilter} showToolbar statusSearchFilter={statusFilter} rows={rows} />
+        <TasksGrid
+            key={statusFilter}
+            showToolbar
+            statusSearchFilter={statusFilter}
+            rows={rows}
+        />
     );
 }

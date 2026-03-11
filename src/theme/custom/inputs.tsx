@@ -1,6 +1,18 @@
-import { RemoveRounded, CheckRounded, CheckBoxOutlineBlankRounded } from "@mui/icons-material";
+import {
+    RemoveRounded,
+    CheckRounded,
+    CheckBoxOutlineBlankRounded,
+} from "@mui/icons-material";
 import { brand, gray } from "../themePrimitives";
-import { alpha, Components, outlinedInputClasses, svgIconClasses, Theme, toggleButtonClasses, toggleButtonGroupClasses } from "@mui/material";
+import {
+    alpha,
+    Components,
+    outlinedInputClasses,
+    svgIconClasses,
+    Theme,
+    toggleButtonClasses,
+    toggleButtonGroupClasses,
+} from "@mui/material";
 
 export const inputsCustomizations: Components<Theme> = {
     MuiButtonBase: {
@@ -311,9 +323,7 @@ export const inputsCustomizations: Components<Theme> = {
                 />
             ),
             checkedIcon: <CheckRounded sx={{ height: 14, width: 14 }} />,
-            indeterminateIcon: (
-                <RemoveRounded sx={{ height: 14, width: 14 }} />
-            ),
+            indeterminateIcon: <RemoveRounded sx={{ height: 14, width: 14 }} />,
         },
         styleOverrides: {
             root: ({ theme }) => ({
