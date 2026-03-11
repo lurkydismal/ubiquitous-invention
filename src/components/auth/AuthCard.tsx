@@ -59,7 +59,9 @@ export default function AuthCard({
         <AuthContainer direction="column" justifyContent="space-between">
             <Card variant={variant}>
                 {children}
+
                 <Divider sx={{ my: 2 }} />
+
                 {footer && (
                     <Box
                         sx={{
