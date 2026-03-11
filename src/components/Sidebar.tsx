@@ -29,8 +29,10 @@ import {
     CancelOutlined as CancelledIcon,
     ScheduleOutlined as OutdatedIcon,
 } from "@mui/icons-material";
-import { usePathname } from "next/navigation";
+import { unauthorized, usePathname, useRouter } from "next/navigation";
 import { Dispatch, Fragment, ReactNode, SetStateAction, useState } from "react";
+import { getUser } from "@/utils/stduser";
+import { logoutAction } from "@/lib/logout";
 
 // import ColorSchemeToggle from "./ColorSchemeToggle";
 
@@ -69,6 +71,12 @@ function Toggler(props: {
 }
 
 export default function Sidebar() {
+    const user = getUser();
+    if (!user) return unauthorized();
+    const username = user.username;
+
+    const router = useRouter();
+
     const pathnameRaw = usePathname() ?? "/";
     // normalize (remove trailing slash)
     const pathname = pathnameRaw.replace(/\/+$/, "") || "/";
@@ -125,6 +133,10 @@ export default function Sidebar() {
         },
     ];
 
+    const handleLogout = async () => {
+        logoutAction();
+    };
+
     return (
         <Sheet
             className="Sidebar"
@@ -158,18 +170,22 @@ export default function Sidebar() {
                     },
                 })}
             />
+
             <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
                 <NextLink href="/">
                     <IconButton variant="soft" color="primary" size="sm">
                         <PendingActionsRoundedIcon />
                     </IconButton>
                 </NextLink>
+
                 <Typography level="title-lg" href="/" component={NextLink}>
                     Tasker
                 </Typography>
                 {/*<ColorSchemeToggle sx={{ ml: "auto" }} />*/}
             </Box>
+
             <Divider />
+
             <Box
                 sx={{
                     minHeight: 0,
@@ -204,11 +220,13 @@ export default function Sidebar() {
                                         selected={item.isSelected(pathname)}
                                     >
                                         <Icon />
+
                                         <ListItemContent>
                                             <Typography level="title-sm">
                                                 {item.label}
                                             </Typography>
                                         </ListItemContent>
+
                                         {item.badge ? (
                                             <Chip
                                                 size="sm"
@@ -237,11 +255,13 @@ export default function Sidebar() {
                                                 selected={isSelected}
                                             >
                                                 <Icon />
+
                                                 <ListItemContent>
                                                     <Typography level="title-sm">
                                                         {item.label}
                                                     </Typography>
                                                 </ListItemContent>
+
                                                 <KeyboardArrowDownIcon
                                                     sx={[
                                                         open
@@ -276,6 +296,7 @@ export default function Sidebar() {
                                                 >
                                                     <ListItemButton>
                                                         <Icon />
+
                                                         {c.label}
                                                     </ListItemButton>
                                                 </ListItem>
@@ -287,6 +308,7 @@ export default function Sidebar() {
                         );
                     })}
                 </List>
+
                 {/*
                 <List
                     size="sm"
@@ -305,6 +327,7 @@ export default function Sidebar() {
                     </ListItem>
                 </List>
                 */}
+
                 {/*
                     <Card
                         suppressHydrationWarning
@@ -333,15 +356,24 @@ export default function Sidebar() {
                     </Card>
                 */}
             </Box>
+
             <Divider />
+
             <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-                <Avatar variant="outlined" size="sm" alt="Siriwat K.">
-                    {"Siriwat K."[0].toUpperCase()}
+                <Avatar variant="outlined" size="sm" alt={username}>
+                    {username[0].toUpperCase()}
                 </Avatar>
+
                 <Box sx={{ minWidth: 0, flex: 1 }}>
-                    <Typography level="title-sm">Siriwat K.</Typography>
+                    <Typography level="title-sm">{username}</Typography>
                 </Box>
-                <IconButton size="sm" variant="plain" color="neutral">
+
+                <IconButton
+                    size="sm"
+                    variant="plain"
+                    color="neutral"
+                    onClick={() => handleLogout}
+                >
                     <LogoutRoundedIcon />
                 </IconButton>
             </Box>

@@ -1,5 +1,7 @@
 import { UsersRowPublic } from "@/db/types";
 import { isServer, storageKeys } from "./stdvar";
+import { userSelectPublicSchema } from "./validate/schemas";
+import log from "./stdlog";
 
 export function setUser(user: UsersRowPublic | null) {
     if (isServer || !storageKeys.client) return;
@@ -10,12 +12,22 @@ export function setUser(user: UsersRowPublic | null) {
     else localStorage.removeItem(storageKey);
 }
 
-export function getUser() {
+export function getUser(): UsersRowPublic | null {
     if (isServer || !storageKeys.client) return null;
 
     const storageKey = storageKeys.client.authStorageKey;
 
     const stored = localStorage.getItem(storageKey);
 
-    return stored ? JSON.parse(stored) : null;
+    const raw = stored ? JSON.parse(stored) : null;
+
+    try {
+        const parsed = userSelectPublicSchema.parse(raw);
+
+        return parsed;
+    } catch (err) {
+        log.error(err);
+
+        return null;
+    }
 }

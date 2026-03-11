@@ -1,4 +1,4 @@
-import { getSessionData } from "@/lib/auth";
+import { getSessionDataAction } from "@/lib/auth";
 import { unauthorized } from "next/navigation";
 
 export default async function Template({
@@ -6,11 +6,9 @@ export default async function Template({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const user = await getSessionData();
+    const user = await getSessionDataAction();
 
-    if (!user) {
-        unauthorized();
-    }
+    if (!user) unauthorized();
 
     return children;
 }

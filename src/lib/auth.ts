@@ -226,7 +226,7 @@ async function cookieForToken(
  * Clear the auth cookie by setting an expired cookie value.
  * - Setting `expires: new Date(0)` causes the browser to remove the cookie.
  */
-export async function clearAuthCookie(cookieStore: CookieStore) {
+export async function clearAuthCookieAction(cookieStore: CookieStore) {
     return cookieStore.delete({
         name: storageKeys.server!.accessToken,
         httpOnly: true,
@@ -250,7 +250,7 @@ export async function clearAuthCookie(cookieStore: CookieStore) {
  *
  * This implementation normalizes username and logs errors (without secrets) for auditing.
  */
-export async function register(user: {
+export async function registerAction(user: {
     username: string;
     password: string;
     avatar_url: string | null;
@@ -371,7 +371,7 @@ async function verifyPassword(user: { username: string; password: string }) {
  * - Replace in-memory rate limiter with Redis or other central store for production.
  * - Rate-limit by IP as well as by username.
  */
-export async function login(credentials: {
+export async function loginAction(credentials: {
     username: string;
     password: string;
     remember?: boolean;
@@ -476,7 +476,7 @@ export async function login(credentials: {
  * - This function returns only what is present in the token; for authoritative profile data, query the DB
  *   (token can be stale).
  */
-export async function getSessionData(): Promise<null | UsersRowPublic> {
+export async function getSessionDataAction(): Promise<null | UsersRowPublic> {
     const cookieStore = await cookies();
     const token = cookieStore.get(storageKeys.server!.accessToken)?.value;
     if (!token) return null;

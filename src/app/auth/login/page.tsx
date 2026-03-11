@@ -8,7 +8,7 @@ import log from "@/utils/stdlog";
 import { useRouter } from "next/navigation";
 import { Typography } from "@mui/material";
 import { useEffect } from "react";
-import { login } from "@/lib/auth";
+import { loginAction } from "@/lib/auth";
 import { useSnackbar } from "@/providers/snackbar";
 import { UsersRowPublic } from "@/db/types";
 import { setUser } from "@/utils/stduser";
@@ -32,7 +32,7 @@ export default function SignInPage() {
         log.trace(`onSubmit called: '${JSON.stringify(data)}'`);
 
         try {
-            const user: UsersRowPublic = await login({ ...data });
+            const user: UsersRowPublic = await loginAction({ ...data });
 
             setUser(user);
 

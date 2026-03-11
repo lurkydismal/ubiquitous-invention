@@ -8,7 +8,7 @@ import log from "@/utils/stdlog";
 import { useRouter } from "next/navigation";
 import { Typography } from "@mui/material";
 import { useEffect } from "react";
-import { register } from "@/lib/auth";
+import { registerAction } from "@/lib/auth";
 import { useSnackbar } from "@/providers/snackbar";
 import { setUser } from "@/utils/stduser";
 
@@ -30,7 +30,7 @@ export default function SignUpPage() {
         log.trace(`onSubmit called: '${JSON.stringify(data)}'`);
 
         try {
-            const user = await register({ ...data, avatar_url: null });
+            const user = await registerAction({ ...data, avatar_url: null });
 
             setUser(user);
 
