@@ -38,47 +38,6 @@ function generateTasks(count = 1000) {
             tag: randomItem(tags),
             author: randomItem(authors),
             tracker: randomItem(trackers),
-            content: `
-# Markdown Renderer Test
-
-This is a **basic paragraph** with *italic*, **bold**, and ~~strikethrough~~ text.  
-Here is a [link](https://example.com) and some \`inline code\`.
-
----
-
-## Lists
-
-### Unordered
-- Item one
-- Item two
-  - Nested item
-- Item three
-
-### Ordered
-1. First
-2. Second
-3. Third
-
----
-
-## Code
-
-Inline: \`const x = 42;\`
-
-Block:
-\`\`\`ts
-function greet(name: string): string {
-    return \`Hello, \$\{name\}!\`;
-}
-\`\`\`
-
-\`\`\`mermaid
-graph TD
-    A[Start] --> B{Decision}
-    B -->|Yes| C[OK]
-    B -->|No| D[Fail]
-\`\`\`
-            `,
         };
     });
 }
