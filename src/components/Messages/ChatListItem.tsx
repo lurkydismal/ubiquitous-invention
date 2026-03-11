@@ -1,6 +1,10 @@
 import { Circle as CircleIcon } from "@mui/icons-material";
-import AvatarWithStatus from "./AvatarWithStatus";
-import { ChatProps, MessageProps, UserProps } from "./MyMessages/types";
+import AvatarWithStatus from "@/components/Avatar/WithStatus";
+import {
+    ChatProps,
+    MessageProps,
+    UserProps,
+} from "@/components/Messages/types";
 import {
     Box,
     ListDivider,

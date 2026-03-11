@@ -2,8 +2,8 @@ import {
     SearchRounded as SearchRoundedIcon,
     CloseRounded as CloseRoundedIcon,
 } from "@mui/icons-material";
-import ChatListItem from "./ChatListItem";
-import { ChatProps } from "./MyMessages/types";
+import ChatListItem from "@/components/Messages/ChatListItem";
+import { ChatProps } from "@/components/Messages/types";
 import {
     Box,
     Chip,

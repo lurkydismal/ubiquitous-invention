@@ -1,8 +1,8 @@
 import { Box, Sheet, Stack } from "@mui/joy";
-import AvatarWithStatus from "./AvatarWithStatus";
-import ChatBubble from "./ChatBubble";
-import MessagesPaneHeader from "./MessagesPaneHeader";
-import { ChatProps, MessageProps } from "./MyMessages/types";
+import AvatarWithStatus from "@/components/Avatar/WithStatus";
+import ChatBubble from "@/components/Messages/ChatBubble";
+import MessagesPaneHeader from "@/components/Messages/MessagesPaneHeader";
+import { ChatProps, MessageProps } from "@/components/Messages/types";
 
 type MessagesPaneProps = {
     chat: ChatProps;

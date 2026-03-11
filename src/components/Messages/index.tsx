@@ -1,7 +1,7 @@
 "use client";
 
-import MessagesPane from "../MessagesPane";
-import ChatsPane from "../ChatsPane";
+import MessagesPane from "../Messages/MessagesPane";
+import ChatsPane from "../Messages/ChatsPane";
 import { ChatProps } from "./types";
 import { chats } from "@/data/MyMessages";
 import { useState } from "react";

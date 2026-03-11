@@ -1,4 +1,4 @@
-import { MessageProps } from "./MyMessages/types";
+import { MessageProps } from "@/components/Messages/types";
 import { Box, Sheet, Stack, Typography } from "@mui/joy";
 
 type ChatBubbleProps = MessageProps & {

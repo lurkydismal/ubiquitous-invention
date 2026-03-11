@@ -1,4 +1,4 @@
-import MyMessages from "@/components/MyMessages";
+import MyMessages from "@/components/Messages";
 import { Box } from "@mui/joy";
 
 export default function Page() {

@@ -1,9 +1,9 @@
 import { GridRowsProp } from "@mui/x-data-grid";
-import ChartUserByCountry from "./ChartUserByCountry";
+import ChartUserByCountry from "./Dashboard/ChartUserByCountry";
 import TasksGrid from "./Dashboard/TasksGrid";
-import PageViewsBarChart from "./PageViewsBarChart";
-import SessionsChart from "./SessionsChart";
-import StatCard, { StatCardProps } from "./StatCard";
+import PageViewsBarChart from "./Dashboard/PageViewsBarChart";
+import SessionsChart from "./Dashboard/SessionsChart";
+import StatCard, { StatCardProps } from "./Dashboard/StatCard";
 import { Box, Grid, Typography } from "@mui/material";
 
 const data: StatCardProps[] = [

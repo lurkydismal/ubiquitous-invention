@@ -1,7 +1,5 @@
 "use client";
 
-import { BarChart } from "@mui/x-charts";
-import views from "@/data/dashboard/views";
 import {
     Card,
     CardContent,
@@ -10,6 +8,7 @@ import {
     Typography,
     useTheme,
 } from "@mui/material";
+import { BarChart, BarSeries } from "@mui/x-charts";
 
 export default function PageViewsBarChart() {
     const theme = useTheme();
@@ -17,6 +16,27 @@ export default function PageViewsBarChart() {
         (theme.vars || theme).palette.primary.dark,
         (theme.vars || theme).palette.secondary.dark,
         (theme.vars || theme).palette.success.dark,
+    ];
+
+    const series: readonly BarSeries[] = [
+        {
+            data: [4051, 2275, 3129, 4693, 3904, 2038, 2275],
+            id: "tasks-changed",
+            label: "Tasks changed",
+            stack: "A",
+        },
+        {
+            data: [2234, 3872, 2998, 4125, 3357, 2789, 2998],
+            id: "messages-sended",
+            label: "Messages sended",
+            stack: "A",
+        },
+        {
+            data: [3098, 4215, 2384, 2101, 4752, 3593, 2384],
+            id: "users-online",
+            label: "Users online",
+            stack: "A",
+        },
     ];
 
     return (
@@ -75,7 +95,7 @@ export default function PageViewsBarChart() {
                         },
                     ]}
                     yAxis={[{ width: 50 }]}
-                    series={views}
+                    series={series}
                     height={250}
                     margin={{ left: 0, right: 0, top: 20, bottom: 0 }}
                     grid={{ horizontal: true }}

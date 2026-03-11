@@ -5,7 +5,7 @@ import {
     Block as CancelledIcon,
     HistoryRounded as OutdatedIcon,
 } from "@mui/icons-material";
-import AvatarChip from "@/components/AvatarChip";
+import AvatarChip from "@/components/Avatar/Chip";
 import dayjs, { formatDate } from "@/utils/dayjs";
 import { Chip } from "@mui/material";
 

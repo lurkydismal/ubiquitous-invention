@@ -1,6 +1,5 @@
 "use client";
 
-import { Fragment } from "react";
 import {
     PendingOutlined as InProgressIcon,
     CheckCircleOutline as FinishedIcon,
@@ -106,14 +105,15 @@ function PieCenterLabel({ primaryText, secondaryText }: PieCenterLabelProps) {
     const secondaryY = primaryY + 24;
 
     return (
-        <Fragment>
+        <>
             <StyledText variant="primary" x={left + width / 2} y={primaryY}>
                 {primaryText}
             </StyledText>
+
             <StyledText variant="secondary" x={left + width / 2} y={secondaryY}>
                 {secondaryText}
             </StyledText>
-        </Fragment>
+        </>
     );
 }
 
@@ -139,6 +139,7 @@ export default function ChartUserByCountry() {
                 <Typography component="h2" variant="subtitle2">
                     Tasks total
                 </Typography>
+
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                     <PieChart
                         colors={colors}
@@ -170,6 +171,7 @@ export default function ChartUserByCountry() {
                         />
                     </PieChart>
                 </Box>
+
                 {countries.map((country, index) => (
                     <Stack
                         key={index}
@@ -192,6 +194,7 @@ export default function ChartUserByCountry() {
                                 >
                                     {country.name}
                                 </Typography>
+
                                 <Typography
                                     variant="body2"
                                     sx={{ color: "text.secondary" }}
@@ -199,6 +202,7 @@ export default function ChartUserByCountry() {
                                     {country.value}%
                                 </Typography>
                             </Stack>
+
                             <LinearProgress
                                 variant="determinate"
                                 aria-label="Number of users by country"

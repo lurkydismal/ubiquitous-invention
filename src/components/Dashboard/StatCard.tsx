@@ -1,6 +1,5 @@
 "use client";
 
-import { StatCard as StatCardProps } from "@/data/dashboard/stats";
 import {
     Box,
     Card,
@@ -10,7 +9,15 @@ import {
     Typography,
     useTheme,
 } from "@mui/material";
-import { areaElementClasses, SparkLineChart } from "@mui/x-charts";
+import { SparkLineChart, areaElementClasses } from "@mui/x-charts";
+
+export type StatCardProps = {
+    title: string;
+    value: string;
+    interval: string;
+    trend: "up" | "down" | "neutral";
+    data: number[];
+};
 
 function getDaysInMonth(month: number, year: number) {
     const date = new Date(year, month, 0);
