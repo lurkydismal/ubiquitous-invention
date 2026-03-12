@@ -1,7 +1,5 @@
 "use client";
 
-import * as React from "react";
-import AppTheme from "@/shared-theme/AppTheme";
 import {
     GlobalStyles,
     Avatar,
@@ -25,32 +23,33 @@ import {
     LogoutRounded as LogoutRoundedIcon,
     PendingActionsRounded as PendingActionsRoundedIcon,
     KeyboardArrowDown as KeyboardArrowDownIcon,
-} from "@mui/icons-material";
-import { usePathname } from "next/navigation";
-import {
     FormatListBulleted as AllIcon,
     PendingOutlined as InProgressIcon,
     CheckCircleOutline as FinishedIcon,
     CancelOutlined as CancelledIcon,
     ScheduleOutlined as OutdatedIcon,
 } from "@mui/icons-material";
+import { unauthorized, usePathname } from "next/navigation";
+import { Dispatch, ReactNode, SetStateAction, useState } from "react";
+import { getUser } from "@/utils/stduser";
 
 // import ColorSchemeToggle from "./ColorSchemeToggle";
 
 function Toggler(props: {
     defaultExpanded?: boolean;
-    children: React.ReactNode;
+    children: ReactNode;
     renderToggle: (params: {
         open: boolean;
-        setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    }) => React.ReactNode;
+        setOpen: Dispatch<SetStateAction<boolean>>;
+    }) => ReactNode;
 }) {
     const { defaultExpanded = false, renderToggle, children } = props;
-    const [open, setOpen] = React.useState(defaultExpanded);
+    const [open, setOpen] = useState(defaultExpanded);
 
     return (
-        <React.Fragment>
+        <>
             {renderToggle({ open, setOpen })}
+
             <Box
                 sx={[
                     {
@@ -67,7 +66,7 @@ function Toggler(props: {
             >
                 {children}
             </Box>
-        </React.Fragment>
+        </>
     );
 }
 
@@ -75,6 +74,10 @@ export default function Sidebar() {
     const pathnameRaw = usePathname() ?? "/";
     // normalize (remove trailing slash)
     const pathname = pathnameRaw.replace(/\/+$/, "") || "/";
+
+    const user = getUser();
+    if (!user) return unauthorized();
+    const username = user.username;
 
     const taskLinks = [
         { label: "All tasks", icon: AllIcon, href: "/tasks" },
@@ -161,18 +164,22 @@ export default function Sidebar() {
                     },
                 })}
             />
+
             <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
                 <NextLink href="/">
                     <IconButton variant="soft" color="primary" size="sm">
                         <PendingActionsRoundedIcon />
                     </IconButton>
                 </NextLink>
+
                 <Typography level="title-lg" href="/" component={NextLink}>
                     Tasker
                 </Typography>
                 {/*<ColorSchemeToggle sx={{ ml: "auto" }} />*/}
             </Box>
+
             <Divider />
+
             <Box
                 sx={{
                     minHeight: 0,
@@ -207,11 +214,13 @@ export default function Sidebar() {
                                         selected={item.isSelected(pathname)}
                                     >
                                         <Icon />
+
                                         <ListItemContent>
                                             <Typography level="title-sm">
                                                 {item.label}
                                             </Typography>
                                         </ListItemContent>
+
                                         {item.badge ? (
                                             <Chip
                                                 size="sm"
@@ -240,11 +249,13 @@ export default function Sidebar() {
                                                 selected={isSelected}
                                             >
                                                 <Icon />
+
                                                 <ListItemContent>
                                                     <Typography level="title-sm">
                                                         {item.label}
                                                     </Typography>
                                                 </ListItemContent>
+
                                                 <KeyboardArrowDownIcon
                                                     sx={[
                                                         open
@@ -279,6 +290,7 @@ export default function Sidebar() {
                                                 >
                                                     <ListItemButton>
                                                         <Icon />
+
                                                         {c.label}
                                                     </ListItemButton>
                                                 </ListItem>
@@ -290,6 +302,7 @@ export default function Sidebar() {
                         );
                     })}
                 </List>
+
                 {/*
                 <List
                     size="sm"
@@ -308,6 +321,7 @@ export default function Sidebar() {
                     </ListItem>
                 </List>
                 */}
+
                 {/*
                     <Card
                         suppressHydrationWarning
@@ -336,26 +350,22 @@ export default function Sidebar() {
                     </Card>
                 */}
             </Box>
+
             <Divider />
+
             <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-                <Avatar variant="outlined" size="sm" alt="Siriwat K.">
-                    {"Siriwat K."[0].toUpperCase()}
+                <Avatar variant="outlined" size="sm" alt={username}>
+                    {username[0].toUpperCase()}
                 </Avatar>
+
                 <Box sx={{ minWidth: 0, flex: 1 }}>
-                    <Typography level="title-sm">Siriwat K.</Typography>
+                    <Typography level="title-sm">{username}</Typography>
                 </Box>
+
                 <IconButton size="sm" variant="plain" color="neutral">
                     <LogoutRoundedIcon />
                 </IconButton>
             </Box>
         </Sheet>
-    );
-}
-
-export function SidebarWrapper() {
-    return (
-        <AppTheme>
-            <Sidebar />
-        </AppTheme>
     );
 }

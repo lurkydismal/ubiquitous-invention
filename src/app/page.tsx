@@ -1,5 +1,10 @@
-import { redirect } from "next/navigation";
+import { getSessionDataAction } from "@/lib/auth";
+import { permanentRedirect } from "next/navigation";
 
-export default function Page() {
-    redirect("/dashboard");
+export default async function Page() {
+    const session = await getSessionDataAction();
+
+    if (!session) permanentRedirect("/auth/login");
+
+    permanentRedirect("/dashboard");
 }

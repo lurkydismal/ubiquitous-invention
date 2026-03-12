@@ -2,6 +2,7 @@
 **/npm-debug.log
 **/yarn-error.log
 **/dist
+**/out
 **/.build
 **/coverage
 **/.DS_Store
@@ -9,3 +10,6 @@
 **/.gitignore
 **/.env
 **/.vscode
+**/.next
+**/next-env.d.ts
+**/pnpm-*
