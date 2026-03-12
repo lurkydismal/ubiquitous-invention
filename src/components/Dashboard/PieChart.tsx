@@ -1,7 +1,6 @@
 "use client";
 
 import { ReactNode, useMemo } from "react";
-import pie from "@/data/dashboard/pie";
 import {
     PendingOutlined as InProgressIcon,
     CheckCircleOutline as FinishedIcon,
@@ -20,9 +19,10 @@ import {
     useTheme,
 } from "@mui/material";
 import { PieChart, useDrawingArea } from "@mui/x-charts";
+import log from "@/utils/stdlog";
 
 type StatItem = {
-    name: string;
+    label: string;
     value: number; // percent 0..100
     icon?: ReactNode;
     color?: string;
@@ -33,7 +33,7 @@ interface MyPieChartProps {
      * Stats array. Will be normalized to 4 items (slice or pad with defaults).
      * Each item should contain `name` and `value` (0..100). `icon` and `color` are optional.
      */
-    stats?: StatItem[];
+    stats: StatItem[];
 }
 
 const DEFAULT_COLORS = [
@@ -114,8 +114,9 @@ export default function MyPieChart({ stats }: MyPieChartProps) {
         for (let i = 0; i < 4; i++) {
             const s = provided[i];
             if (s) {
+                log.debug(1);
                 result.push({
-                    name: s.name ?? `Item ${i + 1}`,
+                    label: s.label ?? `Item ${i + 1}`,
                     value: Number.isFinite(s.value)
                         ? Math.max(0, Math.min(100, s.value))
                         : 0,
@@ -123,8 +124,9 @@ export default function MyPieChart({ stats }: MyPieChartProps) {
                     color: s.color ?? DEFAULT_COLORS[i],
                 });
             } else {
+                log.debug(2);
                 result.push({
-                    name: ["In Progress", "Finished", "Cancelled", "Outdated"][
+                    label: ["In Progress", "Finished", "Cancelled", "Outdated"][
                         i
                     ],
                     value: 0,
@@ -140,8 +142,8 @@ export default function MyPieChart({ stats }: MyPieChartProps) {
     const total = useMemo(() => {
         // compute total from pie data (assumes pie is number[]), fall back to sum of stats values
         const pieSum =
-            Array.isArray(pie) && pie.length > 0
-                ? pie.reduce((a, b) => a + (b.value ?? 0), 0)
+            Array.isArray(stats) && stats.length > 0
+                ? stats.reduce((a, b) => a + (b.value ?? 0), 0)
                 : 0;
         if (pieSum > 0) return pieSum;
 
@@ -196,7 +198,7 @@ export default function MyPieChart({ stats }: MyPieChartProps) {
                         }}
                         series={[
                             {
-                                data: pie,
+                                data: stats,
                                 innerRadius: 64,
                                 outerRadius: 96,
                                 paddingAngle: 0,
@@ -246,7 +248,7 @@ export default function MyPieChart({ stats }: MyPieChartProps) {
                                     variant="body2"
                                     sx={{ fontWeight: 500 }}
                                 >
-                                    {stat.name}
+                                    {stat.label}
                                 </Typography>
 
                                 <Typography
@@ -269,7 +271,7 @@ export default function MyPieChart({ stats }: MyPieChartProps) {
                                     backgroundColor: (theme.vars || theme)
                                         .palette.action.hover,
                                 }}
-                                aria-label={`${stat.name} progress`}
+                                aria-label={`${stat.label} progress`}
                             />
                         </Stack>
                     </Stack>

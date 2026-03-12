@@ -1,4 +1,5 @@
 import { GridRowsProp } from "@mui/x-data-grid";
+import pie from "@/data/dashboard/pie";
 import ChartUserByCountry from "./PieChart";
 import TasksGrid from "./TasksGrid";
 import PageViewsBarChart from "./BarChart";
@@ -45,7 +46,7 @@ export default function MainGrid({ rows }: { rows: GridRowsProp }) {
                 </Grid>
 
                 <Grid size={{ xs: 12, lg: 3 }}>
-                    <ChartUserByCountry />
+                    <ChartUserByCountry stats={pie} />
                 </Grid>
             </Grid>
         </Box>
