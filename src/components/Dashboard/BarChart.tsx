@@ -47,7 +47,7 @@ function computeChangePercent(first: number, last: number) {
     return ((last - first) / Math.abs(first)) * 100;
 }
 
-export default function PageViewsBarChart() {
+export default function MyBarChart() {
     const theme = useTheme();
 
     // color palette for bars (keeps the original intent)
@@ -93,8 +93,8 @@ export default function PageViewsBarChart() {
             Math.abs(percent) <= 5
                 ? "default"
                 : percent > 0
-                  ? "success"
-                  : "error";
+                    ? "success"
+                    : "error";
         const intervalText = len === 1 ? "Last month" : `Last ${len} months`;
 
         return {
