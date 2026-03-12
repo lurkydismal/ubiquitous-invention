@@ -93,8 +93,8 @@ export default function MyBarChart() {
             Math.abs(percent) <= 5
                 ? "default"
                 : percent > 0
-                    ? "success"
-                    : "error";
+                  ? "success"
+                  : "error";
         const intervalText = len === 1 ? "Last month" : `Last ${len} months`;
 
         return {
