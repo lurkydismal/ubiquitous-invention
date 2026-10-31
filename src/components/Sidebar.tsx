@@ -179,9 +179,11 @@ export default async function Sidebar() {
 
                                         <ListItemText
                                             primary={item.label}
-                                            primaryTypographyProps={{
-                                                variant: "body2",
-                                                fontWeight: 600,
+                                            slotProps={{
+                                                primary: {
+                                                    variant: "body2",
+                                                    sx: { fontWeight: 600 },
+                                                },
                                             }}
                                         />
 
@@ -214,9 +216,8 @@ export default async function Sidebar() {
 
                                             <ListItemText
                                                 primary={item.label}
-                                                primaryTypographyProps={{
-                                                    variant: "body2",
-                                                    fontWeight: 600,
+                                                slotProps={{
+                                                    primary: { variant: "body2", sx: { fontWeight: 600 } },
                                                 }}
                                             />
 
@@ -241,17 +242,15 @@ export default async function Sidebar() {
                                                         selected={
                                                             pathname === child.href.split("?")[0] &&
                                                             (!child.href.includes("?") ||
-                                                                pathnameRaw.includes(
-                                                                    child.href.split("?")[1],
-                                                                ))
+                                                                pathnameRaw.includes(child.href.split("?")[1]))
                                                         }
                                                         sx={{ px: 1.5, py: 0.75 }}
                                                     >
                                                         <ChildIcon fontSize="small" />
                                                         <ListItemText
                                                             primary={child.label}
-                                                            primaryTypographyProps={{
-                                                                variant: "body2",
+                                                            slotProps={{
+                                                                primary: { variant: "body2" },
                                                             }}
                                                         />
                                                     </ListItemButton>
@@ -269,12 +268,20 @@ export default async function Sidebar() {
             <Divider />
 
             <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-                <Avatar variant="outlined" size="small" alt={username}>
+                <Avatar
+                    alt={username}
+                    sx={{
+                        width: 32,
+                        height: 32,
+                        border: "1px solid",
+                        borderColor: "divider",
+                    }}
+                >
                     {username.slice(0, 1).toUpperCase()}
                 </Avatar>
 
                 <Box sx={{ minWidth: 0, flex: 1 }}>
-                    <Typography variant="body2" fontWeight={600} noWrap>
+                    <Typography variant="body2" sx={{ fontWeight: 600 }} noWrap>
                         {username}
                     </Typography>
                 </Box>

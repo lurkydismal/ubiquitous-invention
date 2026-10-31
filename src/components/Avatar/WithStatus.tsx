@@ -1,12 +1,20 @@
-import { Avatar, AvatarProps, Badge } from "@mui/material";
+import { Avatar, Badge } from "@mui/material";
+import type { AvatarProps } from "@mui/material";
 
 type AvatarWithStatusProps = AvatarProps & {
     online?: boolean;
     username?: string;
+    size?: "small" | "medium" | "large";
 };
 
+const avatarDimensions = {
+    small: 32,
+    medium: 40,
+    large: 48,
+} as const;
+
 export default function AvatarWithStatus(props: AvatarWithStatusProps) {
-    const { online = false, username = "", size = "small", ...other } = props;
+    const { online = false, username = "", size = "small", sx, ...other } = props;
 
     return (
         <Badge
@@ -24,7 +32,14 @@ export default function AvatarWithStatus(props: AvatarWithStatusProps) {
                 },
             }}
         >
-            <Avatar size={size} alt={username} {...other}>
+            <Avatar
+                alt={username}
+                {...other}
+                sx={[
+                    { width: avatarDimensions[size], height: avatarDimensions[size] },
+                    ...(Array.isArray(sx) ? sx : sx ? [sx] : []),
+                ]}
+            >
                 {username.slice(0, 1).toUpperCase()}
             </Avatar>
         </Badge>

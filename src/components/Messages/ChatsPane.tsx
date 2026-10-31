@@ -51,7 +51,7 @@ export default function ChatsPane(props: ChatsPaneProps) {
                     pb: 1.5,
                 }}
             >
-                <Stack direction="row" spacing={1} alignItems="center" sx={{ mr: "auto" }}>
+                <Stack direction="row" spacing={1} sx={{ alignItems: "center", mr: "auto" }}>
                     <Typography component="h1" variant="h6">
                         Messages
                     </Typography>

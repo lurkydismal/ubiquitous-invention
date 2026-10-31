@@ -51,8 +51,8 @@ export default function StatCard({ title, data }: StatCardProps) {
         const trend: "up" | "down" | "neutral" = isNeutral
             ? "neutral"
             : percent > 0
-              ? "up"
-              : "down";
+                ? "up"
+                : "down";
 
         const roundedPercent = Math.round(percent);
         const sign = roundedPercent > 0 ? "+" : "";
