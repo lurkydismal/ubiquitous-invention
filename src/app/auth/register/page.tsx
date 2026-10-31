@@ -1,43 +1,16 @@
 "use client";
 
 import { Typography } from "@mui/material";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 import AuthCard from "@/components/auth/AuthCard";
 import AuthForm from "@/components/auth/AuthForm";
 import { CopyrightAligned as Copyright } from "@/components/Copyright";
 import { Link } from "@/components/Link";
-import { registerAction } from "@/lib/auth";
-import { useSnackbar } from "@/providers/snackbar";
-import log from "@/utils/stdlog";
-import { setUser } from "@/utils/stduser";
 
+/**
+ * Renders the sign up page component.
+ */
 export default function SignUpPage() {
-    const router = useRouter();
-    const { showError } = useSnackbar();
-
-    useEffect(() => {
-        log.trace("SignUp component mounted");
-        return () => {
-            log.trace("SignUp component unmounted");
-        };
-    }, []);
-
-    const handleSignUp = async (data: { username: string; password: string }) => {
-        log.trace(`onSubmit called: '${JSON.stringify(data)}'`);
-
-        try {
-            const user = await registerAction({ ...data, avatar_url: null });
-
-            setUser(user);
-
-            router.push("");
-        } catch (err) {
-            showError(err);
-        }
-    };
-
     const footer = (
         <>
             <Typography sx={{ textAlign: "center" }}>
@@ -53,7 +26,7 @@ export default function SignUpPage() {
 
     return (
         <AuthCard footer={footer}>
-            <AuthForm mode="signup" onSubmit={handleSignUp} />
+            <AuthForm mode="signup" />
         </AuthCard>
     );
 }

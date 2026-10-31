@@ -1,48 +1,16 @@
 "use client";
 
 import { Typography } from "@mui/material";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 import AuthCard from "@/components/auth/AuthCard";
 import AuthForm from "@/components/auth/AuthForm";
 import { CopyrightAligned as Copyright } from "@/components/Copyright";
 import { Link } from "@/components/Link";
-import { UsersRowPublic } from "@/db/types";
-import { loginAction } from "@/lib/auth";
-import { useSnackbar } from "@/providers/snackbar";
-import log from "@/utils/stdlog";
-import { setUser } from "@/utils/stduser";
 
+/**
+ * Renders the sign in page component.
+ */
 export default function SignInPage() {
-    const router = useRouter();
-    const { showError } = useSnackbar();
-
-    useEffect(() => {
-        log.trace("SignIn component mounted");
-        return () => {
-            log.trace("SignIn component unmounted");
-        };
-    }, []);
-
-    const handleSignIn = async (data: {
-        username: string;
-        password: string;
-        rememberMe?: boolean;
-    }) => {
-        log.trace(`onSubmit called: '${JSON.stringify(data)}'`);
-
-        try {
-            const user: UsersRowPublic = await loginAction({ ...data });
-
-            setUser(user);
-
-            router.push("/");
-        } catch (err) {
-            showError(err);
-        }
-    };
-
     const footer = (
         <>
             <Typography sx={{ textAlign: "center" }}>
@@ -58,7 +26,7 @@ export default function SignInPage() {
 
     return (
         <AuthCard footer={footer}>
-            <AuthForm mode="signin" onSubmit={handleSignIn} />
+            <AuthForm mode="signin" />
         </AuthCard>
     );
 }
