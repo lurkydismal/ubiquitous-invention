@@ -13,7 +13,7 @@
  * - Logs current build environment (development or production) using a custom logger.
  *
  * Notes:
- * - `font.variable` sets a CSS variable `--font-main` for use across the app.
+ * - `font.variable` sets a CSS variable `--font-nain` for use across the app.
  * - `InitColorSchemeScript` ensures proper MUI theme handling on first load.
  * - `AppRouterCacheProvider` is configured with `enableCssLayer: true` to optimize style insertion.
  */
@@ -28,6 +28,7 @@ import "./globals.css";
 import { Suspense } from "react";
 
 import MuiLayout from "@/components/MuiLayout";
+import SnackbarProvider from "@/providers/snackbar";
 import log from "@/utils/stdlog";
 import { isDev, appName, appVersion } from "@/utils/stdvar";
 
@@ -74,7 +75,9 @@ export default function RootLayout({
                 <AppRouterCacheProvider options={{ enableCssLayer: true }}>
                     <MuiLayout>
                         {/* Suspense boundary for async content */}
-                        <Suspense>{children}</Suspense>
+                        <Suspense>
+                            <SnackbarProvider>{children}</SnackbarProvider>
+                        </Suspense>
                     </MuiLayout>
                 </AppRouterCacheProvider>
             </body>
