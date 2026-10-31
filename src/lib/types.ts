@@ -1,29 +1,32 @@
-import z from "zod";
+import { AnyColumn } from "drizzle-orm";
 
-import { users, follows, categories, posts } from "@/db/schema";
+import * as schema from "@/db/schema";
+import { DbTargetSchema } from "@/utils/validate/schemas";
 
-export const TABLES = {
-    users: users,
-    follows: follows,
-    categories: categories,
-    posts: posts,
-} as const;
+export const TABLES = schema;
 
 export type DbTarget = keyof typeof TABLES;
 
-export const DbTargetSchema = z.enum(Object.keys(TABLES) as [DbTarget, ...DbTarget[]]);
-
-export function parseRawTarget(rawTarget: DbTarget) {
+/**
+ * Parses raw target.
+ */
+export function parseRawTarget(rawTarget: DbTarget): (typeof TABLES)[DbTarget] & {
+    author_id: AnyColumn;
+    last_editor_id: AnyColumn;
+} {
     const target = DbTargetSchema.parse(rawTarget);
     const table = TABLES[target];
     if (!table) {
         throw new Error("Invalid db target in get");
     }
 
-    return table;
+    return table as (typeof TABLES)[DbTarget] & {
+        author_id: AnyColumn;
+        last_editor_id: AnyColumn;
+    };
 }
 
-type SuccessResult<T> = { ok: true; data?: T };
+type SuccessResult<T> = { ok: true; data: T };
 type FailureResult = { ok: false; error: string };
 
 export type ActionResult<T = void> = SuccessResult<T> | FailureResult;

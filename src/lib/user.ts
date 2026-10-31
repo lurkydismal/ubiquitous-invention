@@ -1,48 +1,89 @@
 "use server";
 
-import { eq, desc } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 
 import db from "@/db";
-import { users } from "@/db/schema";
+import { user } from "@/db/schema";
+import { cacheDbRequest } from "@/lib/cache";
 import { normalizeArrayOrValue } from "@/utils/stdfunc";
+import log from "@/utils/stdlog";
 import { userSelectPublicSchema } from "@/utils/validate/schemas";
 
-export async function requestUserIdAction(usernameNormalized: string) {
+/**
+ * Requests user id from the database.
+ */
+export async function requestUserId(name: string) {
     "use cache";
+    cacheDbRequest(["user"]);
 
-    return db
-        .select({ id: users.id })
-        .from(users)
-        .where(eq(users.username_normalized, usernameNormalized))
-        .limit(1)
-        .execute();
+    log.trace("requestUserId called", { name });
+
+    return db.select({ id: user.id }).from(user).where(eq(user.name, name)).limit(1).execute();
 }
 
-export async function getUserIdAction(request: ReturnType<typeof requestUserIdAction>) {
+/**
+ * Gets user id.
+ */
+export async function getUserId(request: ReturnType<typeof requestUserId>) {
+    log.trace("getUserId called");
     const userId = normalizeArrayOrValue(await request);
+    log.debug("getUserId normalized result", { userId });
     if (userId && userId.id) return userId.id;
 
     return null;
 }
 
-export async function requestUserAction(uid: string | number) {
+/**
+ * Requests user from the database.
+ */
+export async function requestUser(uid: string) {
     "use cache";
+    cacheDbRequest(["user"]);
 
-    const field = typeof uid === "string" ? users.username_normalized : users.id;
+    log.trace("requestUser called", { uid, uidType: typeof uid });
 
-    return db.select().from(users).where(eq(field, uid)).limit(1).execute();
+    const field = user.id;
+
+    return db
+        .select({
+            name: user.name,
+        })
+        .from(user)
+        .where(eq(field, uid))
+        .limit(1)
+        .execute();
 }
 
-export async function getUserAction(request: ReturnType<typeof requestUserAction>) {
+/**
+ * Gets user.
+ */
+export async function getUser(request: ReturnType<typeof requestUser>) {
+    log.trace("getUser called");
     return userSelectPublicSchema.parse(normalizeArrayOrValue(await request));
 }
 
-export async function requestAllUsersAction() {
+/**
+ * Requests all users from the database.
+ */
+export async function requestAllUsers() {
     "use cache";
+    cacheDbRequest(["user"]);
 
-    return db.select().from(users).orderBy(desc(users.username_normalized)).execute();
+    log.trace("requestAllUsers called");
+
+    return db
+        .select({
+            name: user.name,
+        })
+        .from(user)
+        .orderBy(desc(user.name))
+        .execute();
 }
 
-export async function getAllUsersAction(request: ReturnType<typeof requestAllUsersAction>) {
+/**
+ * Gets all users.
+ */
+export async function getAllUsers(request: ReturnType<typeof requestAllUsers>) {
+    log.trace("getAllUsers called");
     return userSelectPublicSchema.array().parse(await request);
 }
