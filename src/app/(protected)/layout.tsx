@@ -1,7 +1,11 @@
-import { Box } from "@mui/material";
+import { Box, Container } from "@mui/material";
 
-import Sidebar from "@/components/Sidebar";
+import Footer from "@/components/Footer";
+import NavBar from "@/components/NavBar";
 
+/**
+ * Renders the protected application layout shell.
+ */
 export default async function Layout({
     children,
 }: Readonly<{
@@ -12,20 +16,26 @@ export default async function Layout({
             sx={{
                 minHeight: "100vh",
                 display: "flex",
+                flexDirection: "column",
             }}
         >
-            <Sidebar />
+            <NavBar />
 
-            <Box
+            <Container
+                maxWidth={false}
                 sx={{
                     flexGrow: 1,
                     display: "flex",
                     flexDirection: "column",
-                    m: 0,
+                    mt: 11,
+                    mb: 4,
+                    gap: 4,
                 }}
             >
                 {children}
-            </Box>
+            </Container>
+
+            <Footer />
         </Box>
     );
 }
