@@ -16,9 +16,23 @@ type NextLinkProps = MuiLinkProps & {
     href: NextLinkComposedProps["href"];
 };
 
+/**
+ * MUI-compatible link wrapper around Next.js `Link`.
+ *
+ * Use this component when a Material UI component expects a link-like
+ * component via `component={...}` while still preserving Next.js routing.
+ *
+ * @example
+ * <Link href="/dashboard" underline="hover" color="inherit">
+ *   Dashboard
+ * </Link>
+ */
 export function Link({ href, children, ...props }: Readonly<NextLinkProps>) {
+    // TODO: Fix unused
+    const { onClick, onMouseEnter, onTouchStart, ...rest } = props;
+
     return (
-        <MuiLink {...props} href={href} component={NextLink}>
+        <MuiLink {...rest} href={href} component={NextLink}>
             {children}
         </MuiLink>
     );

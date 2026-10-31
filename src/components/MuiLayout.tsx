@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * RootLayout Component
  *
@@ -21,14 +19,11 @@ import { Box, CircularProgress, CssBaseline } from "@mui/material";
 import { Suspense } from "react";
 
 import SnackbarProvider from "@/providers/snackbar";
-import AppTheme, { AppThemeProps } from "@/theme";
-import * as custom from "@/theme/custom";
+import AppTheme from "@/theme";
 
-const themeComponents: AppThemeProps["themeComponents"] = Object.assign(
-    {},
-    ...Object.values(custom),
-);
-
+/**
+ * Renders the mui layout component.
+ */
 export default function MuiLayout({
     children,
 }: Readonly<{
@@ -36,7 +31,7 @@ export default function MuiLayout({
 }>) {
     return (
         // Apply global theme to all child components
-        <AppTheme themeComponents={themeComponents}>
+        <AppTheme>
             <CssBaseline enableColorScheme />
 
             {/* Full viewport-height container */}

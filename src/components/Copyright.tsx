@@ -5,7 +5,7 @@ import {
     SxProps,
     LinkProps as MuiLinkProps,
 } from "@mui/material";
-import React, { ComponentProps } from "react";
+import { ComponentProps } from "react";
 
 import { buildYear, githubUrl } from "@/utils/stdvar";
 
@@ -17,14 +17,17 @@ type GitHubLinkProps = MuiLinkProps & {
     href: GitHubLinkComposedProps["href"];
 };
 
+/**
+ * Renders the git hub link component.
+ */
 function GitHubLink({ href, ...props }: Readonly<GitHubLinkProps>) {
     return (
         <Link
             {...props}
             href={href}
             color="inherit" // inherit from parent typography (guarantees visibility if parent is readable)
-            display="inline-block"
             sx={{
+                display: "inline-block",
                 textDecoration: "none",
                 transition: "color 120ms ease, text-decoration-color 120ms ease",
                 "&:hover": {
@@ -43,6 +46,9 @@ type Props = TypographyProps & {
     sx?: SxProps<Theme>;
 };
 
+/**
+ * Renders the copyright base component.
+ */
 function CopyrightBase({
     href = githubUrl,
     openInNewTab = true,
@@ -75,10 +81,16 @@ function CopyrightBase({
     );
 }
 
+/**
+ * Renders the copyright aligned component.
+ */
 export function CopyrightAligned(props: Omit<Props, "centered">) {
     return <CopyrightBase {...props} centered />;
 }
 
+/**
+ * Renders the copyright component.
+ */
 export function Copyright(props: Props) {
     return <CopyrightBase {...props} />;
 }
