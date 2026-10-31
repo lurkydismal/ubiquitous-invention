@@ -8,8 +8,6 @@ import log from "@/utils/stdlog";
 
 import { AuthorInfo, AuthorRow, AuthorsInfo, nameSx, profileHref } from "./base";
 
-export { AuthorWithFollow, AuthorWithFollowAndLink } from "./WithFollow";
-
 /**
  * Styles used for author date links.
  */
