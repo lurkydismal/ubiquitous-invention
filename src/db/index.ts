@@ -17,6 +17,9 @@ import { relations } from "./relations";
 // Custom implementation of Drizzle's LogWriter interface
 // All log messages from Drizzle will be routed through this writer
 class MyLogWriter implements LogWriter {
+    /**
+     * Forwards database driver notices to log.debug().
+     */
     write(message: string) {
         log.debug(message);
     }
@@ -30,13 +33,12 @@ const logger = new DefaultLogger({ writer: new MyLogWriter() });
 // `casing: "snake_case"` ensures database fields are mapped in snake_case
 const db = drizzle({
     connection: {
-        user: process.env.POSTGRES_USER!,
-        password: process.env.POSTGRES_PASSWORD!,
-        database: process.env.POSTGRES_DB!,
-        host: process.env.DB_HOST!,
-        port: Number(process.env.DB_PORT!),
+        user: process.env["POSTGRES_USER"]!,
+        password: process.env["POSTGRES_PASSWORD"]!,
+        database: process.env["POSTGRES_DB"]!,
+        host: process.env["DB_HOST"]!,
+        port: Number(process.env["DB_PORT"]!),
     },
-    casing: "snake_case",
     logger,
     relations: relations,
 });
