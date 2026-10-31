@@ -2,11 +2,20 @@ import {
     SearchRounded as SearchRoundedIcon,
     CloseRounded as CloseRoundedIcon,
 } from "@mui/icons-material";
-import { Box, Chip, IconButton, Input, List, Sheet, Stack, Typography } from "@mui/joy";
+import {
+    Box,
+    Chip,
+    IconButton,
+    InputAdornment,
+    List,
+    OutlinedInput,
+    Paper,
+    Stack,
+    Typography,
+} from "@mui/material";
 
 import ChatListItem from "@/components/Messages/ChatListItem";
 import { ChatProps } from "@/components/Messages/types";
-// import { toggleMessagesPane } from "@/stdfunc";
 
 type ChatsPaneProps = {
     chats: ChatProps[];
@@ -16,8 +25,11 @@ type ChatsPaneProps = {
 
 export default function ChatsPane(props: ChatsPaneProps) {
     const { chats, setSelectedChat, selectedChatId } = props;
+
     return (
-        <Sheet
+        <Paper
+            square
+            elevation={0}
             sx={{
                 borderRight: "1px solid",
                 borderColor: "divider",
@@ -26,6 +38,7 @@ export default function ChatsPane(props: ChatsPaneProps) {
                     md: "100dvh",
                 },
                 overflowY: "auto",
+                bgcolor: "background.paper",
             }}
         >
             <Stack
@@ -38,32 +51,17 @@ export default function ChatsPane(props: ChatsPaneProps) {
                     pb: 1.5,
                 }}
             >
-                <Typography
-                    component="h1"
-                    endDecorator={
-                        <Chip
-                            variant="soft"
-                            color="primary"
-                            size="md"
-                            slotProps={{ root: { component: "span" } }}
-                        >
-                            4
-                        </Chip>
-                    }
-                    sx={{
-                        fontSize: { xs: "md", md: "lg" },
-                        fontWeight: "lg",
-                        mr: "auto",
-                    }}
-                >
-                    Messages
-                </Typography>
+                <Stack direction="row" spacing={1} alignItems="center" sx={{ mr: "auto" }}>
+                    <Typography component="h1" variant="h6">
+                        Messages
+                    </Typography>
+                    <Chip label="4" variant="filled" color="primary" size="small" />
+                </Stack>
 
                 <IconButton
-                    variant="plain"
-                    aria-label="edit"
-                    color="neutral"
-                    size="sm"
+                    aria-label="Close conversations"
+                    color="inherit"
+                    size="small"
                     onClick={() => {}}
                     sx={{ display: { sm: "none" } }}
                 >
@@ -72,21 +70,20 @@ export default function ChatsPane(props: ChatsPaneProps) {
             </Stack>
 
             <Box sx={{ px: 2, pb: 1.5 }}>
-                <Input
-                    size="sm"
-                    startDecorator={<SearchRoundedIcon />}
+                <OutlinedInput
+                    fullWidth
+                    size="small"
+                    startAdornment={
+                        <InputAdornment position="start">
+                            <SearchRoundedIcon fontSize="small" />
+                        </InputAdornment>
+                    }
                     placeholder="Search"
-                    aria-label="Search"
+                    inputProps={{ "aria-label": "Search conversations" }}
                 />
             </Box>
 
-            <List
-                sx={{
-                    py: 0,
-                    "--ListItem-paddingY": "0.75rem",
-                    "--ListItem-paddingX": "1rem",
-                }}
-            >
+            <List disablePadding sx={{ py: 0 }}>
                 {chats.map((chat) => (
                     <ChatListItem
                         key={chat.id}
@@ -96,6 +93,6 @@ export default function ChatsPane(props: ChatsPaneProps) {
                     />
                 ))}
             </List>
-        </Sheet>
+        </Paper>
     );
 }

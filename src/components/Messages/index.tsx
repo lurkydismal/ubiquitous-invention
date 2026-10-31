@@ -1,6 +1,6 @@
 "use client";
 
-import { Sheet } from "@mui/joy";
+import { Box } from "@mui/material";
 import { useState } from "react";
 
 import { chats } from "@/data/MyMessages";
@@ -13,7 +13,7 @@ export default function MyProfile() {
     const [selectedChat, setSelectedChat] = useState<ChatProps>(chats[0]);
 
     return (
-        <Sheet
+        <Box
             sx={{
                 flex: 1,
                 width: "100%",
@@ -26,7 +26,7 @@ export default function MyProfile() {
                 },
             }}
         >
-            <Sheet
+            <Box
                 sx={{
                     position: { xs: "fixed", sm: "sticky" },
                     transform: {
@@ -44,9 +44,9 @@ export default function MyProfile() {
                     selectedChatId={selectedChat.id}
                     setSelectedChat={setSelectedChat}
                 />
-            </Sheet>
+            </Box>
 
             <MessagesPane key={selectedChat.id} chat={selectedChat} />
-        </Sheet>
+        </Box>
     );
 }

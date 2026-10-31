@@ -12,28 +12,26 @@ import {
     ScheduleOutlined as OutdatedIcon,
 } from "@mui/icons-material";
 import {
-    GlobalStyles,
     Avatar,
     Box,
     Chip,
     Divider,
+    GlobalStyles,
     IconButton,
     List,
     ListItem,
     ListItemButton,
-    listItemButtonClasses,
-    ListItemContent,
+    ListItemText,
+    Paper,
     Typography,
-    Sheet,
-} from "@mui/joy";
+    listItemButtonClasses,
+} from "@mui/material";
 import { unauthorized, usePathname } from "next/navigation";
 
 import NextLink from "@/components/Link";
 import { getSession } from "@/lib/dal/auth";
 
 import Toggler from "./Toggler";
-
-// import ColorSchemeToggle from "./ColorSchemeToggle";
 
 const taskLinks = [
     { label: "All tasks", icon: AllIcon, href: "/tasks" },
@@ -89,7 +87,6 @@ const menu = [
 
 export default async function Sidebar() {
     const pathnameRaw = usePathname() ?? "/";
-    // normalize (remove trailing slash)
     const pathname = pathnameRaw.replace(/\/+$/, "") || "/";
 
     const session = await getSession();
@@ -97,7 +94,10 @@ export default async function Sidebar() {
     const username = session.user.name;
 
     return (
-        <Sheet
+        <Paper
+            component="aside"
+            square
+            elevation={0}
             className="Sidebar"
             sx={{
                 position: { xs: "fixed", md: "sticky" },
@@ -117,6 +117,7 @@ export default async function Sidebar() {
                 gap: 2,
                 borderRight: "1px solid",
                 borderColor: "divider",
+                bgcolor: "background.paper",
             }}
         >
             <GlobalStyles
@@ -131,16 +132,19 @@ export default async function Sidebar() {
             />
 
             <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-                <NextLink href="/">
-                    <IconButton variant="soft" color="primary" size="sm">
-                        <PendingActionsRoundedIcon />
-                    </IconButton>
-                </NextLink>
+                <IconButton
+                    component={NextLink}
+                    href="/"
+                    color="primary"
+                    size="small"
+                    sx={{ bgcolor: "action.hover", "&:hover": { bgcolor: "action.selected" } }}
+                >
+                    <PendingActionsRoundedIcon />
+                </IconButton>
 
-                <Typography level="title-lg" href="/" component={NextLink}>
+                <Typography variant="h6" component={NextLink} href="/" color="inherit" noWrap>
                     Tasker
                 </Typography>
-                {/*<ColorSchemeToggle sx={{ ml: "auto" }} />*/}
             </Box>
 
             <Divider />
@@ -154,91 +158,102 @@ export default async function Sidebar() {
                     flexDirection: "column",
                     [`& .${listItemButtonClasses.root}`]: {
                         gap: 1.5,
+                        borderRadius: 1.5,
                     },
                 }}
             >
-                <List
-                    size="sm"
-                    sx={{
-                        gap: 1,
-                        "--List-nestedInsetStart": "30px",
-                        "--ListItem-radius": (theme) => theme.vars.radius.sm,
-                    }}
-                >
+                <List disablePadding sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
                     {menu.map((item) => {
                         const Icon = item.Icon;
 
                         if (item.type === "link") {
                             return (
-                                <ListItem key={item.key} href={item.href} component={NextLink}>
-                                    <ListItemButton selected={item.isSelected(pathname)}>
-                                        <Icon />
+                                <ListItem key={item.key} disablePadding>
+                                    <ListItemButton
+                                        component={NextLink}
+                                        href={item.href}
+                                        selected={item.isSelected(pathname)}
+                                        sx={{ px: 1.5, py: 1 }}
+                                    >
+                                        <Icon fontSize="small" />
 
-                                        <ListItemContent>
-                                            <Typography level="title-sm">{item.label}</Typography>
-                                        </ListItemContent>
+                                        <ListItemText
+                                            primary={item.label}
+                                            primaryTypographyProps={{
+                                                variant: "body2",
+                                                fontWeight: 600,
+                                            }}
+                                        />
 
                                         {item.badge ? (
-                                            <Chip size="sm" color="primary" variant="solid">
-                                                {item.badge}
-                                            </Chip>
+                                            <Chip
+                                                size="small"
+                                                color="primary"
+                                                variant="filled"
+                                                label={item.badge}
+                                            />
                                         ) : null}
                                     </ListItemButton>
                                 </ListItem>
                             );
                         }
 
-                        // Nested
                         const isSelected = item.isSelected(pathname);
 
                         return (
-                            <ListItem key={item.key} nested>
+                            <ListItem key={item.key} disablePadding sx={{ display: "block" }}>
                                 <Toggler
                                     defaultExpanded={isSelected}
-                                    renderToggle={({ open, setOpen }) => {
-                                        return (
-                                            <ListItemButton
-                                                onClick={() => setOpen(!open)}
-                                                selected={isSelected}
-                                            >
-                                                <Icon />
+                                    renderToggle={({ open, setOpen }) => (
+                                        <ListItemButton
+                                            onClick={() => setOpen(!open)}
+                                            selected={isSelected}
+                                            sx={{ px: 1.5, py: 1 }}
+                                        >
+                                            <Icon fontSize="small" />
 
-                                                <ListItemContent>
-                                                    <Typography level="title-sm">
-                                                        {item.label}
-                                                    </Typography>
-                                                </ListItemContent>
+                                            <ListItemText
+                                                primary={item.label}
+                                                primaryTypographyProps={{
+                                                    variant: "body2",
+                                                    fontWeight: 600,
+                                                }}
+                                            />
 
-                                                <KeyboardArrowDownIcon
-                                                    sx={[
-                                                        open
-                                                            ? {
-                                                                transform: "rotate(180deg)",
-                                                            }
-                                                            : {
-                                                                transform: "none",
-                                                            },
-                                                    ]}
-                                                />
-                                            </ListItemButton>
-                                        );
-                                    }}
+                                            <KeyboardArrowDownIcon
+                                                sx={{
+                                                    transform: open ? "rotate(180deg)" : "none",
+                                                    transition: "transform 0.2s ease",
+                                                }}
+                                            />
+                                        </ListItemButton>
+                                    )}
                                 >
-                                    <List>
-                                        {item.children.map((c, index) => {
-                                            const Icon = c.icon;
+                                    <List disablePadding sx={{ pl: 3, pt: 0.5, gap: 0.5 }}>
+                                        {item.children.map((child) => {
+                                            const ChildIcon = child.icon;
 
                                             return (
-                                                <ListItem
-                                                    key={c.href}
-                                                    sx={index === 0 ? { mt: 0.5 } : null}
-                                                    href={c.href}
-                                                    component={NextLink}
-                                                >
-                                                    <ListItemButton>
-                                                        <Icon />
-
-                                                        {c.label}
+                                                <ListItem key={child.href} disablePadding>
+                                                    <ListItemButton
+                                                        component={NextLink}
+                                                        href={child.href}
+                                                        selected={
+                                                            pathname === child.href.split("?")[0] &&
+                                                            (!child.href.includes("?") ||
+                                                                pathnameRaw.includes(
+                                                                    child.href.split("?")[1],
+                                                                ))
+                                                        }
+                                                        sx={{ px: 1.5, py: 0.75 }}
+                                                    >
+                                                        <ChildIcon fontSize="small" />
+                                                        <ListItemText
+                                                            primary={child.label}
+                                                            primaryTypographyProps={{
+                                                                variant: "body2",
+                                                            }}
+                                                        />
                                                     </ListItemButton>
                                                 </ListItem>
                                             );
@@ -249,70 +264,25 @@ export default async function Sidebar() {
                         );
                     })}
                 </List>
-
-                {/*
-                <List
-                    size="sm"
-                    sx={{
-                        mt: "auto",
-                        flexGrow: 0,
-                        "--ListItem-radius": (theme) => theme.vars.radius.sm,
-                        "--List-gap": "8px",
-                    }}
-                >
-                    <ListItem>
-                        <ListItemButton>
-                            <SettingsRoundedIcon />
-                            Settings
-                        </ListItemButton>
-                    </ListItem>
-                </List>
-                */}
-
-                {/*
-                    <Card
-                        suppressHydrationWarning
-                        invertedColors // A tree hydrated but some attributes of the server rendered HTML didn't match the client properties
-                        variant='soft'
-                        color='warning'
-                        size='sm'
-                        sx={{ boxShadow: 'none' }}
-                    >
-                        <Stack
-                            direction='row'
-                            sx={{ justifyContent: 'space-between', alignItems: 'center' }}
-                        >
-                            <Typography level='title-sm'>Used space</Typography>
-                            <IconButton size='sm'>
-                                <CloseRoundedIcon />
-                            </IconButton>
-                        </Stack>
-                        <Typography level='body-xs'>
-                            Your team has used 80% of your available space. Need more?
-                        </Typography>
-                        <LinearProgress variant='outlined' value={80} determinate sx={{ my: 1 }} />
-                        <Button size='sm' variant='solid'>
-                            Upgrade plan
-                        </Button>
-                    </Card>
-                */}
             </Box>
 
             <Divider />
 
             <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-                <Avatar variant="outlined" size="sm" alt={username}>
-                    {username[0].toUpperCase()}
+                <Avatar variant="outlined" size="small" alt={username}>
+                    {username.slice(0, 1).toUpperCase()}
                 </Avatar>
 
                 <Box sx={{ minWidth: 0, flex: 1 }}>
-                    <Typography level="title-sm">{username}</Typography>
+                    <Typography variant="body2" fontWeight={600} noWrap>
+                        {username}
+                    </Typography>
                 </Box>
 
-                <IconButton size="sm" variant="plain" color="neutral">
+                <IconButton size="small" aria-label="Log out" color="inherit">
                     <LogoutRoundedIcon />
                 </IconButton>
             </Box>
-        </Sheet>
+        </Paper>
     );
 }

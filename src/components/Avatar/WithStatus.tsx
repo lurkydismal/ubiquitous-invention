@@ -1,4 +1,4 @@
-import { Avatar, AvatarProps, Badge } from "@mui/joy";
+import { Avatar, AvatarProps, Badge } from "@mui/material";
 
 type AvatarWithStatusProps = AvatarProps & {
     online?: boolean;
@@ -6,21 +6,27 @@ type AvatarWithStatusProps = AvatarProps & {
 };
 
 export default function AvatarWithStatus(props: AvatarWithStatusProps) {
-    const { online = false, username = "", ...other } = props;
+    const { online = false, username = "", size = "small", ...other } = props;
 
     return (
-        <div>
-            <Badge
-                color={online ? "success" : "neutral"}
-                variant={online ? "solid" : "soft"}
-                size="sm"
-                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-                badgeInset="4px 4px"
-            >
-                <Avatar size="sm" alt={username} {...other}>
-                    {username[0].toUpperCase()}
-                </Avatar>
-            </Badge>
-        </div>
+        <Badge
+            variant="dot"
+            overlap="circular"
+            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+            sx={{
+                "& .MuiBadge-badge": {
+                    width: 9,
+                    height: 9,
+                    minWidth: 9,
+                    borderRadius: "50%",
+                    backgroundColor: online ? "success.main" : "text.disabled",
+                    boxShadow: (theme) => `0 0 0 2px ${theme.palette.background.paper}`,
+                },
+            }}
+        >
+            <Avatar size={size} alt={username} {...other}>
+                {username.slice(0, 1).toUpperCase()}
+            </Avatar>
+        </Badge>
     );
 }

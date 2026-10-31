@@ -1,4 +1,4 @@
-import { Box, Sheet, Stack } from "@mui/joy";
+import { Box, Paper, Stack } from "@mui/material";
 
 import AvatarWithStatus from "@/components/Avatar/WithStatus";
 import ChatBubble from "@/components/Messages/ChatBubble";
@@ -13,7 +13,9 @@ export default function MessagesPane(props: MessagesPaneProps) {
     const { chat } = props;
 
     return (
-        <Sheet
+        <Paper
+            square
+            elevation={0}
             sx={{
                 height: {
                     xs: "calc(100dvh - var(--Header-height))",
@@ -21,7 +23,7 @@ export default function MessagesPane(props: MessagesPaneProps) {
                 },
                 display: "flex",
                 flexDirection: "column",
-                backgroundColor: "background.level1",
+                bgcolor: "background.default",
             }}
         >
             <MessagesPaneHeader sender={chat.sender} />
@@ -33,7 +35,7 @@ export default function MessagesPane(props: MessagesPaneProps) {
                     minHeight: 0,
                     px: 2,
                     py: 3,
-                    overflowY: "scroll",
+                    overflowY: "auto",
                     flexDirection: "column-reverse",
                 }}
             >
@@ -43,11 +45,12 @@ export default function MessagesPane(props: MessagesPaneProps) {
 
                         return (
                             <Stack
-                                key={index}
+                                key={message.id ?? index}
                                 direction="row"
                                 spacing={2}
                                 sx={{
                                     flexDirection: isYou ? "row-reverse" : "row",
+                                    alignItems: "flex-end",
                                 }}
                             >
                                 {message.sender !== "You" && (
@@ -63,6 +66,6 @@ export default function MessagesPane(props: MessagesPaneProps) {
                     })}
                 </Stack>
             </Box>
-        </Sheet>
+        </Paper>
     );
 }

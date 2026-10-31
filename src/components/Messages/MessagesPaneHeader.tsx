@@ -2,10 +2,9 @@ import {
     Circle as CircleIcon,
     ArrowBackIosNewRounded as ArrowBackIosNewRoundedIcon,
 } from "@mui/icons-material";
-import { Avatar, Chip, IconButton, Stack, Typography } from "@mui/joy";
+import { Avatar, Chip, IconButton, Stack, Typography } from "@mui/material";
 
 import { UserProps } from "./types";
-// import { toggleMessagesPane } from "@/stdfunc";
 
 type MessagesPaneHeaderProps = {
     sender: UserProps;
@@ -20,79 +19,53 @@ export default function MessagesPaneHeader(props: MessagesPaneHeaderProps) {
             direction="row"
             sx={{
                 justifyContent: "space-between",
-                py: { xs: 2, md: 2 },
+                alignItems: "center",
+                py: 2,
                 px: { xs: 1, md: 2 },
                 borderBottom: "1px solid",
                 borderColor: "divider",
-                backgroundColor: "background.body",
+                bgcolor: "background.paper",
             }}
         >
-            <Stack direction="row" spacing={{ xs: 1, md: 2 }} sx={{ alignItems: "center" }}>
+            <Stack
+                direction="row"
+                spacing={{ xs: 1, md: 2 }}
+                sx={{ alignItems: "center", minWidth: 0 }}
+            >
                 <IconButton
-                    variant="plain"
-                    color="neutral"
-                    size="sm"
+                    aria-label="Back to conversations"
+                    color="inherit"
+                    size="small"
                     sx={{ display: { xs: "inline-flex", sm: "none" } }}
                 >
                     <ArrowBackIosNewRoundedIcon />
                 </IconButton>
 
-                <Avatar size="lg" alt={sender.name}>
-                    {sender.name[0].toUpperCase()}
+                <Avatar sx={{ width: 40, height: 40 }} alt={sender.name}>
+                    {sender.name.slice(0, 1).toUpperCase()}
                 </Avatar>
 
-                <Typography
-                    component="h2"
-                    noWrap
-                    endDecorator={
-                        <Chip
-                            variant="outlined"
-                            size="sm"
-                            color="neutral"
-                            sx={{ borderRadius: "sm" }}
-                            startDecorator={
-                                <CircleIcon
-                                    sx={{ fontSize: 8 }}
-                                    color={isOnline ? "success" : "disabled"}
-                                />
-                            }
-                            slotProps={{ root: { component: "span" } }}
-                        >
-                            {isOnline ? "Online" : "Offline"}
-                        </Chip>
-                    }
-                    sx={{ fontWeight: "lg", fontSize: "lg" }}
-                >
-                    {sender.name}
-                </Typography>
+                <Stack direction="row" spacing={1} alignItems="center" sx={{ minWidth: 0 }}>
+                    <Typography component="h2" variant="h6" noWrap>
+                        {sender.name}
+                    </Typography>
+
+                    <Chip
+                        icon={
+                            <CircleIcon
+                                sx={{
+                                    fontSize: 8,
+                                    color: isOnline ? "success.main" : "text.disabled",
+                                }}
+                            />
+                        }
+                        label={isOnline ? "Online" : "Offline"}
+                        variant="outlined"
+                        size="small"
+                        sx={{ borderRadius: 1, "& .MuiChip-icon": { ml: 0.75 } }}
+                    />
+                </Stack>
             </Stack>
-
-            {/*
-            <Stack spacing={1} direction='row' sx={{ alignItems: 'center' }}>
-                <Button
-                    startDecorator={<PhoneInTalkRoundedIcon />}
-                    color='neutral'
-                    variant='outlined'
-                    size='sm'
-                    sx={{ display: { xs: 'none', md: 'inline-flex' } }}
-                >
-                    Call
-                </Button>
-
-                <Button
-                    color='neutral'
-                    variant='outlined'
-                    size='sm'
-                    sx={{ display: { xs: 'none', md: 'inline-flex' } }}
-                >
-                    View profile
-                </Button>
-
-                <IconButton size='sm' variant='plain' color='neutral'>
-                    <MoreVertRoundedIcon />
-                </IconButton>
-            </Stack>
-            */}
         </Stack>
     );
 }

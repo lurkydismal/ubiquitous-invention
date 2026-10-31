@@ -1,17 +1,16 @@
 import { Circle as CircleIcon } from "@mui/icons-material";
 import {
     Box,
-    ListDivider,
+    Divider,
     ListItem,
     ListItemButton,
     ListItemButtonProps,
     Stack,
     Typography,
-} from "@mui/joy";
+} from "@mui/material";
 
 import AvatarWithStatus from "@/components/Avatar/WithStatus";
 import { ChatProps, MessageProps, UserProps } from "@/components/Messages/types";
-// import { toggleMessagesPane } from "@/stdfunc";
 
 type ChatListItemProps = ListItemButtonProps & {
     id: string;
@@ -24,40 +23,44 @@ type ChatListItemProps = ListItemButtonProps & {
 
 export default function ChatListItem(props: ChatListItemProps) {
     const { id, sender, messages, selectedChatId, setSelectedChat } = props;
+    const latestMessage = messages[0];
     const selected = selectedChatId === id;
 
     return (
         <>
-            <ListItem>
+            <ListItem disablePadding>
                 <ListItemButton
-                    onClick={() => {
-                        // toggleMessagesPane();
-                        setSelectedChat({ id, sender, messages });
-                    }}
+                    onClick={() => setSelectedChat({ id, sender, messages })}
                     selected={selected}
-                    color="neutral"
                     sx={{
                         flexDirection: "column",
                         alignItems: "initial",
                         gap: 1,
+                        px: 2,
+                        py: 1.5,
                     }}
                 >
-                    <Stack direction="row" spacing={1.5}>
+                    <Stack direction="row" spacing={1.5} sx={{ width: "100%", minWidth: 0 }}>
                         <AvatarWithStatus online={sender.online} username={sender.name} />
 
-                        <Box sx={{ flex: 1 }}>
-                            <Typography level="title-sm">{sender.name}</Typography>
+                        <Box sx={{ flex: 1, minWidth: 0 }}>
+                            <Typography variant="subtitle2" noWrap>
+                                {sender.name}
+                            </Typography>
 
-                            <Typography level="body-sm">{sender.name}</Typography>
+                            <Typography variant="body2" color="text.secondary" noWrap>
+                                {sender.name}
+                            </Typography>
                         </Box>
 
-                        <Box sx={{ lineHeight: 1.5, textAlign: "right" }}>
-                            {messages[0].unread && (
+                        <Box sx={{ lineHeight: 1.5, textAlign: "right", flexShrink: 0 }}>
+                            {latestMessage?.unread && (
                                 <CircleIcon sx={{ fontSize: 12 }} color="primary" />
                             )}
 
                             <Typography
-                                level="body-xs"
+                                variant="caption"
+                                color="text.secondary"
                                 noWrap
                                 sx={{ display: { xs: "none", md: "block" } }}
                             >
@@ -67,21 +70,23 @@ export default function ChatListItem(props: ChatListItemProps) {
                     </Stack>
 
                     <Typography
-                        level="body-sm"
+                        variant="body2"
+                        color="text.secondary"
                         sx={{
+                            width: "100%",
                             display: "-webkit-box",
-                            WebkitLineClamp: "2",
+                            WebkitLineClamp: 2,
                             WebkitBoxOrient: "vertical",
                             overflow: "hidden",
                             textOverflow: "ellipsis",
                         }}
                     >
-                        {messages[0].content}
+                        {latestMessage?.content ?? ""}
                     </Typography>
                 </ListItemButton>
             </ListItem>
 
-            <ListDivider sx={{ margin: 0 }} />
+            <Divider component="li" sx={{ my: 0 }} />
         </>
     );
 }

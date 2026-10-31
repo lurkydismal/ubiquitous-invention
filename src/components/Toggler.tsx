@@ -1,6 +1,6 @@
 "use client";
 
-import { Box } from "@mui/joy";
+import { Box } from "@mui/material";
 import { Dispatch, ReactNode, SetStateAction, useState } from "react";
 
 export default function Toggler(props: {
@@ -19,16 +19,15 @@ export default function Toggler(props: {
             {renderToggle({ open, setOpen })}
 
             <Box
-                sx={[
-                    {
-                        display: "grid",
-                        transition: "0.2s ease",
-                        "& > *": {
-                            overflow: "hidden",
-                        },
+                sx={{
+                    display: "grid",
+                    gridTemplateRows: open ? "1fr" : "0fr",
+                    transition: "grid-template-rows 0.2s ease",
+                    "& > *": {
+                        minHeight: 0,
+                        overflow: "hidden",
                     },
-                    open ? { gridTemplateRows: "1fr" } : { gridTemplateRows: "0fr" },
-                ]}
+                }}
             >
                 {children}
             </Box>
