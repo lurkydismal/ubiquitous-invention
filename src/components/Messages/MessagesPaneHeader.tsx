@@ -4,7 +4,7 @@ import {
 } from "@mui/icons-material";
 import { Avatar, Chip, IconButton, Stack, Typography } from "@mui/joy";
 
-import { UserProps } from "./MyMessages/types";
+import { UserProps } from "./types";
 // import { toggleMessagesPane } from "@/stdfunc";
 
 type MessagesPaneHeaderProps = {

@@ -1,5 +1,3 @@
-"use client";
-
 import {
     DashboardRounded as DashboardRoundedIcon,
     AssignmentRounded as AssignmentRoundedIcon,
@@ -29,106 +27,74 @@ import {
     Sheet,
 } from "@mui/joy";
 import { unauthorized, usePathname } from "next/navigation";
-import { Dispatch, ReactNode, SetStateAction, useState } from "react";
 
 import NextLink from "@/components/Link";
-import { getUser } from "@/utils/stduser";
+import { getSession } from "@/lib/dal/auth";
+
+import Toggler from "./Toggler";
 
 // import ColorSchemeToggle from "./ColorSchemeToggle";
 
-function Toggler(props: {
-    defaultExpanded?: boolean;
-    children: ReactNode;
-    renderToggle: (params: {
-        open: boolean;
-        setOpen: Dispatch<SetStateAction<boolean>>;
-    }) => ReactNode;
-}) {
-    const { defaultExpanded = false, renderToggle, children } = props;
-    const [open, setOpen] = useState(defaultExpanded);
+const taskLinks = [
+    { label: "All tasks", icon: AllIcon, href: "/tasks" },
+    {
+        label: "In progress",
+        icon: InProgressIcon,
+        href: "/tasks?filter=in-progress",
+    },
+    {
+        label: "Finished",
+        icon: FinishedIcon,
+        href: "/tasks?filter=finished",
+    },
+    {
+        label: "Cancelled",
+        icon: CancelledIcon,
+        href: "/tasks?filter=cancelled",
+    },
+    {
+        label: "Outdated",
+        icon: OutdatedIcon,
+        href: "/tasks?filter=outdated",
+    },
+];
 
-    return (
-        <>
-            {renderToggle({ open, setOpen })}
+const menu = [
+    {
+        key: "dashboard",
+        type: "link" as const,
+        href: "/dashboard",
+        label: "Dashboard",
+        Icon: DashboardRoundedIcon,
+        isSelected: (p: string) => p.includes("/dashboard"),
+    },
+    {
+        key: "tasks",
+        type: "nested" as const,
+        label: "Tasks",
+        Icon: AssignmentRoundedIcon,
+        isSelected: (p: string) => p.includes("/tasks"),
+        children: taskLinks,
+    },
+    {
+        key: "messages",
+        type: "link" as const,
+        href: "/messages",
+        label: "Messages",
+        Icon: QuestionAnswerRoundedIcon,
+        badge: 4,
+        isSelected: (p: string) => p.includes("/messages"),
+    },
+];
 
-            <Box
-                sx={[
-                    {
-                        display: "grid",
-                        transition: "0.2s ease",
-                        "& > *": {
-                            overflow: "hidden",
-                        },
-                    },
-                    open ? { gridTemplateRows: "1fr" } : { gridTemplateRows: "0fr" },
-                ]}
-            >
-                {children}
-            </Box>
-        </>
-    );
-}
-
-export default function Sidebar() {
+export default async function Sidebar() {
     const pathnameRaw = usePathname() ?? "/";
     // normalize (remove trailing slash)
     const pathname = pathnameRaw.replace(/\/+$/, "") || "/";
 
-    const user = getUser();
-    if (!user) return unauthorized();
-    const username = user.username;
-
-    const taskLinks = [
-        { label: "All tasks", icon: AllIcon, href: "/tasks" },
-        {
-            label: "In progress",
-            icon: InProgressIcon,
-            href: "/tasks?filter=in-progress",
-        },
-        {
-            label: "Finished",
-            icon: FinishedIcon,
-            href: "/tasks?filter=finished",
-        },
-        {
-            label: "Cancelled",
-            icon: CancelledIcon,
-            href: "/tasks?filter=cancelled",
-        },
-        {
-            label: "Outdated",
-            icon: OutdatedIcon,
-            href: "/tasks?filter=outdated",
-        },
-    ];
-
-    const menu = [
-        {
-            key: "dashboard",
-            type: "link" as const,
-            href: "/dashboard",
-            label: "Dashboard",
-            Icon: DashboardRoundedIcon,
-            isSelected: (p: string) => p.includes("/dashboard"),
-        },
-        {
-            key: "tasks",
-            type: "nested" as const,
-            label: "Tasks",
-            Icon: AssignmentRoundedIcon,
-            isSelected: (p: string) => p.includes("/tasks"),
-            children: taskLinks,
-        },
-        {
-            key: "messages",
-            type: "link" as const,
-            href: "/messages",
-            label: "Messages",
-            Icon: QuestionAnswerRoundedIcon,
-            badge: 4,
-            isSelected: (p: string) => p.includes("/messages"),
-        },
-    ];
+    const session = await getSession();
+    if (!session) return unauthorized();
+    const username = session.user.name;
 
     return (
         <Sheet

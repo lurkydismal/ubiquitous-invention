@@ -3,10 +3,12 @@ import { Fragment } from "react";
 
 import { Link } from "@/components/Link";
 import { linkSx } from "@/data/styles";
-import { UsersRowPublic } from "@/db/types";
+import { UserRowPublic } from "@/db/types";
 import log from "@/utils/stdlog";
 
 import { AuthorInfo, AuthorRow, AuthorsInfo, nameSx, profileHref } from "./base";
+
+export { AuthorWithFollow, AuthorWithFollowAndLink } from "./WithFollow";
 
 /**
  * Styles used for author date links.
@@ -34,12 +36,12 @@ export function Author({
     avatarWidth,
     avatarHeight,
 }: {
-    author: UsersRowPublic;
+    author: UserRowPublic;
     variant?: TypographyVariant;
     avatarWidth?: number;
     avatarHeight?: number;
 }) {
-    log.trace("Author render", { username: author?.username });
+    log.trace("Author render", { name: author?.name });
 
     return (
         <AuthorRow
@@ -64,7 +66,7 @@ export function Authors({
     avatarWidth,
     avatarHeight,
 }: {
-    authors: UsersRowPublic[];
+    authors: UserRowPublic[];
     variant?: TypographyVariant;
     avatarWidth?: number;
     avatarHeight?: number;
@@ -96,13 +98,13 @@ export function AuthorWithDate({
     avatarWidth,
     avatarHeight,
 }: {
-    author: UsersRowPublic;
+    author: UserRowPublic;
     date: Date | string;
     variant?: TypographyVariant;
     avatarWidth?: number;
     avatarHeight?: number;
 }) {
-    log.trace("AuthorWithDate render", { username: author?.username });
+    log.trace("AuthorWithDate render", { name: author?.name });
     const d = new Date(date);
 
     return (
@@ -130,7 +132,7 @@ export function AuthorWithDate({
 
 /**
  * Single author whose name/avatar link to the author's profile.
- * Profile URL uses encoded username in the path; the profile page should decode the slug.
+ * Profile URL uses encoded name in the path; the profile page should decode the slug.
  */
 export function AuthorWithDateAndLink({
     author,
@@ -139,13 +141,13 @@ export function AuthorWithDateAndLink({
     avatarWidth,
     avatarHeight,
 }: {
-    author: UsersRowPublic;
+    author: UserRowPublic;
     date: Date | string;
     variant?: TypographyVariant;
     avatarWidth?: number;
     avatarHeight?: number;
 }) {
-    log.trace("AuthorWithDateAndLink render", { username: author?.username });
+    log.trace("AuthorWithDateAndLink render", { name: author?.name });
 
     const d = new Date(date);
 
@@ -180,7 +182,7 @@ export function AuthorWithDateAndLink({
 
 /**
  * Multiple authors with links for each name (and avatars shown in an AvatarGroup).
- * Each author's name links to `/profile/<encoded-username>`.
+ * Each author's name links to `/profile/<encoded-name>`.
  */
 export function AuthorsWithDateAndLink({
     authors,
@@ -189,7 +191,7 @@ export function AuthorsWithDateAndLink({
     avatarWidth,
     avatarHeight,
 }: {
-    authors: UsersRowPublic[];
+    authors: UserRowPublic[];
     date: Date | string;
     variant?: TypographyVariant;
     avatarWidth?: number;
@@ -213,7 +215,7 @@ export function AuthorsWithDateAndLink({
                     <AvatarGroup max={3}>
                         {authors.map((a) => (
                             <Link
-                                key={a.username + "-avatar"}
+                                key={a.name + "-avatar"}
                                 href={profileHref(a)}
                                 underline="none"
                                 sx={{
@@ -222,16 +224,14 @@ export function AuthorsWithDateAndLink({
                                 }}
                             >
                                 <Avatar
-                                    alt={a.username}
-                                    src={a.avatar_url ?? undefined}
+                                    alt={a.name}
+                                    src={a.image ?? undefined}
                                     sx={{
                                         width: avatarWidth,
                                         height: avatarHeight,
                                     }}
                                 >
-                                    {a.username && a.username[0]
-                                        ? a.username[0].toUpperCase()
-                                        : "?"}
+                                    {a.name && a.name[0] ? a.name[0].toUpperCase() : "?"}
                                 </Avatar>
                             </Link>
                         ))}
@@ -239,14 +239,14 @@ export function AuthorsWithDateAndLink({
 
                     <Typography variant={variant}>
                         {authors.map((a, i) => (
-                            <Fragment key={a.username}>
+                            <Fragment key={a.name}>
                                 <Link
                                     underline="none"
                                     variant="h4"
                                     href={profileHref(a)}
                                     sx={nameSx}
                                 >
-                                    {a.username}
+                                    {a.name}
                                 </Link>
                                 {i < authors.length - 1 && ", "}
                             </Fragment>
@@ -277,7 +277,7 @@ export function AuthorsWithDate({
     avatarWidth,
     avatarHeight,
 }: {
-    authors: UsersRowPublic[];
+    authors: UserRowPublic[];
     date: Date | string;
     variant?: TypographyVariant;
     avatarWidth?: number;

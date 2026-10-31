@@ -1,6 +1,6 @@
-import { StrictLineSeries } from "@/components/Dashboard/LineChart";
+// import { StrictLineSeries } from "@/components/Dashboard/LineChart";
 
-const sessions: readonly StrictLineSeries[] = [
+const sessions = [
     {
         area: true,
         curve: "linear",

@@ -1,7 +1,7 @@
 import { Avatar, AvatarGroup, Box, Typography, TypographyVariant } from "@mui/material";
 
 import { linkSx } from "@/data/styles";
-import { UsersRowPublic } from "@/db/types";
+import { UserRowPublic } from "@/db/types";
 import log from "@/utils/stdlog";
 
 /**
@@ -28,8 +28,8 @@ export const nameSx = {
     },
 };
 
-export function profileHref(author: UsersRowPublic) {
-    return `/profile/${encodeURIComponent(author.username_normalized)}`;
+export function profileHref(author: UserRowPublic) {
+    return `/profile/${encodeURIComponent(author.name)}`;
 }
 
 /**
@@ -59,7 +59,7 @@ export function AuthorRow({ left, right }: { left: React.ReactNode; right?: Reac
 }
 
 /**
- * Render single avatar + username.
+ * Render single avatar + name.
  *
  * @param author - public user record
  * @param variant - MUI Typography variant
@@ -72,14 +72,14 @@ export function AuthorInfo({
     avatarWidth = 24,
     avatarHeight = 24,
 }: {
-    author: UsersRowPublic;
+    author: UserRowPublic;
     variant?: TypographyVariant;
     avatarWidth?: number;
     avatarHeight?: number;
 }) {
-    log.trace("AuthorInfo render", { username: author?.username });
+    log.trace("AuthorInfo render", { name: author?.name });
 
-    const initial = author?.username && author.username[0] ? author.username[0].toUpperCase() : "?";
+    const initial = author?.name && author.name[0] ? author.name[0].toUpperCase() : "?";
 
     return (
         <Box
@@ -91,14 +91,14 @@ export function AuthorInfo({
             }}
         >
             <Avatar
-                alt={author.username ?? "author"}
-                src={author.avatar_url ?? undefined}
+                alt={author.name ?? "author"}
+                src={author.image ?? undefined}
                 sx={{ width: avatarWidth, height: avatarHeight }}
             >
                 {initial}
             </Avatar>
 
-            <Typography variant={variant}>{author.username}</Typography>
+            <Typography variant={variant}>{author.name}</Typography>
         </Box>
     );
 }
@@ -117,7 +117,7 @@ export function AuthorsInfo({
     avatarWidth = 24,
     avatarHeight = 24,
 }: {
-    authors: UsersRowPublic[];
+    authors: UserRowPublic[];
     variant?: TypographyVariant;
     avatarWidth?: number;
     avatarHeight?: number;
@@ -136,17 +136,17 @@ export function AuthorsInfo({
             <AvatarGroup max={3}>
                 {authors.map((a) => (
                     <Avatar
-                        key={a.username}
-                        alt={a.username}
-                        src={a.avatar_url ?? undefined}
+                        key={a.name}
+                        alt={a.name}
+                        src={a.image ?? undefined}
                         sx={{ width: avatarWidth, height: avatarHeight }}
                     >
-                        {a.username && a.username[0] ? a.username[0].toUpperCase() : "?"}
+                        {a.name && a.name[0] ? a.name[0].toUpperCase() : "?"}
                     </Avatar>
                 ))}
             </AvatarGroup>
 
-            <Typography variant={variant}>{authors.map((a) => a.username).join(", ")}</Typography>
+            <Typography variant={variant}>{authors.map((a) => a.name).join(", ")}</Typography>
         </Box>
     );
 }
