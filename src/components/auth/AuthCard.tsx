@@ -1,6 +1,9 @@
 import { styled, Stack, Divider, Box, Card as MuiCard } from "@mui/material";
 import { ReactNode } from "react";
 
+/**
+ * Provides the styled Material UI card used by authentication pages.
+ */
 export const Card = styled(MuiCard)(({ theme }) => ({
     display: "flex",
     flexDirection: "column",
@@ -20,6 +23,9 @@ export const Card = styled(MuiCard)(({ theme }) => ({
     }),
 }));
 
+/**
+ * Provides the centered responsive container for authentication content.
+ */
 export const AuthContainer = styled(Stack)(({ theme }) => ({
     position: "relative",
     height: "calc((1 - var(--template-frame-height, 0)) * 100dvh)",
@@ -50,14 +56,15 @@ type Props = {
     variant?: "outlined" | "elevation";
 };
 
+/**
+ * Renders the auth card component.
+ */
 export default function AuthCard({ children, footer, variant = "outlined" }: Props) {
     return (
-        <AuthContainer direction="column" justifyContent="space-between">
+        <AuthContainer direction="column" sx={{ justifyContent: "space-between" }}>
             <Card variant={variant}>
                 {children}
-
                 <Divider sx={{ my: 2 }} />
-
                 {footer && (
                     <Box
                         sx={{
