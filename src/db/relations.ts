@@ -3,36 +3,30 @@ import { defineRelations } from "drizzle-orm";
 import * as schema from "./schema";
 
 export const relations = defineRelations(schema, (r) => ({
-    users: {
-        posts: r.many.posts({
-            alias: "author",
+    tables: {
+        author: r.one.user({
+            from: r.tables.author_id,
+            to: r.user.id,
         }),
-        coAuthoredPosts: r.many.posts({
-            alias: "coAuthor",
+        last_editor: r.one.user({
+            from: r.tables.last_editor_id,
+            to: r.user.id,
         }),
     },
-
-    categories: {
-        posts: r.many.posts(),
+    user: {
+        sessions: r.many.session(),
+        accounts: r.many.account(),
     },
-
-    posts: {
-        author: r.one.users({
-            alias: "author",
-            from: r.posts.author_id,
-            to: r.users.id,
-            optional: false,
+    session: {
+        user: r.one.user({
+            from: r.session.userId,
+            to: r.user.id,
         }),
-        coAuthor: r.one.users({
-            alias: "coAuthor",
-            from: r.posts.co_author_id,
-            to: r.users.id,
-            optional: false,
-        }),
-        category: r.one.categories({
-            from: r.posts.category_id,
-            to: r.categories.id,
-            optional: false,
+    },
+    account: {
+        user: r.one.user({
+            from: r.account.userId,
+            to: r.user.id,
         }),
     },
 }));
