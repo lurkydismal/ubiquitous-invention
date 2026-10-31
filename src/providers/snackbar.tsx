@@ -9,20 +9,32 @@ import {
     Close as CloseIcon,
 } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
-import { SnackbarProvider, VariantType, enqueueSnackbar, closeSnackbar } from "notistack";
+import {
+    SnackbarProvider,
+    VariantType,
+    type OptionsObject,
+    enqueueSnackbar,
+    closeSnackbar,
+} from "notistack";
 import { createContext, useContext } from "react";
 
 import log from "@/utils/stdlog";
 import { LogFn } from "@/utils/stdlog/types";
+import { maxSnackbarCount } from "@/utils/stdvar";
+
+type SnackbarOptions = Pick<OptionsObject, "persist" | "onClose">;
 
 const SnackbarContext = createContext<{
-    showMessage: (message: string) => void;
-    showSuccess: (message: string) => void;
-    showError: (err: unknown) => void;
-    showWarning: (warn: unknown) => void;
-    showInfo: (message: string) => void;
+    showMessage: (message: string, options?: SnackbarOptions) => void;
+    showSuccess: (message: string, options?: SnackbarOptions) => void;
+    showError: (err: unknown, options?: SnackbarOptions) => void;
+    showWarning: (warn: unknown, options?: SnackbarOptions) => void;
+    showInfo: (message: string, options?: SnackbarOptions) => void;
 } | null>(null);
 
+/**
+ * Converts an unknown error value into a user-facing message.
+ */
 function errorToMessage(err: unknown): string {
     if (err instanceof Error) {
         return err.message || "Operation failed";
@@ -35,6 +47,9 @@ function errorToMessage(err: unknown): string {
     return "Operation failed";
 }
 
+/**
+ * Returns the snackbar hook state and actions.
+ */
 export function useSnackbar() {
     const ctx = useContext(SnackbarContext);
 
@@ -45,12 +60,18 @@ export function useSnackbar() {
     return ctx;
 }
 
+/**
+ * Renders the custom snackbar provider component.
+ */
 export default function CustomSnackbarProvider({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const _showMessage = (err: unknown, variant?: VariantType) => {
+    /**
+     * Handles show message behavior.
+     */
+    const _showMessage = (err: unknown, variant: VariantType, options?: SnackbarOptions) => {
         const message = errorToMessage(err);
 
         let logVariant: LogFn;
@@ -73,27 +94,42 @@ export default function CustomSnackbarProvider({
 
         logVariant(message);
 
-        enqueueSnackbar(message, { variant });
+        enqueueSnackbar(message, { variant, ...options });
     };
 
-    const showMessage = (message: string) => {
-        _showMessage(message, "default");
+    /**
+     * Handles show message behavior.
+     */
+    const showMessage = (message: string, options?: SnackbarOptions) => {
+        _showMessage(message, "default", options);
     };
 
-    const showSuccess = (message: string) => {
-        _showMessage(message, "success");
+    /**
+     * Handles show success behavior.
+     */
+    const showSuccess = (message: string, options?: SnackbarOptions) => {
+        _showMessage(message, "success", options);
     };
 
-    const showError = (err: unknown) => {
-        _showMessage(err, "error");
+    /**
+     * Handles show error behavior.
+     */
+    const showError = (err: unknown, options?: SnackbarOptions) => {
+        _showMessage(err, "error", options);
     };
 
-    const showWarning = (warn: unknown) => {
-        _showMessage(warn, "warning");
+    /**
+     * Handles show warning behavior.
+     */
+    const showWarning = (warn: unknown, options?: SnackbarOptions) => {
+        _showMessage(warn, "warning", options);
     };
 
-    const showInfo = (message: string) => {
-        _showMessage(message, "info");
+    /**
+     * Handles show info behavior.
+     */
+    const showInfo = (message: string, options?: SnackbarOptions) => {
+        _showMessage(message, "info", options);
     };
 
     return (
@@ -109,7 +145,7 @@ export default function CustomSnackbarProvider({
             {children}
 
             <SnackbarProvider
-                maxSnack={5}
+                maxSnack={maxSnackbarCount}
                 iconVariant={{
                     default: <DefaultIcon sx={{ mr: 1.5 }} />,
                     success: <SuccessIcon sx={{ mr: 1.5 }} />,
