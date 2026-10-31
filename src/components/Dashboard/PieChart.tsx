@@ -1,6 +1,5 @@
 "use client";
 
-import { ReactNode, useMemo } from "react";
 import {
     PendingOutlined as InProgressIcon,
     CheckCircleOutline as FinishedIcon,
@@ -19,6 +18,8 @@ import {
     useTheme,
 } from "@mui/material";
 import { PieChart, useDrawingArea } from "@mui/x-charts";
+import { ReactNode, useMemo } from "react";
+
 import log from "@/utils/stdlog";
 
 type StatItem = {
@@ -69,10 +70,8 @@ const StyledText = styled("text", {
 function formatShort(n: number) {
     if (!isFinite(n)) return "—";
     const abs = Math.abs(n);
-    if (abs >= 1_000_000_000)
-        return `${(n / 1_000_000_000).toFixed(1).replace(/\.0$/, "")}B`;
-    if (abs >= 1_000_000)
-        return `${(n / 1_000_000).toFixed(1).replace(/\.0$/, "")}M`;
+    if (abs >= 1_000_000_000) return `${(n / 1_000_000_000).toFixed(1).replace(/\.0$/, "")}B`;
+    if (abs >= 1_000_000) return `${(n / 1_000_000).toFixed(1).replace(/\.0$/, "")}M`;
     if (abs >= 1_000) return `${(n / 1_000).toFixed(1).replace(/\.0$/, "")}K`;
     return String(n);
 }
@@ -117,18 +116,14 @@ export default function MyPieChart({ stats }: MyPieChartProps) {
                 log.debug(1);
                 result.push({
                     label: s.label ?? `Item ${i + 1}`,
-                    value: Number.isFinite(s.value)
-                        ? Math.max(0, Math.min(100, s.value))
-                        : 0,
+                    value: Number.isFinite(s.value) ? Math.max(0, Math.min(100, s.value)) : 0,
                     icon: s.icon ?? DEFAULT_ICONS[i],
                     color: s.color ?? DEFAULT_COLORS[i],
                 });
             } else {
                 log.debug(2);
                 result.push({
-                    label: ["In Progress", "Finished", "Cancelled", "Outdated"][
-                        i
-                    ],
+                    label: ["In Progress", "Finished", "Cancelled", "Outdated"][i],
                     value: 0,
                     icon: DEFAULT_ICONS[i],
                     color: DEFAULT_COLORS[i],
@@ -148,10 +143,7 @@ export default function MyPieChart({ stats }: MyPieChartProps) {
         if (pieSum > 0) return pieSum;
 
         // if pie is not usable, compute total from normalized stats (map percents -> sum of percents)
-        const statsSum = normalizedStats.reduce(
-            (a, b) => a + (b.value ?? 0),
-            0,
-        );
+        const statsSum = normalizedStats.reduce((a, b) => a + (b.value ?? 0), 0);
         return statsSum;
     }, [normalizedStats]);
 
@@ -212,10 +204,7 @@ export default function MyPieChart({ stats }: MyPieChartProps) {
                         width={260}
                         hideLegend
                     >
-                        <PieCenterLabel
-                            primaryText={totalText}
-                            secondaryText={secondaryLabel}
-                        />
+                        <PieCenterLabel primaryText={totalText} secondaryText={secondaryLabel} />
                     </PieChart>
                 </Box>
 
@@ -244,17 +233,11 @@ export default function MyPieChart({ stats }: MyPieChartProps) {
                                     gap: 2,
                                 }}
                             >
-                                <Typography
-                                    variant="body2"
-                                    sx={{ fontWeight: 500 }}
-                                >
+                                <Typography variant="body2" sx={{ fontWeight: 500 }}>
                                     {stat.label}
                                 </Typography>
 
-                                <Typography
-                                    variant="body2"
-                                    sx={{ color: "text.secondary" }}
-                                >
+                                <Typography variant="body2" sx={{ color: "text.secondary" }}>
                                     {stat.value}%
                                 </Typography>
                             </Stack>
@@ -268,8 +251,7 @@ export default function MyPieChart({ stats }: MyPieChartProps) {
                                     [`& .${linearProgressClasses.bar}`]: {
                                         backgroundColor: stat.color,
                                     },
-                                    backgroundColor: (theme.vars || theme)
-                                        .palette.action.hover,
+                                    backgroundColor: (theme.vars || theme).palette.action.hover,
                                 }}
                                 aria-label={`${stat.label} progress`}
                             />

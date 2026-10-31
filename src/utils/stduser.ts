@@ -1,7 +1,8 @@
 import { UsersRowPublic } from "@/db/types";
+
+import log from "./stdlog";
 import { isServer, storageKeys } from "./stdvar";
 import { userSelectPublicSchema } from "./validate/schemas";
-import log from "./stdlog";
 
 export function setUser(user: UsersRowPublic | null) {
     if (isServer || !storageKeys.client) return;

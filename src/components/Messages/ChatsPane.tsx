@@ -2,18 +2,10 @@ import {
     SearchRounded as SearchRoundedIcon,
     CloseRounded as CloseRoundedIcon,
 } from "@mui/icons-material";
+import { Box, Chip, IconButton, Input, List, Sheet, Stack, Typography } from "@mui/joy";
+
 import ChatListItem from "@/components/Messages/ChatListItem";
 import { ChatProps } from "@/components/Messages/types";
-import {
-    Box,
-    Chip,
-    IconButton,
-    Input,
-    List,
-    Sheet,
-    Stack,
-    Typography,
-} from "@mui/joy";
 // import { toggleMessagesPane } from "@/stdfunc";
 
 type ChatsPaneProps = {

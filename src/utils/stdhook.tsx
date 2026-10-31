@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+
 import { calculateReadingTime, getAccurateWordCount } from "@/utils/stdfunc";
 
 /**
@@ -36,10 +37,7 @@ export function useHtmlDataDark(): boolean {
         // Observe changes to the HTML element's attributes
         const obs = new MutationObserver((mutations) => {
             for (const m of mutations) {
-                if (
-                    m.type === "attributes" &&
-                    m.attributeName === "data-dark"
-                ) {
+                if (m.type === "attributes" && m.attributeName === "data-dark") {
                     read();
                     break;
                 }

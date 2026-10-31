@@ -1,40 +1,18 @@
 "use client";
 
-import { useMemo } from "react";
-import views from "@/data/dashboard/views";
-import {
-    Card,
-    CardContent,
-    Chip,
-    ChipOwnProps,
-    Stack,
-    Typography,
-    useTheme,
-} from "@mui/material";
+import { Card, CardContent, Chip, ChipOwnProps, Stack, Typography, useTheme } from "@mui/material";
 import { BarChart } from "@mui/x-charts";
+import { useMemo } from "react";
 
-const MONTHS = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-];
+import views from "@/data/dashboard/views";
+
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 function formatShort(n: number) {
     if (!isFinite(n)) return "—";
     const abs = Math.abs(n);
-    if (abs >= 1_000_000_000)
-        return `${(n / 1_000_000_000).toFixed(1).replace(/\.0$/, "")}B`;
-    if (abs >= 1_000_000)
-        return `${(n / 1_000_000).toFixed(1).replace(/\.0$/, "")}M`;
+    if (abs >= 1_000_000_000) return `${(n / 1_000_000_000).toFixed(1).replace(/\.0$/, "")}B`;
+    if (abs >= 1_000_000) return `${(n / 1_000_000).toFixed(1).replace(/\.0$/, "")}M`;
     if (abs >= 1_000) return `${(n / 1_000).toFixed(1).replace(/\.0$/, "")}k`;
     return String(n);
 }
@@ -89,12 +67,7 @@ export default function MyBarChart() {
         const sign = rounded > 0 ? "+" : "";
         const percentText = `${sign}${rounded}%`;
 
-        const chipColor =
-            Math.abs(percent) <= 5
-                ? "default"
-                : percent > 0
-                  ? "success"
-                  : "error";
+        const chipColor = Math.abs(percent) <= 5 ? "default" : percent > 0 ? "success" : "error";
         const intervalText = len === 1 ? "Last month" : `Last ${len} months`;
 
         return {
@@ -133,12 +106,8 @@ export default function MyBarChart() {
                         />
                     </Stack>
 
-                    <Typography
-                        variant="caption"
-                        sx={{ color: "text.secondary" }}
-                    >
-                        Tasks changed and users activity for the{" "}
-                        {derived.intervalText}
+                    <Typography variant="caption" sx={{ color: "text.secondary" }}>
+                        Tasks changed and users activity for the {derived.intervalText}
                     </Typography>
                 </Stack>
 

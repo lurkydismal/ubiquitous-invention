@@ -19,14 +19,17 @@
  */
 
 import type { Metadata } from "next";
+
 import { InitColorSchemeScript } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v16-appRouter";
 import { Inter as Font } from "next/font/google";
+
 import "./globals.css";
+import { Suspense } from "react";
+
+import MuiLayout from "@/components/MuiLayout";
 import log from "@/utils/stdlog";
 import { isDev, appName, appVersion } from "@/utils/stdvar";
-import MuiLayout from "@/components/MuiLayout";
-import { Suspense } from "react";
 
 // Configure Geist Mono font with CSS variable for global usage
 const font = Font({

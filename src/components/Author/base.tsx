@@ -1,13 +1,8 @@
+import { Avatar, AvatarGroup, Box, Typography, TypographyVariant } from "@mui/material";
+
 import { linkSx } from "@/data/styles";
 import { UsersRowPublic } from "@/db/types";
 import log from "@/utils/stdlog";
-import {
-    Avatar,
-    AvatarGroup,
-    Box,
-    Typography,
-    TypographyVariant,
-} from "@mui/material";
 
 /**
  * Styles used for author name links.
@@ -43,13 +38,7 @@ export function profileHref(author: UsersRowPublic) {
  * @param left - left-side node (required)
  * @param right - right-side node (optional)
  */
-export function AuthorRow({
-    left,
-    right,
-}: {
-    left: React.ReactNode;
-    right?: React.ReactNode;
-}) {
+export function AuthorRow({ left, right }: { left: React.ReactNode; right?: React.ReactNode }) {
     log.trace("AuthorRow render");
 
     return (
@@ -90,10 +79,7 @@ export function AuthorInfo({
 }) {
     log.trace("AuthorInfo render", { username: author?.username });
 
-    const initial =
-        author?.username && author.username[0]
-            ? author.username[0].toUpperCase()
-            : "?";
+    const initial = author?.username && author.username[0] ? author.username[0].toUpperCase() : "?";
 
     return (
         <Box
@@ -155,16 +141,12 @@ export function AuthorsInfo({
                         src={a.avatar_url ?? undefined}
                         sx={{ width: avatarWidth, height: avatarHeight }}
                     >
-                        {a.username && a.username[0]
-                            ? a.username[0].toUpperCase()
-                            : "?"}
+                        {a.username && a.username[0] ? a.username[0].toUpperCase() : "?"}
                     </Avatar>
                 ))}
             </AvatarGroup>
 
-            <Typography variant={variant}>
-                {authors.map((a) => a.username).join(", ")}
-            </Typography>
+            <Typography variant={variant}>{authors.map((a) => a.username).join(", ")}</Typography>
         </Box>
     );
 }

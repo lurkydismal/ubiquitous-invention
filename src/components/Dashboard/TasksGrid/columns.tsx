@@ -1,13 +1,14 @@
-import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import {
     CheckRounded as FinishedIcon,
     AutorenewRounded as InProgressIcon,
     Block as CancelledIcon,
     HistoryRounded as OutdatedIcon,
 } from "@mui/icons-material";
+import { Chip } from "@mui/material";
+import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
+
 import AvatarChip from "@/components/Avatar/Chip";
 import dayjs, { formatDate } from "@/utils/dayjs";
-import { Chip } from "@mui/material";
 
 function fieldFromHeader(headerName: string): string {
     return (
@@ -21,20 +22,10 @@ function fieldFromHeader(headerName: string): string {
 }
 
 type Status = "Finished" | "In Progress" | "Cancelled" | "Outdated";
-type StatusColor =
-    | "default"
-    | "primary"
-    | "secondary"
-    | "error"
-    | "info"
-    | "success"
-    | "warning";
+type StatusColor = "default" | "primary" | "secondary" | "error" | "info" | "success" | "warning";
 
 function renderStatus(status: Status) {
-    const config: Record<
-        Status,
-        { color: StatusColor; icon: React.ReactElement }
-    > = {
+    const config: Record<Status, { color: StatusColor; icon: React.ReactElement }> = {
         Finished: {
             color: "success",
             icon: <FinishedIcon />,
@@ -55,15 +46,7 @@ function renderStatus(status: Status) {
 
     const { color, icon } = config[status];
 
-    return (
-        <Chip
-            variant="outlined"
-            size="small"
-            icon={icon}
-            color={color}
-            label={status}
-        ></Chip>
-    );
+    return <Chip variant="outlined" size="small" icon={icon} color={color} label={status}></Chip>;
 }
 
 function renderUser(username: string) {
@@ -96,8 +79,7 @@ const columns = [
     },
     {
         headerName: "Status",
-        renderCell: (params: GridRenderCellParams) =>
-            renderStatus(params.value),
+        renderCell: (params: GridRenderCellParams) => renderStatus(params.value),
     },
     {
         headerName: "Tag",
@@ -132,9 +114,7 @@ const columns = [
         align: "center",
         ...(item.flex == null ? { flex: 1 } : {}),
         ...(item.minWidth == null ? { minWidth: 100 } : {}),
-        ...(item.field == null
-            ? { field: fieldFromHeader(item.headerName) }
-            : {}),
+        ...(item.field == null ? { field: fieldFromHeader(item.headerName) } : {}),
     };
 }) as readonly GridColDef[];
 

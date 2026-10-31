@@ -1,4 +1,5 @@
 import z from "zod";
+
 import { users, follows, categories, posts } from "@/db/schema";
 
 export const TABLES = {
@@ -10,9 +11,7 @@ export const TABLES = {
 
 export type DbTarget = keyof typeof TABLES;
 
-export const DbTargetSchema = z.enum(
-    Object.keys(TABLES) as [DbTarget, ...DbTarget[]],
-);
+export const DbTargetSchema = z.enum(Object.keys(TABLES) as [DbTarget, ...DbTarget[]]);
 
 export function parseRawTarget(rawTarget: DbTarget) {
     const target = DbTargetSchema.parse(rawTarget);

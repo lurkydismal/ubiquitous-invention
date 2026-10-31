@@ -1,4 +1,5 @@
 import { Chip } from "@mui/material";
+
 import Avatar from "@/components/Avatar";
 
 export default function AvatarChips({ username }: { username: string }) {

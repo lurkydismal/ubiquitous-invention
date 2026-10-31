@@ -96,22 +96,19 @@ export const chats: ChatProps[] = [
                 id: "9",
                 timestamp: "Thursday 11:44am",
                 sender: users[0],
-                content:
-                    "No rush though — we still have to wait for Lana's designs.",
+                content: "No rush though — we still have to wait for Lana's designs.",
             },
             {
                 id: "10",
                 timestamp: "Today 2:20pm",
                 sender: users[0],
-                content:
-                    "Hey Olivia, can you please review the latest design when you can?",
+                content: "Hey Olivia, can you please review the latest design when you can?",
             },
             {
                 id: "11",
                 timestamp: "Just now",
                 sender: "You",
-                content:
-                    "Sure thing, I'll have a look today.They're looking great!",
+                content: "Sure thing, I'll have a look today.They're looking great!",
             },
         ],
     },
@@ -127,8 +124,7 @@ export const chats: ChatProps[] = [
             },
             {
                 id: "2",
-                content:
-                    "That sounds like a great idea, Katherine! Any idea where you want to go?",
+                content: "That sounds like a great idea, Katherine! Any idea where you want to go?",
                 timestamp: "Wednesday 9:05am",
                 sender: "You",
             },
@@ -177,22 +173,19 @@ export const chats: ChatProps[] = [
         messages: [
             {
                 id: "1",
-                content:
-                    "Hey Olivia, I was thinking about doing some home improvement work.",
+                content: "Hey Olivia, I was thinking about doing some home improvement work.",
                 timestamp: "Wednesday 9:00am",
                 sender: users[3],
             },
             {
                 id: "2",
-                content:
-                    "That sounds interesting! What kind of improvements are you considering?",
+                content: "That sounds interesting! What kind of improvements are you considering?",
                 timestamp: "Wednesday 9:05am",
                 sender: "You",
             },
             {
                 id: "3",
-                content:
-                    "I am planning to repaint the walls and replace the old furniture.",
+                content: "I am planning to repaint the walls and replace the old furniture.",
                 timestamp: "Wednesday 9:15am",
                 sender: users[3],
             },

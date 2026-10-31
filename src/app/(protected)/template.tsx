@@ -1,5 +1,6 @@
-import { getSessionDataAction } from "@/lib/auth";
 import { unauthorized } from "next/navigation";
+
+import { getSessionDataAction } from "@/lib/auth";
 
 export default async function Template({
     children,

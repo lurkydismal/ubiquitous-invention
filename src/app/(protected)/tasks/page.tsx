@@ -22,16 +22,9 @@ export default async function Page({
         cancelled: "Cancelled",
         outdated: "Outdated",
     };
-    const statusFilter = normalizedFilter
-        ? routeToStatusMap[normalizedFilter]
-        : undefined;
+    const statusFilter = normalizedFilter ? routeToStatusMap[normalizedFilter] : undefined;
 
     return (
-        <TasksGrid
-            key={statusFilter}
-            showToolbar
-            statusSearchFilter={statusFilter}
-            rows={rows}
-        />
+        <TasksGrid key={statusFilter} showToolbar statusSearchFilter={statusFilter} rows={rows} />
     );
 }

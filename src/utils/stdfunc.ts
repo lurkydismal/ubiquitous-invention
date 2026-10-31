@@ -198,11 +198,7 @@ export function delay(milliseconds: number): Promise<void> {
  * @param perPage - Number of items per page
  * @returns Slice of items for the current page
  */
-export function paginate<T>(
-    items: T[],
-    currentPage: number,
-    perPage: number,
-): T[] {
+export function paginate<T>(items: T[], currentPage: number, perPage: number): T[] {
     const start = (currentPage - 1) * perPage;
     const end = start + perPage;
 
@@ -304,10 +300,7 @@ export function getAccurateWordCount(text: string): number {
  * @param wordsPerMinute - Optional reading speed override
  * @returns Estimated reading time in minutes
  */
-export function calculateReadingTime(
-    wordCount: number,
-    wordsPerMinute: number = 225,
-): number {
+export function calculateReadingTime(wordCount: number, wordsPerMinute: number = 225): number {
     if (!wordCount) return 0;
 
     return Math.max(1, Math.ceil(wordCount / wordsPerMinute));

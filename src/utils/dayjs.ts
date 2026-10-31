@@ -10,9 +10,10 @@
  */
 
 import dayjs, { Dayjs } from "dayjs";
-import utc from "dayjs/plugin/utc";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
+
 import { dateFormat, dateTimeFormat } from "@/utils/stdvar";
 import { dateInputSchema } from "@/utils/validate/schemas";
 
@@ -48,10 +49,7 @@ dayjs.extend(customParseFormat);
  * @param needTime - Whether to include time in the output
  * @returns The formatted date string in local time
  */
-export function formatDate(
-    date: string | Date | Dayjs,
-    needTime: boolean = false,
-): string {
+export function formatDate(date: string | Date | Dayjs, needTime: boolean = false): string {
     const parsed = dateInputSchema.parse(date);
 
     return parsed.local().format(needTime ? dateTimeFormat : dateFormat);

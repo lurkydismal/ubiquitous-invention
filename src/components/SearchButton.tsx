@@ -1,18 +1,9 @@
 import { RssFeedRounded, SearchRounded } from "@mui/icons-material";
-import {
-    FormControl,
-    OutlinedInput,
-    InputAdornment,
-    Box,
-    IconButton,
-} from "@mui/material";
+import { FormControl, OutlinedInput, InputAdornment, Box, IconButton } from "@mui/material";
 
 function Search() {
     return (
-        <FormControl
-            sx={{ width: { xs: "100%", md: "25ch" } }}
-            variant="outlined"
-        >
+        <FormControl sx={{ width: { xs: "100%", md: "25ch" } }} variant="outlined">
             <OutlinedInput
                 placeholder="Search…"
                 size="small"
@@ -21,10 +12,7 @@ function Search() {
                     "aria-label": "search",
                 }}
                 startAdornment={
-                    <InputAdornment
-                        position="start"
-                        sx={{ color: "text.primary" }}
-                    >
+                    <InputAdornment position="start" sx={{ color: "text.primary" }}>
                         <SearchRounded fontSize="small" />
                     </InputAdornment>
                 }

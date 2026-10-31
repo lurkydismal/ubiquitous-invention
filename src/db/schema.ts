@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import {
     varchar,
     serial,
@@ -12,8 +13,8 @@ import {
     pgEnum,
     timestamp,
 } from "drizzle-orm/pg-core";
+
 import { timestamps } from "./helpers";
-import { sql } from "drizzle-orm";
 
 export const users = pgTable(
     "users",
@@ -27,10 +28,7 @@ export const users = pgTable(
     },
     (t) => [
         check("username_not_blank", sql`length(trim(${t.username})) > 0`),
-        check(
-            "username_normalized_not_blank",
-            sql`length(trim(${t.username_normalized})) > 0`,
-        ),
+        check("username_normalized_not_blank", sql`length(trim(${t.username_normalized})) > 0`),
         check(
             "username_normalized_lowercase",
             sql`${t.username_normalized} = lower(${t.username_normalized})`,
@@ -56,10 +54,7 @@ export const follows = pgTable(
     (t) => [
         primaryKey({ columns: [t.follower_id, t.following_id] }),
 
-        check(
-            "follower_cannot_follow_themselves",
-            sql`follower_id != following_id`,
-        ),
+        check("follower_cannot_follow_themselves", sql`follower_id != following_id`),
 
         index().on(t.follower_id),
         index().on(t.following_id),
@@ -76,11 +71,7 @@ export const categories = pgTable(
     (t) => [check("name_not_blank", sql`length(trim(${t.name})) > 0`)],
 );
 
-export const postVisibilityEnum = pgEnum("post_visibility", [
-    "public",
-    "unlisted",
-    "private",
-]);
+export const postVisibilityEnum = pgEnum("post_visibility", ["public", "unlisted", "private"]);
 
 export const posts = pgTable(
     "posts",
@@ -100,9 +91,7 @@ export const posts = pgTable(
         content: text().notNull(),
         content_warning: boolean().default(false).notNull(),
         visibility: postVisibilityEnum().default("public").notNull(),
-        scheduled_at: timestamp({ precision: 0, withTimezone: true })
-            .defaultNow()
-            .notNull(),
+        scheduled_at: timestamp({ precision: 0, withTimezone: true }).defaultNow().notNull(),
         reading_time: smallint().notNull(),
         ...timestamps,
     },

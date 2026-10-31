@@ -1,5 +1,6 @@
-import { MessageProps } from "@/components/Messages/types";
 import { Box, Sheet, Stack, Typography } from "@mui/joy";
+
+import { MessageProps } from "@/components/Messages/types";
 
 type ChatBubbleProps = MessageProps & {
     variant: "sent" | "received";
@@ -11,14 +12,8 @@ export default function ChatBubble(props: ChatBubbleProps) {
     const isSent = variant === "sent";
     return (
         <Box sx={{ maxWidth: "60%", minWidth: "auto" }}>
-            <Stack
-                direction="row"
-                spacing={2}
-                sx={{ justifyContent: "space-between", mb: 0.25 }}
-            >
-                <Typography level="body-xs">
-                    {isYou ? "" : sender.name}
-                </Typography>
+            <Stack direction="row" spacing={2} sx={{ justifyContent: "space-between", mb: 0.25 }}>
+                <Typography level="body-xs">{isYou ? "" : sender.name}</Typography>
 
                 <Typography level="body-xs">{timestamp}</Typography>
             </Stack>
@@ -48,8 +43,7 @@ export default function ChatBubble(props: ChatBubbleProps) {
                               },
                         isSent
                             ? {
-                                  backgroundColor:
-                                      "var(--joy-palette-primary-solidBg)",
+                                  backgroundColor: "var(--joy-palette-primary-solidBg)",
                               }
                             : {
                                   backgroundColor: "background.body",

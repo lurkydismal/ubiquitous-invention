@@ -1,6 +1,7 @@
 "use client";
 
 import { DataGrid, DataGridProps, GridRowsProp } from "@mui/x-data-grid";
+
 import columns from "./columns";
 
 type TasksGridProps = Omit<DataGridProps, "columns"> & {
@@ -8,11 +9,7 @@ type TasksGridProps = Omit<DataGridProps, "columns"> & {
     statusSearchFilter?: string;
 };
 
-export default function TasksGrid({
-    rows,
-    statusSearchFilter,
-    ...props
-}: TasksGridProps) {
+export default function TasksGrid({ rows, statusSearchFilter, ...props }: TasksGridProps) {
     return (
         <DataGrid
             {...props}

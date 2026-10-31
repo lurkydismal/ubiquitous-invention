@@ -1,13 +1,9 @@
 "use client";
 
 import {
-    colorSchemes,
-    shadows,
-    shape,
-    typography,
-} from "@/theme/themePrimitives";
-import * as DG from "@mui/x-data-grid/locales";
-import * as MUI from "@mui/material/locale";
+    CssVarsProvider as JoyCssVarsProvider,
+    useColorScheme as useJoyColorScheme,
+} from "@mui/joy";
 import {
     ThemeOptions,
     createTheme,
@@ -16,11 +12,11 @@ import {
     THEME_ID as MATERIAL_THEME_ID,
     useColorScheme as useMaterialColorScheme,
 } from "@mui/material";
-import {
-    CssVarsProvider as JoyCssVarsProvider,
-    useColorScheme as useJoyColorScheme,
-} from "@mui/joy";
+import * as MUI from "@mui/material/locale";
+import * as DG from "@mui/x-data-grid/locales";
 import { useEffect } from "react";
+
+import { colorSchemes, shadows, shape, typography } from "@/theme/themePrimitives";
 
 // Props for AppTheme wrapper
 export interface AppThemeProps {
@@ -59,9 +55,7 @@ export default function AppTheme(props: AppThemeProps) {
     // with a fallback to enUS
     const getLocales = (localeName: string) => ({
         mui: (MUI as Record<string, typeof MUI.enUS>)[localeName] || MUI.enUS,
-        dg:
-            (DG as unknown as Record<string, typeof DG.enUS>)[localeName] ||
-            DG.enUS,
+        dg: (DG as unknown as Record<string, typeof DG.enUS>)[localeName] || DG.enUS,
     });
 
     // Destructure the selected locales
@@ -90,10 +84,7 @@ export default function AppTheme(props: AppThemeProps) {
 
     // Render ThemeProvider and JoyCssVarsProvider wrapping the app's children
     return (
-        <ThemeProvider
-            theme={{ [MATERIAL_THEME_ID]: theme }}
-            disableTransitionOnChange
-        >
+        <ThemeProvider theme={{ [MATERIAL_THEME_ID]: theme }} disableTransitionOnChange>
             <JoyCssVarsProvider disableTransitionOnChange>
                 <ColorSchemeSync>{children}</ColorSchemeSync>
             </JoyCssVarsProvider>

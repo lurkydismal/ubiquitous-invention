@@ -15,8 +15,8 @@
  * logic is not yet available but timing and response structure matter.
  */
 
-import { delay } from "@/utils/stdfunc";
 import { ActionResult } from "@/lib/types";
+import { delay } from "@/utils/stdfunc";
 
 /**
  * Mock server action that only waits for the specified duration
@@ -36,10 +36,7 @@ export async function mockAction(milliseconds: number): Promise<{ ok: true }>;
  * @param data - Value to include in the response under `data`.
  * @returns An object with `{ ok: true, data }`.
  */
-export async function mockAction<T>(
-    milliseconds: number,
-    data: T,
-): Promise<{ ok: true; data: T }>;
+export async function mockAction<T>(milliseconds: number, data: T): Promise<{ ok: true; data: T }>;
 
 /**
  * Mock server action that waits for the specified duration
@@ -70,10 +67,7 @@ export async function mockAction<T, K extends string>(
  * This function is intended for testing, prototyping, or mocking
  * server actions with predictable timing and response shapes.
  */
-export async function mockAction<T>(
-    milliseconds: number,
-    data?: T,
-): Promise<ActionResult<T>> {
+export async function mockAction<T>(milliseconds: number, data?: T): Promise<ActionResult<T>> {
     // Simulate async work
     await delay(milliseconds);
 

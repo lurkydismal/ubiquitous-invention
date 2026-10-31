@@ -1,10 +1,4 @@
 import { Circle as CircleIcon } from "@mui/icons-material";
-import AvatarWithStatus from "@/components/Avatar/WithStatus";
-import {
-    ChatProps,
-    MessageProps,
-    UserProps,
-} from "@/components/Messages/types";
 import {
     Box,
     ListDivider,
@@ -14,6 +8,9 @@ import {
     Stack,
     Typography,
 } from "@mui/joy";
+
+import AvatarWithStatus from "@/components/Avatar/WithStatus";
+import { ChatProps, MessageProps, UserProps } from "@/components/Messages/types";
 // import { toggleMessagesPane } from "@/stdfunc";
 
 type ChatListItemProps = ListItemButtonProps & {
@@ -46,27 +43,17 @@ export default function ChatListItem(props: ChatListItemProps) {
                     }}
                 >
                     <Stack direction="row" spacing={1.5}>
-                        <AvatarWithStatus
-                            online={sender.online}
-                            username={sender.name}
-                        />
+                        <AvatarWithStatus online={sender.online} username={sender.name} />
 
                         <Box sx={{ flex: 1 }}>
-                            <Typography level="title-sm">
-                                {sender.name}
-                            </Typography>
+                            <Typography level="title-sm">{sender.name}</Typography>
 
-                            <Typography level="body-sm">
-                                {sender.name}
-                            </Typography>
+                            <Typography level="body-sm">{sender.name}</Typography>
                         </Box>
 
                         <Box sx={{ lineHeight: 1.5, textAlign: "right" }}>
                             {messages[0].unread && (
-                                <CircleIcon
-                                    sx={{ fontSize: 12 }}
-                                    color="primary"
-                                />
+                                <CircleIcon sx={{ fontSize: 12 }} color="primary" />
                             )}
 
                             <Typography

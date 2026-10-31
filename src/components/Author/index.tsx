@@ -1,22 +1,12 @@
-import { Link } from "@/components/Link";
-import log from "@/utils/stdlog";
+import { Box, TypographyVariant, Avatar, Typography, AvatarGroup } from "@mui/material";
 import { Fragment } from "react";
-import {
-    Box,
-    TypographyVariant,
-    Avatar,
-    Typography,
-    AvatarGroup,
-} from "@mui/material";
+
+import { Link } from "@/components/Link";
 import { linkSx } from "@/data/styles";
 import { UsersRowPublic } from "@/db/types";
-import {
-    AuthorInfo,
-    AuthorRow,
-    AuthorsInfo,
-    nameSx,
-    profileHref,
-} from "./base";
+import log from "@/utils/stdlog";
+
+import { AuthorInfo, AuthorRow, AuthorsInfo, nameSx, profileHref } from "./base";
 
 /**
  * Styles used for author date links.

@@ -1,5 +1,6 @@
-import { getSessionDataAction } from "@/lib/auth";
 import { permanentRedirect } from "next/navigation";
+
+import { getSessionDataAction } from "@/lib/auth";
 
 export default async function Page() {
     const session = await getSessionDataAction();

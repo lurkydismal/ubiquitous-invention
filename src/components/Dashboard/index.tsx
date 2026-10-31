@@ -1,12 +1,14 @@
+import { Box, Grid, Typography } from "@mui/material";
 import { GridRowsProp } from "@mui/x-data-grid";
+
 import pie from "@/data/dashboard/pie";
-import ChartUserByCountry from "./PieChart";
-import TasksGrid from "./TasksGrid";
+import stats from "@/data/dashboard/stats";
+
 import PageViewsBarChart from "./BarChart";
 import SessionsChart from "./LineChart";
+import ChartUserByCountry from "./PieChart";
 import StatCard from "./StatCard";
-import stats from "@/data/dashboard/stats";
-import { Box, Grid, Typography } from "@mui/material";
+import TasksGrid from "./TasksGrid";
 
 export default function MainGrid({ rows }: { rows: GridRowsProp }) {
     return (
@@ -15,12 +17,7 @@ export default function MainGrid({ rows }: { rows: GridRowsProp }) {
                 Tasks overview
             </Typography>
 
-            <Grid
-                container
-                spacing={2}
-                columns={12}
-                sx={{ mb: (theme) => theme.spacing(2) }}
-            >
+            <Grid container spacing={2} columns={12} sx={{ mb: (theme) => theme.spacing(2) }}>
                 {stats.map((card, index) => (
                     <Grid key={index} size={{ xs: 12, sm: 6, lg: 3 }}>
                         <StatCard {...card} />

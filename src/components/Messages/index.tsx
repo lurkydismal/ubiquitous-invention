@@ -1,11 +1,13 @@
 "use client";
 
-import MessagesPane from "../Messages/MessagesPane";
-import ChatsPane from "../Messages/ChatsPane";
-import { ChatProps } from "./types";
-import { chats } from "@/data/MyMessages";
-import { useState } from "react";
 import { Sheet } from "@mui/joy";
+import { useState } from "react";
+
+import { chats } from "@/data/MyMessages";
+
+import ChatsPane from "../Messages/ChatsPane";
+import MessagesPane from "../Messages/MessagesPane";
+import { ChatProps } from "./types";
 
 export default function MyProfile() {
     const [selectedChat, setSelectedChat] = useState<ChatProps>(chats[0]);

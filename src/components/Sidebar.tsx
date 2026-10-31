@@ -1,6 +1,19 @@
 "use client";
 
 import {
+    DashboardRounded as DashboardRoundedIcon,
+    AssignmentRounded as AssignmentRoundedIcon,
+    QuestionAnswerRounded as QuestionAnswerRoundedIcon,
+    LogoutRounded as LogoutRoundedIcon,
+    PendingActionsRounded as PendingActionsRoundedIcon,
+    KeyboardArrowDown as KeyboardArrowDownIcon,
+    FormatListBulleted as AllIcon,
+    PendingOutlined as InProgressIcon,
+    CheckCircleOutline as FinishedIcon,
+    CancelOutlined as CancelledIcon,
+    ScheduleOutlined as OutdatedIcon,
+} from "@mui/icons-material";
+import {
     GlobalStyles,
     Avatar,
     Box,
@@ -15,22 +28,10 @@ import {
     Typography,
     Sheet,
 } from "@mui/joy";
-import NextLink from "@/components/Link";
-import {
-    DashboardRounded as DashboardRoundedIcon,
-    AssignmentRounded as AssignmentRoundedIcon,
-    QuestionAnswerRounded as QuestionAnswerRoundedIcon,
-    LogoutRounded as LogoutRoundedIcon,
-    PendingActionsRounded as PendingActionsRoundedIcon,
-    KeyboardArrowDown as KeyboardArrowDownIcon,
-    FormatListBulleted as AllIcon,
-    PendingOutlined as InProgressIcon,
-    CheckCircleOutline as FinishedIcon,
-    CancelOutlined as CancelledIcon,
-    ScheduleOutlined as OutdatedIcon,
-} from "@mui/icons-material";
 import { unauthorized, usePathname } from "next/navigation";
 import { Dispatch, ReactNode, SetStateAction, useState } from "react";
+
+import NextLink from "@/components/Link";
 import { getUser } from "@/utils/stduser";
 
 // import ColorSchemeToggle from "./ColorSchemeToggle";
@@ -59,9 +60,7 @@ function Toggler(props: {
                             overflow: "hidden",
                         },
                     },
-                    open
-                        ? { gridTemplateRows: "1fr" }
-                        : { gridTemplateRows: "0fr" },
+                    open ? { gridTemplateRows: "1fr" } : { gridTemplateRows: "0fr" },
                 ]}
             >
                 {children}
@@ -205,28 +204,16 @@ export default function Sidebar() {
 
                         if (item.type === "link") {
                             return (
-                                <ListItem
-                                    key={item.key}
-                                    href={item.href}
-                                    component={NextLink}
-                                >
-                                    <ListItemButton
-                                        selected={item.isSelected(pathname)}
-                                    >
+                                <ListItem key={item.key} href={item.href} component={NextLink}>
+                                    <ListItemButton selected={item.isSelected(pathname)}>
                                         <Icon />
 
                                         <ListItemContent>
-                                            <Typography level="title-sm">
-                                                {item.label}
-                                            </Typography>
+                                            <Typography level="title-sm">{item.label}</Typography>
                                         </ListItemContent>
 
                                         {item.badge ? (
-                                            <Chip
-                                                size="sm"
-                                                color="primary"
-                                                variant="solid"
-                                            >
+                                            <Chip size="sm" color="primary" variant="solid">
                                                 {item.badge}
                                             </Chip>
                                         ) : null}
@@ -260,12 +247,10 @@ export default function Sidebar() {
                                                     sx={[
                                                         open
                                                             ? {
-                                                                  transform:
-                                                                      "rotate(180deg)",
+                                                                  transform: "rotate(180deg)",
                                                               }
                                                             : {
-                                                                  transform:
-                                                                      "none",
+                                                                  transform: "none",
                                                               },
                                                     ]}
                                                 />
@@ -280,11 +265,7 @@ export default function Sidebar() {
                                             return (
                                                 <ListItem
                                                     key={c.href}
-                                                    sx={
-                                                        index === 0
-                                                            ? { mt: 0.5 }
-                                                            : null
-                                                    }
+                                                    sx={index === 0 ? { mt: 0.5 } : null}
                                                     href={c.href}
                                                     component={NextLink}
                                                 >

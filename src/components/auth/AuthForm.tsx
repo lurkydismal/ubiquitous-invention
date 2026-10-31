@@ -77,9 +77,7 @@ export default function AuthForm(props: Props) {
                             {...field}
                             autoComplete="username"
                             autoFocus
-                            color={
-                                Boolean(fieldState.error) ? "error" : "primary"
-                            }
+                            color={Boolean(fieldState.error) ? "error" : "primary"}
                             error={Boolean(fieldState.error)}
                             fullWidth
                             helperText={fieldState.error?.message}
@@ -111,9 +109,7 @@ export default function AuthForm(props: Props) {
                         <TextField
                             {...field}
                             autoComplete="new-password"
-                            color={
-                                Boolean(fieldState.error) ? "error" : "primary"
-                            }
+                            color={Boolean(fieldState.error) ? "error" : "primary"}
                             error={Boolean(fieldState.error)}
                             fullWidth
                             helperText={fieldState.error?.message}
@@ -136,9 +132,7 @@ export default function AuthForm(props: Props) {
                             control={
                                 <Checkbox
                                     checked={Boolean(field.value)}
-                                    onChange={(e) =>
-                                        field.onChange(e.target.checked)
-                                    }
+                                    onChange={(e) => field.onChange(e.target.checked)}
                                     color="primary"
                                 />
                             }

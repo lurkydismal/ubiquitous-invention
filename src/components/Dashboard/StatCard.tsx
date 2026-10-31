@@ -1,16 +1,8 @@
 "use client";
 
-import { useId, useMemo } from "react";
-import {
-    Box,
-    Card,
-    CardContent,
-    Chip,
-    Stack,
-    Typography,
-    useTheme,
-} from "@mui/material";
+import { Box, Card, CardContent, Chip, Stack, Typography, useTheme } from "@mui/material";
 import { SparkLineChart, areaElementClasses } from "@mui/x-charts";
+import { useId, useMemo } from "react";
 
 export type StatCardProps = {
     title: string;
@@ -20,10 +12,8 @@ export type StatCardProps = {
 function formatShort(n: number) {
     if (!isFinite(n)) return "—";
     const abs = Math.abs(n);
-    if (abs >= 1_000_000_000)
-        return `${(n / 1_000_000_000).toFixed(1).replace(/\.0$/, "")}B`;
-    if (abs >= 1_000_000)
-        return `${(n / 1_000_000).toFixed(1).replace(/\.0$/, "")}M`;
+    if (abs >= 1_000_000_000) return `${(n / 1_000_000_000).toFixed(1).replace(/\.0$/, "")}B`;
+    if (abs >= 1_000_000) return `${(n / 1_000_000).toFixed(1).replace(/\.0$/, "")}M`;
     if (abs >= 1_000) return `${(n / 1_000).toFixed(1).replace(/\.0$/, "")}k`;
     return String(n);
 }
@@ -86,22 +76,12 @@ export default function StatCard({ title, data }: StatCardProps) {
             theme.palette.mode === "light"
                 ? theme.palette.success.main
                 : theme.palette.success.dark,
-        down:
-            theme.palette.mode === "light"
-                ? theme.palette.error.main
-                : theme.palette.error.dark,
-        neutral:
-            theme.palette.mode === "light"
-                ? theme.palette.grey[400]
-                : theme.palette.grey[700],
+        down: theme.palette.mode === "light" ? theme.palette.error.main : theme.palette.error.dark,
+        neutral: theme.palette.mode === "light" ? theme.palette.grey[400] : theme.palette.grey[700],
     };
 
     const chipColor =
-        derived.trend === "up"
-            ? "success"
-            : derived.trend === "down"
-              ? "error"
-              : "default";
+        derived.trend === "up" ? "success" : derived.trend === "down" ? "error" : "default";
 
     const chartColor = trendColors[derived.trend];
 
@@ -132,17 +112,10 @@ export default function StatCard({ title, data }: StatCardProps) {
                                 {derived.valueText}
                             </Typography>
 
-                            <Chip
-                                size="small"
-                                color={chipColor}
-                                label={derived.percentText}
-                            />
+                            <Chip size="small" color={chipColor} label={derived.percentText} />
                         </Stack>
 
-                        <Typography
-                            variant="caption"
-                            sx={{ color: "text.secondary" }}
-                        >
+                        <Typography variant="caption" sx={{ color: "text.secondary" }}>
                             {derived.intervalText}
                         </Typography>
                     </Stack>
@@ -197,9 +170,7 @@ export default function StatCard({ title, data }: StatCardProps) {
                                     color: "text.disabled",
                                 }}
                             >
-                                <Typography variant="caption">
-                                    No chart data
-                                </Typography>
+                                <Typography variant="caption">No chart data</Typography>
                             </Box>
                         )}
                     </Box>

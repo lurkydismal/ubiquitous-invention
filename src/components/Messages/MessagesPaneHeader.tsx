@@ -2,8 +2,9 @@ import {
     Circle as CircleIcon,
     ArrowBackIosNewRounded as ArrowBackIosNewRoundedIcon,
 } from "@mui/icons-material";
-import { UserProps } from "./MyMessages/types";
 import { Avatar, Chip, IconButton, Stack, Typography } from "@mui/joy";
+
+import { UserProps } from "./MyMessages/types";
 // import { toggleMessagesPane } from "@/stdfunc";
 
 type MessagesPaneHeaderProps = {
@@ -26,11 +27,7 @@ export default function MessagesPaneHeader(props: MessagesPaneHeaderProps) {
                 backgroundColor: "background.body",
             }}
         >
-            <Stack
-                direction="row"
-                spacing={{ xs: 1, md: 2 }}
-                sx={{ alignItems: "center" }}
-            >
+            <Stack direction="row" spacing={{ xs: 1, md: 2 }} sx={{ alignItems: "center" }}>
                 <IconButton
                     variant="plain"
                     color="neutral"

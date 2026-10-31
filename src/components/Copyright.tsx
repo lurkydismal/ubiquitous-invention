@@ -1,5 +1,3 @@
-import React, { ComponentProps } from "react";
-import { buildYear, githubUrl } from "@/utils/stdvar";
 import {
     TypographyProps,
     Theme,
@@ -7,6 +5,10 @@ import {
     SxProps,
     LinkProps as MuiLinkProps,
 } from "@mui/material";
+import React, { ComponentProps } from "react";
+
+import { buildYear, githubUrl } from "@/utils/stdvar";
+
 import { Link } from "./Link";
 
 type GitHubLinkComposedProps = ComponentProps<typeof Link>;
@@ -24,8 +26,7 @@ function GitHubLink({ href, ...props }: Readonly<GitHubLinkProps>) {
             display="inline-block"
             sx={{
                 textDecoration: "none",
-                transition:
-                    "color 120ms ease, text-decoration-color 120ms ease",
+                transition: "color 120ms ease, text-decoration-color 120ms ease",
                 "&:hover": {
                     textDecoration: "underline",
                 },

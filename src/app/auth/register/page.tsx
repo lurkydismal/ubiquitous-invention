@@ -1,15 +1,16 @@
 "use client";
 
+import { Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+
 import AuthCard from "@/components/auth/AuthCard";
 import AuthForm from "@/components/auth/AuthForm";
-import { Link } from "@/components/Link";
 import { CopyrightAligned as Copyright } from "@/components/Copyright";
-import log from "@/utils/stdlog";
-import { useRouter } from "next/navigation";
-import { Typography } from "@mui/material";
-import { useEffect } from "react";
+import { Link } from "@/components/Link";
 import { registerAction } from "@/lib/auth";
 import { useSnackbar } from "@/providers/snackbar";
+import log from "@/utils/stdlog";
 import { setUser } from "@/utils/stduser";
 
 export default function SignUpPage() {
@@ -23,10 +24,7 @@ export default function SignUpPage() {
         };
     }, []);
 
-    const handleSignUp = async (data: {
-        username: string;
-        password: string;
-    }) => {
+    const handleSignUp = async (data: { username: string; password: string }) => {
         log.trace(`onSubmit called: '${JSON.stringify(data)}'`);
 
         try {
@@ -44,11 +42,7 @@ export default function SignUpPage() {
         <>
             <Typography sx={{ textAlign: "center" }}>
                 Already have an account?{" "}
-                <Link
-                    href="/auth/login"
-                    sx={{ alignSelf: "center" }}
-                    variant="body2"
-                >
+                <Link href="/auth/login" sx={{ alignSelf: "center" }} variant="body2">
                     Sign in
                 </Link>
             </Typography>

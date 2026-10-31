@@ -17,10 +17,11 @@
  * - `children`: React.ReactNode – all nested page content/components.
  */
 
-import AppTheme, { AppThemeProps } from "@/theme";
 import { Box, CircularProgress, CssBaseline } from "@mui/material";
-import SnackbarProvider from "@/providers/snackbar";
 import { Suspense } from "react";
+
+import SnackbarProvider from "@/providers/snackbar";
+import AppTheme, { AppThemeProps } from "@/theme";
 import * as custom from "@/theme/custom";
 
 const themeComponents: AppThemeProps["themeComponents"] = Object.assign(

@@ -1,29 +1,29 @@
 packages:
-  - .
+    - .
 allowBuilds:
-  argon2: false
-  esbuild: false
-  sharp: false
-  unrs-resolver: false
+    argon2: false
+    esbuild: false
+    sharp: false
+    unrs-resolver: false
 minimumReleaseAgeExclude:
-  - '@fallow-cli/darwin-arm64@3.38.0'
-  - '@fallow-cli/darwin-x64@3.38.0'
-  - '@fallow-cli/linux-arm64-gnu@3.38.0'
-  - '@fallow-cli/linux-arm64-musl@3.38.0'
-  - '@fallow-cli/linux-x64-gnu@3.38.0'
-  - '@fallow-cli/linux-x64-musl@3.38.0'
-  - '@fallow-cli/win32-arm64-msvc@3.38.0'
-  - '@fallow-cli/win32-x64-msvc@3.38.0'
-  - '@mui/x-charts@9.17.0'
-  - '@mui/x-data-grid@9.17.0'
-  - '@mui/x-date-pickers@9.17.0'
-  - '@mui/x-internal-gestures@9.17.0'
-  - '@mui/x-internals@9.17.0'
-  - '@mui/x-virtualizer@0.7.5'
-  - fallow-type-aware@3.38.0
-  - fallow@3.38.0
+    - "@fallow-cli/darwin-arm64@3.38.0"
+    - "@fallow-cli/darwin-x64@3.38.0"
+    - "@fallow-cli/linux-arm64-gnu@3.38.0"
+    - "@fallow-cli/linux-arm64-musl@3.38.0"
+    - "@fallow-cli/linux-x64-gnu@3.38.0"
+    - "@fallow-cli/linux-x64-musl@3.38.0"
+    - "@fallow-cli/win32-arm64-msvc@3.38.0"
+    - "@fallow-cli/win32-x64-msvc@3.38.0"
+    - "@mui/x-charts@9.17.0"
+    - "@mui/x-data-grid@9.17.0"
+    - "@mui/x-date-pickers@9.17.0"
+    - "@mui/x-internal-gestures@9.17.0"
+    - "@mui/x-internals@9.17.0"
+    - "@mui/x-virtualizer@0.7.5"
+    - fallow-type-aware@3.38.0
+    - fallow@3.38.0
 permissions:
-  drizzle-kit:
-    skills: false
-  fallow:
-    skills: false
+    drizzle-kit:
+        skills: false
+    fallow:
+        skills: false

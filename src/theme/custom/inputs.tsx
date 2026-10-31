@@ -1,9 +1,4 @@
-import {
-    RemoveRounded,
-    CheckRounded,
-    CheckBoxOutlineBlankRounded,
-} from "@mui/icons-material";
-import { brand, gray } from "../themePrimitives";
+import { RemoveRounded, CheckRounded, CheckBoxOutlineBlankRounded } from "@mui/icons-material";
 import {
     alpha,
     Components,
@@ -13,6 +8,8 @@ import {
     toggleButtonClasses,
     toggleButtonGroupClasses,
 } from "@mui/material";
+
+import { brand, gray } from "../themePrimitives";
 
 export const inputsCustomizations: Components<Theme> = {
     MuiButtonBase: {
@@ -317,11 +314,7 @@ export const inputsCustomizations: Components<Theme> = {
     MuiCheckbox: {
         defaultProps: {
             disableRipple: true,
-            icon: (
-                <CheckBoxOutlineBlankRounded
-                    sx={{ color: "hsla(210, 0%, 0%, 0.0)" }}
-                />
-            ),
+            icon: <CheckBoxOutlineBlankRounded sx={{ color: "hsla(210, 0%, 0%, 0.0)" }} />,
             checkedIcon: <CheckRounded sx={{ height: 14, width: 14 }} />,
             indeterminateIcon: <RemoveRounded sx={{ height: 14, width: 14 }} />,
         },
@@ -388,8 +381,7 @@ export const inputsCustomizations: Components<Theme> = {
                 padding: 0,
             },
             root: ({ theme }) => ({
-                backgroundColor: (theme.vars || theme).palette.background
-                    .default,
+                backgroundColor: (theme.vars || theme).palette.background.default,
                 border: `1px solid ${(theme.vars || theme).palette.divider}`,
                 borderRadius: (theme.vars || theme).shape.borderRadius,
                 color: (theme.vars || theme).palette.text.primary,
