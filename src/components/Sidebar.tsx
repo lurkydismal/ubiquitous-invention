@@ -9,7 +9,7 @@ import {
     KeyboardArrowDown as KeyboardArrowDownIcon,
     FormatListBulleted as AllIcon,
     PendingOutlined as InProgressIcon,
-    CheckCircleOutline as FinishedIcon,
+    CheckCircleOutlined as FinishedIcon,
     CancelOutlined as CancelledIcon,
     ScheduleOutlined as OutdatedIcon,
 } from "@mui/icons-material";
@@ -247,11 +247,11 @@ export default function Sidebar() {
                                                     sx={[
                                                         open
                                                             ? {
-                                                                  transform: "rotate(180deg)",
-                                                              }
+                                                                transform: "rotate(180deg)",
+                                                            }
                                                             : {
-                                                                  transform: "none",
-                                                              },
+                                                                transform: "none",
+                                                            },
                                                     ]}
                                                 />
                                             </ListItemButton>

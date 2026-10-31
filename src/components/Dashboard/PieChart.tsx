@@ -2,7 +2,7 @@
 
 import {
     PendingOutlined as InProgressIcon,
-    CheckCircleOutline as FinishedIcon,
+    CheckCircleOutlined as FinishedIcon,
     CancelOutlined as CancelledIcon,
     ScheduleOutlined as OutdatedIcon,
 } from "@mui/icons-material";

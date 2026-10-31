@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Card, CardContent, Chip, Stack, Typography, useTheme } from "@mui/material";
-import { SparkLineChart, areaElementClasses } from "@mui/x-charts";
+import { SparkLineChart, lineClasses } from "@mui/x-charts";
 import { useId, useMemo } from "react";
 
 export type StatCardProps = {
@@ -51,8 +51,8 @@ export default function StatCard({ title, data }: StatCardProps) {
         const trend: "up" | "down" | "neutral" = isNeutral
             ? "neutral"
             : percent > 0
-              ? "up"
-              : "down";
+                ? "up"
+                : "down";
 
         const roundedPercent = Math.round(percent);
         const sign = roundedPercent > 0 ? "+" : "";
@@ -133,7 +133,7 @@ export default function StatCard({ title, data }: StatCardProps) {
                                     data: derived.labels,
                                 }}
                                 sx={{
-                                    [`& .${areaElementClasses.root}`]: {
+                                    [`& .${lineClasses.area}`]: {
                                         fill: `url(#area-gradient-${id})`,
                                     },
                                 }}
