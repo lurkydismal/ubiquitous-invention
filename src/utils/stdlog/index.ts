@@ -1,31 +1,8 @@
-import { Logger } from "tslog";
-
-import { isBrowser, isDev, needTrace } from "@/utils/stdvar";
+import { isBrowser } from "@/utils/stdvar";
 
 import { browserLogger } from "./browser";
+import { serverLogger } from "./server";
 import { CommonLogger } from "./types";
-
-/**
- * Determine minimum server log level:
- * - `needTrace` forces the most verbose level (1).
- * - In development (`isDev` true) use level 2.
- * - Otherwise use level 3 for production.
- *
- * These numeric levels are passed to `tslog` as `minLevel`.
- */
-const logLevel = needTrace ? 1 : isDev ? 2 : 3;
-
-/**
- * `serverLogger` - `tslog`-based logger configured for server/node environments.
- * - `type: "pretty"` renders human-readable logs.
- * - `minLevel` is set based on environment and tracing flags.
- * - `prettyLogTemplate` is configured to show the log level name followed by a tab.
- */
-export const serverLogger = new Logger({
-    type: "pretty",
-    minLevel: logLevel,
-    prettyLogTemplate: "{{dateIsoStr}} {{logLevelName}}\t",
-});
 
 /**
  * `log` selects the appropriate logger implementation at runtime:
@@ -45,7 +22,7 @@ export default log;
  * Each key-value pair of the input object is logged using `log.trace`.
  * The output format is: `<key>: <value> (type: <type of value>)`.
  *
- * @template T - The type of object to log. Can be any object with string keys.
+ * @template T - The type of object to log. Can be an arbitrary object with string keys.
  * @param {T} obj - The object whose properties will be logged.
  */
 export function logVar<T extends Record<string, unknown>>(obj: T) {
