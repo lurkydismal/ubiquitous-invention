@@ -1,46 +1,25 @@
 "use client";
 
-import {
-    CssVarsProvider as JoyCssVarsProvider,
-    useColorScheme as useJoyColorScheme,
-} from "@mui/joy";
-import {
-    ThemeOptions,
-    createTheme,
-    ThemeProvider,
-    useMediaQuery,
-    THEME_ID as MATERIAL_THEME_ID,
-    useColorScheme as useMaterialColorScheme,
-} from "@mui/material";
+import { ThemeOptions, createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import * as MUI from "@mui/material/locale";
 import * as DG from "@mui/x-data-grid/locales";
-import { useEffect } from "react";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import * as DP from "@mui/x-date-pickers/locales";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { ReactNode } from "react";
 
 import { colorSchemes, shadows, shape, typography } from "@/theme/themePrimitives";
 
 // Props for AppTheme wrapper
 export interface AppThemeProps {
-    children?: React.ReactNode;
+    children?: ReactNode;
     themeComponents?: ThemeOptions["components"]; // Optional overrides for MUI component styles
 }
 
-function ColorSchemeSync({
-    children,
-}: Readonly<{
-    children: React.ReactNode;
-}>) {
-    const { mode, setMode: setMaterialMode } = useMaterialColorScheme();
-    const { setMode: setJoyMode } = useJoyColorScheme();
-
-    useEffect(() => {
-        setMaterialMode(mode ?? "system");
-        setJoyMode(mode ?? "system");
-    }, [mode, setMaterialMode, setJoyMode]);
-
-    return children;
-}
-
 // Main AppTheme component providing theme and localization
+/**
+ * Renders the app theme component.
+ */
 export default function AppTheme(props: AppThemeProps) {
     const { children, themeComponents } = props;
     const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)", {
@@ -49,21 +28,33 @@ export default function AppTheme(props: AppThemeProps) {
 
     // Get user's browser locale (e.g., "en-US") and extract language code ("en")
     const userLocale = navigator.language || "en-US";
-    const lang = userLocale.split("-")[0];
+    const lang = userLocale.split("-")[0]!;
 
     // Function to fetch localized messages for MUI components, DataGrid, and DatePicker
     // with a fallback to enUS
+    /**
+     * Gets locales.
+     */
     const getLocales = (localeName: string) => ({
         mui: (MUI as Record<string, typeof MUI.enUS>)[localeName] || MUI.enUS,
         dg: (DG as unknown as Record<string, typeof DG.enUS>)[localeName] || DG.enUS,
+        dp: (DP as unknown as Record<string, typeof DP.enUS>)[localeName] || DP.enUS,
     });
 
     // Destructure the selected locales
-    const { mui, dg } = getLocales(lang);
+    const { mui, dg, dp } = getLocales(lang);
+
+    const prefersReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
 
     // Create MUI theme with custom primitives, dark/light mode, and localization
     const theme = createTheme(
         {
+            ...(prefersReducedMotion && {
+                transitions: {
+                    // So `transition: none;` gets applied everywhere
+                    create: () => "none",
+                },
+            }),
             palette: {
                 mode: prefersDarkMode ? "dark" : "light",
             },
@@ -75,19 +66,20 @@ export default function AppTheme(props: AppThemeProps) {
             shadows,
             shape,
             components: {
-                ...themeComponents, // merge any user-provided component overrides
+                ...themeComponents, // merge user-provided component overrides
             },
         },
         mui, // apply MUI core locale
         dg, // apply DataGrid locale
+        dp, // apply DatePicker locale
     );
 
-    // Render ThemeProvider and JoyCssVarsProvider wrapping the app's children
+    // Render ThemeProvider and LocalizationProvider wrapping the app's children
     return (
-        <ThemeProvider theme={{ [MATERIAL_THEME_ID]: theme }} disableTransitionOnChange>
-            <JoyCssVarsProvider disableTransitionOnChange>
-                <ColorSchemeSync>{children}</ColorSchemeSync>
-            </JoyCssVarsProvider>
+        <ThemeProvider theme={theme} disableTransitionOnChange>
+            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={lang}>
+                {children}
+            </LocalizationProvider>
         </ThemeProvider>
     );
 }

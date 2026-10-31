@@ -1,22 +1,25 @@
 import {
-    alpha,
-    checkboxClasses,
-    iconButtonClasses,
-    listClasses,
-    listItemIconClasses,
-    menuItemClasses,
-    paperClasses,
-    tablePaginationClasses,
     Theme,
+    checkboxClasses,
+    tablePaginationClasses,
+    paperClasses,
+    menuItemClasses,
+    listItemIconClasses,
+    listClasses,
+    iconButtonClasses,
+    alpha,
 } from "@mui/material";
 import { gridClasses } from "@mui/x-data-grid";
 
-import { gray } from "../themePrimitives";
+import { gray } from "@/theme/themePrimitives";
 
 // Custom style overrides for MUI DataGrid and related components
 export const dataGridCustomizations = {
     MuiDataGrid: {
         styleOverrides: {
+            /**
+             * Returns root slot styles for the data grid theme override.
+             */
             root: ({ theme }: { theme: Theme }) => ({
                 "--DataGrid-overlayHeight": "300px",
                 overflow: "clip",
@@ -45,9 +48,15 @@ export const dataGridCustomizations = {
                     },
                 },
             }),
+            /**
+             * Returns cell slot styles for the data grid theme override.
+             */
             cell: ({ theme }: { theme: Theme }) => ({
                 borderTopColor: (theme.vars || theme).palette.divider,
             }),
+            /**
+             * Returns menu slot styles for the data grid theme override.
+             */
             menu: ({ theme }: { theme: Theme }) => ({
                 borderRadius: theme.shape.borderRadius,
                 backgroundImage: "none",
@@ -65,6 +74,9 @@ export const dataGridCustomizations = {
                     paddingRight: 0,
                 },
             }),
+            /**
+             * Returns row slot styles for the data grid theme override.
+             */
             row: ({ theme }: { theme: Theme }) => ({
                 "&:last-of-type": {
                     borderBottom: `1px solid ${(theme.vars || theme).palette.divider}`,
@@ -79,6 +91,9 @@ export const dataGridCustomizations = {
                     },
                 },
             }),
+            /**
+             * Returns icon button container styles for the data grid theme override.
+             */
             iconButtonContainer: ({ theme }: { theme: Theme }) => ({
                 [`& .${iconButtonClasses.root}`]: {
                     border: "none",
@@ -100,6 +115,9 @@ export const dataGridCustomizations = {
                     }),
                 },
             }),
+            /**
+             * Returns menu icon button styles for the data grid theme override.
+             */
             menuIconButton: ({ theme }: { theme: Theme }) => ({
                 border: "none",
                 backgroundColor: "transparent",
@@ -119,10 +137,16 @@ export const dataGridCustomizations = {
                     },
                 }),
             }),
+            /**
+             * Returns filter form styles for the data grid theme override.
+             */
             filterForm: ({ theme }: { theme: Theme }) => ({
                 gap: theme.spacing(1),
                 alignItems: "flex-end",
             }),
+            /**
+             * Returns column management header styles for the data grid theme override.
+             */
             columnsManagementHeader: ({ theme }: { theme: Theme }) => ({
                 paddingRight: theme.spacing(3),
                 paddingLeft: theme.spacing(3),
