@@ -193,8 +193,10 @@ export default function ExtraToolbarButtons<RI extends Record<string, unknown>>(
 
         const source = new EventSource("/api/dashboard/changes");
         source.onmessage = (event) => {
-            const payload = JSON.parse(event.data) as { type?: string };
-            if ((payload as { event?: string }).event !== "notification") {
+            try {
+                const payload = JSON.parse(event.data) as { event?: string };
+                if (payload.event !== "notification") return;
+            } catch {
                 return;
             }
 

@@ -4,7 +4,6 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import auth from "@/lib/auth";
-import { authClient } from "@/lib/auth/client";
 import { loginUserSchema, registerUserSchema } from "@/utils/validate/schemas";
 
 import { actionClient } from "./client";
@@ -18,17 +17,19 @@ export const register = actionClient
     });
 
 export const login = actionClient.inputSchema(loginUserSchema).action(async ({ parsedInput }) => {
-    await auth.api.signInEmail({ body: parsedInput });
+    const { remember, ...credentials } = parsedInput;
+
+    await auth.api.signInEmail({
+        body: {
+            ...credentials,
+            ...(remember === undefined ? {} : { rememberMe: remember }),
+        },
+    });
 
     redirect("/");
 });
 
-export const logout = authClient.action(async () => {
-    await auth.api.signOut();
-});
-
-export const getSession = authClient.action(async () => {
-    return await auth.api.getSession({
-        headers: await headers(),
-    });
-});
+/** Signs out the current Better Auth session. */
+export async function logout(): Promise<void> {
+    await auth.api.signOut({ headers: await headers() });
+}

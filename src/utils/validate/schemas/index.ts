@@ -1,9 +1,8 @@
-import { Dayjs } from "dayjs";
+import type { Dayjs } from "dayjs";
 import { createInsertSchema, createSelectSchema, createUpdateSchema } from "drizzle-orm/zod";
 import z from "zod";
 
 import { user } from "@/db/schema";
-import { DbTarget, TABLES } from "@/lib/types";
 import dayjs from "@/utils/dayjs";
 
 export const emptyToNull = <T extends z.ZodType>(schema: T) =>
@@ -51,14 +50,14 @@ export const mutationInputSchema = z.record(z.string(), z.unknown()).and(
 );
 
 export const registerUserSchema = z.object({
-    name: z.string(),
-    email: z.email(),
-    password: z.string(),
+    name: z.string().trim().min(1).max(100),
+    email: z.email().trim(),
+    password: z.string().min(8).max(128),
 });
 export const loginUserSchema = z.object({
-    email: z.email(),
-    password: z.string(),
+    email: z.email().trim(),
+    password: z.string().min(1).max(128),
     remember: z.boolean().optional(),
 });
 
-export const DbTargetSchema = z.enum(Object.keys(TABLES) as [DbTarget, ...DbTarget[]]);
+export { DbTargetSchema } from "@/lib/types";

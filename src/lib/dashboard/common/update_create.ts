@@ -1,15 +1,16 @@
 "use server";
 
-import { and, AnyColumn, eq, getColumns, SQL } from "drizzle-orm";
-import { createInsertSchema, createSelectSchema, createUpdateSchema } from "drizzle-orm/zod";
+import { and, eq, getColumns } from "drizzle-orm";
+import type { AnyColumn, SQL } from "drizzle-orm";
+import { createInsertSchema, createUpdateSchema } from "drizzle-orm/zod";
 import z from "zod";
 
 import db from "@/db";
 import { updateDbCacheTags } from "@/lib/cache";
 import { emitDashboardChange } from "@/lib/dashboard/common/change-events";
-import { getSession } from "@/lib/safe/auth";
-import { ActionResult, DbTarget, parseRawTarget } from "@/lib/types";
-import { getUserId, requestUserId } from "@/lib/user";
+import { getSession } from "@/lib/dal/auth";
+import { parseRawTarget } from "@/lib/types";
+import type { ActionResult, DbTarget } from "@/lib/types";
 import { toCamelCase } from "@/utils/stdfunc";
 import log from "@/utils/stdlog";
 import { mutationInputSchema } from "@/utils/validate/schemas";
@@ -27,11 +28,18 @@ type SaveOptions = {
 function toDbMutation(parsedRow: MutationRow, actorId: string, opts: SaveOptions): MutationRow {
     const base = { ...parsedRow };
 
+    // These fields are controlled by the server, not by dashboard form input.
+    delete base["id"];
+    delete base["author_id"];
+    delete base["last_editor_id"];
+    delete base["created_at"];
+    delete base["updated_at"];
+
     if (opts.isUpdate) {
-        delete base["id"];
         return {
             ...base,
             last_editor_id: actorId,
+            updated_at: new Date(),
         };
     }
 
@@ -108,14 +116,6 @@ function removeIdColumnsFromMutation(row: MutationRow, idColumns: AnyColumn[]): 
 }
 
 /**
- * Fetches the current database row for an update so callers can validate it still exists.
- */
-async function getExistingRows(rawTarget: DbTarget, whereClause: SQL): Promise<MutationRow[]> {
-    const table = parseRawTarget(rawTarget);
-    return db.select().from(table).where(whereClause).limit(1).execute();
-}
-
-/**
  * Saves the parsed row mutation to the database.
  */
 export async function save(
@@ -127,20 +127,15 @@ export async function save(
     const parsedInput = await mutationInputSchema.parseAsync(input);
 
     const schema = opts.isUpdate ? createUpdateSchema(table) : createInsertSchema(table);
-    const selectSchema = createSelectSchema(table);
 
-    const sessionUser = (await getSession()).data?.user;
-    const actor = sessionUser?.name;
-
-    if (!actor) {
-        throw new Error("Missing authenticated user");
+    const session = await getSession();
+    if (!session) {
+        return { ok: false, error: "Unauthorized" };
     }
 
-    const actorId = await getUserId(requestUserId(actor));
-
-    if (!actorId) {
-        throw new Error("Missing authenticated user");
-    }
+    // Use the stable primary key from the session. User names are not unique
+    // identifiers and must not be used to resolve an actor ID.
+    const actorId = session.user.id;
 
     const row = await schema.parseAsync(toDbMutation(parsedInput, actorId, opts));
 
@@ -150,8 +145,11 @@ export async function save(
         }
 
         const idColumnNames = normalizeIdColumns(opts.idColumnName);
-
         const columns = getColumns(table) as Record<string, AnyColumn | undefined>;
+
+        if (new Set(idColumnNames).size !== idColumnNames.length) {
+            return { ok: false, error: "Duplicate primary-key columns are not allowed" };
+        }
 
         const idColumns: AnyColumn[] = [];
         for (const columnName of idColumnNames) {
@@ -159,32 +157,38 @@ export async function save(
             if (!column) {
                 return { ok: false, error: `Unknown id column: ${columnName}` };
             }
+            if (!column.primary) {
+                return { ok: false, error: `Update key is not a primary-key column: ${columnName}` };
+            }
             idColumns.push(column);
+        }
+
+        // Require the complete primary key. A partial composite key could
+        // otherwise update several records before the affected-row check runs.
+        const primaryColumnNames = Object.values(columns)
+            .filter((column): column is AnyColumn => Boolean(column?.primary))
+            .map((column) => column.name);
+        if (
+            primaryColumnNames.length === 0 ||
+            primaryColumnNames.length !== idColumnNames.length ||
+            primaryColumnNames.some((columnName) => !idColumnNames.includes(columnName))
+        ) {
+            return { ok: false, error: "Updates must include the complete primary key" };
         }
 
         const mutationRow = removeIdColumnsFromMutation(row, idColumns);
         const whereClause = buildPrimaryKeyWhereClause(rawTarget, parsedInput, idColumnNames);
 
-        const existingRows = await getExistingRows(rawTarget, whereClause);
+        // RETURNING gives us the affected rows atomically, without a separate
+        // existence query that could race with a concurrent delete.
+        const updatedRows = await db
+            .update(table)
+            .set(mutationRow)
+            .where(whereClause)
+            .returning();
 
-        await selectSchema.array().length(1).parseAsync(existingRows);
-
-        const updateResult = await db.update(table).set(mutationRow).where(whereClause).execute();
-
-        // Ensure mutation actually affected one row.
-        const affectedRows =
-            typeof (updateResult as { rowCount?: number }).rowCount === "number"
-                ? (updateResult as { rowCount: number }).rowCount
-                : Array.isArray(updateResult)
-                  ? updateResult.length
-                  : undefined;
-
-        if (affectedRows === undefined) {
-            throw new Error(
-                "Unable to verify update: database driver did not return affected row count",
-            );
-        } else if (affectedRows !== 1) {
-            throw new Error("Update target no longer exists");
+        if (updatedRows.length !== 1) {
+            return { ok: false, error: "Update target no longer exists" };
         }
     } else {
         await db
@@ -208,24 +212,49 @@ export async function save(
 /**
  * Parses form.
  */
-export async function parseForm(formData: FormData): Promise<MutationRow> {
-    const entries = z
-        .record(z.string(), z.unknown())
-        .parse(Object.fromEntries(formData.entries())) as MutationRow;
+export async function parseForm(
+    formData: FormData,
+    rawTarget: DbTarget,
+): Promise<MutationRow> {
+    const table = parseRawTarget(rawTarget);
+    const columns = getColumns(table) as Record<string, AnyColumn | undefined>;
+    const entries = Object.fromEntries(formData.entries()) as MutationRow;
 
-    for (const [key, value] of Object.entries(entries)) {
-        if (value === "") {
+    for (const [key, rawValue] of Object.entries(entries)) {
+        if (typeof rawValue !== "string") continue;
+
+        if (rawValue.trim() === "") {
             entries[key] = null;
+            continue;
+        }
+
+        const column = columns[key];
+        if (!column) continue;
+
+        // FormData always transports scalar values as strings. Restore their
+        // database-native types before passing the payload to Drizzle/Zod.
+        if (column.dataType === "number") {
+            const value = Number(rawValue);
+            if (!Number.isFinite(value)) {
+                throw new Error(`Invalid numeric value for ${key}`);
+            }
+            entries[key] = value;
+        } else if (column.dataType === "boolean") {
+            if (rawValue === "true" || rawValue === "1" || rawValue === "on") {
+                entries[key] = true;
+            } else if (rawValue === "false" || rawValue === "0") {
+                entries[key] = false;
+            } else {
+                throw new Error(`Invalid boolean value for ${key}`);
+            }
+        } else if (column.dataType === "date") {
+            const value = new Date(rawValue);
+            if (Number.isNaN(value.getTime())) {
+                throw new Error(`Invalid date value for ${key}`);
+            }
+            entries[key] = value;
         }
     }
 
-    if (entries["id"] !== undefined) {
-        const idResult = z.coerce.number().int().positive().safeParse(entries["id"]);
-        if (!idResult.success) {
-            throw new Error(`Invalid id value: ${entries["id"]}`);
-        }
-        entries["id"] = idResult.data;
-    }
-
-    return entries;
+    return mutationInputSchema.parse(entries) as MutationRow;
 }

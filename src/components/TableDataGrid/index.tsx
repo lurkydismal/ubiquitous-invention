@@ -43,9 +43,7 @@ export default function TableDataGrid<
         () =>
             resolvedFields.reduce((row, field) => {
                 row[field.key as keyof RI] = (
-                    field.type !== "boolean" && field.type !== "radio-group"
-                        ? (field.placeholder ?? null)
-                        : null
+                    field.type === "boolean" ? (field.default ?? null) : null
                 ) as RI[keyof RI];
                 return row;
             }, {} as RI),
@@ -64,6 +62,7 @@ export default function TableDataGrid<
             );
             if (!hasLoaders) {
                 setResolvedFields(fields);
+                setFieldsResolving(false);
                 return;
             }
 
@@ -107,6 +106,7 @@ export default function TableDataGrid<
         try {
             setCurrentRows(await getRowsAction());
         } catch (err) {
+            setCurrentRows([]);
             showError(err);
         }
     }, [getRowsAction, showError]);

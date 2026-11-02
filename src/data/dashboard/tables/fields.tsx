@@ -41,11 +41,10 @@ const fields: FieldConfig<TableRow, TableRowInsert>[] = [
         key: "multiline_field",
         label: "Multiline",
         type: "multiline",
-        name: "content", // name in FormData. Optional, defaults to key
         size: 12,
         required: true,
         placeholder: "Required multiline content",
-        // optional transform for putting value into FormData (not needed for plain strings)
+        // Optional transform for the update payload (not needed for plain strings).
         toFormValue: (v) => (v == null ? "" : String(v)),
     },
     {

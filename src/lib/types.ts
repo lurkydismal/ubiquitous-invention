@@ -1,16 +1,24 @@
-import { AnyColumn } from "drizzle-orm";
+import type { AnyColumn } from "drizzle-orm";
+import { z } from "zod";
 
-import * as schema from "@/db/schema";
-import { DbTargetSchema } from "@/utils/validate/schemas";
+import { tables } from "@/db/schema";
 
-export const TABLES = schema;
+/**
+ * Tables that are intentionally exposed through the generic dashboard CRUD API.
+ * Keep this allowlist separate from the complete Drizzle schema: auth and
+ * internal tables must never become addressable through client-invoked actions.
+ */
+export const TABLES = {
+    tables,
+} as const;
 
 export type DbTarget = keyof typeof TABLES;
+export const DbTargetSchema = z.enum(Object.keys(TABLES) as [DbTarget, ...DbTarget[]]);
 
 /**
  * Parses raw target.
  */
-export function parseRawTarget(rawTarget: DbTarget): (typeof TABLES)[DbTarget] & {
+export function parseRawTarget(rawTarget: unknown): (typeof TABLES)[DbTarget] & {
     author_id: AnyColumn;
     last_editor_id: AnyColumn;
 } {

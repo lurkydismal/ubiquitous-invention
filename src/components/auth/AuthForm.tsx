@@ -53,6 +53,7 @@ function SignInForm() {
 
                         <TextField
                             {...field}
+                            id="email"
                             autoComplete="email"
                             autoFocus
                             color={Boolean(fieldState.error) ? "error" : "primary"}
@@ -78,7 +79,8 @@ function SignInForm() {
 
                         <TextField
                             {...field}
-                            autoComplete="new-password"
+                            id="password"
+                            autoComplete="current-password"
                             color={Boolean(fieldState.error) ? "error" : "primary"}
                             error={Boolean(fieldState.error)}
                             fullWidth
@@ -161,6 +163,7 @@ function SignUpForm() {
 
                         <TextField
                             {...field}
+                            id="name"
                             autoComplete="name"
                             autoFocus
                             color={Boolean(fieldState.error) ? "error" : "primary"}
@@ -182,12 +185,12 @@ function SignUpForm() {
                 control={control}
                 render={({ field, fieldState }) => (
                     <FormControl>
-                        <FormLabel htmlFor="email">Email</FormLabel>
+                        <FormLabel htmlFor="signup-email">Email</FormLabel>
 
                         <TextField
                             {...field}
+                            id="signup-email"
                             autoComplete="email"
-                            autoFocus
                             color={Boolean(fieldState.error) ? "error" : "primary"}
                             error={Boolean(fieldState.error)}
                             fullWidth
@@ -195,7 +198,7 @@ function SignUpForm() {
                             name="email"
                             placeholder="tralalero@localhost.noreply"
                             required
-                            type="text"
+                            type="email"
                             variant="outlined"
                         />
                     </FormControl>
@@ -207,10 +210,11 @@ function SignUpForm() {
                 control={control}
                 render={({ field, fieldState }) => (
                     <FormControl>
-                        <FormLabel htmlFor="password">Password</FormLabel>
+                        <FormLabel htmlFor="signup-password">Password</FormLabel>
 
                         <TextField
                             {...field}
+                            id="signup-password"
                             autoComplete="new-password"
                             color={Boolean(fieldState.error) ? "error" : "primary"}
                             error={Boolean(fieldState.error)}

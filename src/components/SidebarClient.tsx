@@ -33,8 +33,8 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import NextLink from "@/components/Link";
-// Change this import to the file where your Better Auth client is exported.
 import { logout } from "@/lib/safe/auth";
+import { useSnackbar } from "@/providers/snackbar";
 
 const taskLinks = [
     { label: "All tasks", filter: null, Icon: AllIcon },
@@ -78,6 +78,7 @@ export default function SidebarClient({ username }: SidebarClientProps) {
     const pathname = normalizePathname(usePathname() ?? "/");
     const searchParams = useSearchParams();
     const router = useRouter();
+    const { showError } = useSnackbar();
 
     const isTasksPage = isActivePath(pathname, "/tasks");
     const activeTaskFilter = searchParams.get("filter");
@@ -85,8 +86,7 @@ export default function SidebarClient({ username }: SidebarClientProps) {
     const [tasksOpen, setTasksOpen] = useState(isTasksPage);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
 
-    // Expand the task section when navigation enters /tasks, without
-    // preventing the user from manually collapsing it afterward.
+    // Expand the task section when navigation enters /tasks.
     useEffect(() => {
         if (isTasksPage) {
             setTasksOpen(true);
@@ -99,11 +99,10 @@ export default function SidebarClient({ username }: SidebarClientProps) {
         try {
             await logout();
 
-            // Change /login if your sign-in page uses a different route.
-            router.replace("/login");
+            router.replace("/auth/login");
             router.refresh();
         } catch (error) {
-            console.error("Failed to sign out:", error);
+            showError(error);
         } finally {
             setIsLoggingOut(false);
         }
@@ -130,24 +129,20 @@ export default function SidebarClient({ username }: SidebarClientProps) {
                 elevation={0}
                 className="Sidebar"
                 sx={{
-                    position: { xs: "fixed", md: "sticky" },
+                    position: "sticky",
                     top: 0,
-                    left: { xs: 0, md: "auto" },
-                    transform: {
-                        xs: "translateX(calc(100% * (var(--SideNavigation-slideIn, 0) - 1)))",
-                        md: "none",
-                    },
-                    transition: "transform 0.4s, width 0.4s",
-                    zIndex: 10000,
-                    height: "100dvh",
-                    width: "var(--Sidebar-width)",
+                    zIndex: 10,
+                    height: { xs: "auto", md: "100dvh" },
+                    maxHeight: { xs: "48dvh", md: "none" },
+                    width: { xs: "100%", md: "var(--Sidebar-width)" },
                     flexShrink: 0,
                     display: "flex",
                     flexDirection: "column",
                     gap: 2,
                     p: 2,
                     overflow: "hidden",
-                    borderRight: "1px solid",
+                    borderRight: { xs: 0, md: "1px solid" },
+                    borderBottom: { xs: "1px solid", md: 0 },
                     borderColor: "divider",
                     bgcolor: "background.paper",
                 }}

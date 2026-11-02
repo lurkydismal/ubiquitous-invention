@@ -1,8 +1,10 @@
+import "server-only";
 import { cacheLife, cacheTag, updateTag } from "next/cache";
 
 import type { DbTarget } from "@/lib/types";
 
 const DB_CACHE_TAG_PREFIX = "db";
+type DbCacheTarget = DbTarget | "user" | "all";
 
 const DASHBOARD_DB_CACHE_LIFE = {
     expire: 60 * 60,
@@ -13,14 +15,14 @@ const DASHBOARD_DB_CACHE_LIFE = {
 /**
  * Builds a stable cache tag for a database table or query dependency.
  */
-function getDbCacheTag(target: DbTarget | "all") {
+function getDbCacheTag(target: DbCacheTarget) {
     return `${DB_CACHE_TAG_PREFIX}:${target}`;
 }
 
 /**
  * Applies shared cache metadata to cached database reads.
  */
-export function cacheDbRequest(targets: readonly (DbTarget | "all")[]) {
+export function cacheDbRequest(targets: readonly DbCacheTarget[]) {
     cacheLife(DASHBOARD_DB_CACHE_LIFE);
     cacheTag(getDbCacheTag("all"), ...targets.map(getDbCacheTag));
 }

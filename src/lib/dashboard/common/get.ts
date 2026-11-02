@@ -1,7 +1,8 @@
 "use server";
 
-import { GridValidRowModel } from "@mui/x-data-grid";
-import { AnyColumn, desc, eq, getColumns } from "drizzle-orm";
+import type { GridValidRowModel } from "@mui/x-data-grid";
+import { desc, eq, getColumns } from "drizzle-orm";
+import type { AnyColumn } from "drizzle-orm";
 import { alias } from "drizzle-orm/pg-core";
 import { createSelectSchema } from "drizzle-orm/zod";
 import z from "zod";
@@ -9,7 +10,9 @@ import z from "zod";
 import db from "@/db";
 import { user } from "@/db/schema";
 import { cacheDbRequest } from "@/lib/cache";
-import { ActionResult, DbTarget, parseRawTarget } from "@/lib/types";
+import { getSession } from "@/lib/dal/auth";
+import { DbTargetSchema, parseRawTarget } from "@/lib/types";
+import type { ActionResult, DbTarget } from "@/lib/types";
 import { toCamelCase } from "@/utils/stdfunc";
 import log from "@/utils/stdlog";
 
@@ -17,6 +20,23 @@ import log from "@/utils/stdlog";
  * Gets rows.
  */
 export async function getRows(
+    rawTarget: DbTarget,
+    idColumnName: string,
+): Promise<ActionResult<readonly GridValidRowModel[]>> {
+    const session = await getSession();
+    if (!session) {
+        return { ok: false, error: "Unauthorized" };
+    }
+
+    const target = DbTargetSchema.safeParse(rawTarget);
+    if (!target.success) {
+        return { ok: false, error: "Unknown dashboard table" };
+    }
+
+    return getCachedRows(target.data, idColumnName);
+}
+
+async function getCachedRows(
     rawTarget: DbTarget,
     idColumnName: string,
 ): Promise<ActionResult<readonly GridValidRowModel[]>> {

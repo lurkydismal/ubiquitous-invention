@@ -201,7 +201,7 @@ export function paginate<T>(items: T[], currentPage: number, perPage: number): T
  *
  * @template T - The type of the value that is passed in. This can be an arbitrary type, and it can also be an array of that type.
  * @param item - The value to be normalized. It can either be a single value of type `T` or an array of values of type `T[]`.
- * @returns The normalized value: if `item` is an array, it returns the first element (`item[0]`), otherwise it returns `item` itself.
+ * @returns The first element for arrays, the value itself for scalar inputs, or `undefined` for an empty array.
  *
  * @example
  * // If the input is an array, return the first element.
@@ -210,8 +210,8 @@ export function paginate<T>(items: T[], currentPage: number, perPage: number): T
  * // If the input is a single value, return the value itself.
  * normalizeArrayOrValue(5); // Returns: 5
  */
-export function normalizeArrayOrValue<T>(item: T | T[]): T {
-    return Array.isArray(item) ? (item[0] ?? ([] as T)) : item;
+export function normalizeArrayOrValue<T>(item: T | T[]): T | undefined {
+    return Array.isArray(item) ? item[0] : item;
 }
 
 /**

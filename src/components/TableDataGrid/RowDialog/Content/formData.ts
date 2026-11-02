@@ -11,12 +11,15 @@ function setFormDataField<R extends Record<string, unknown>, RI extends Record<s
     field: FieldConfig<R, RI>,
     sourceValues: Partial<RI>,
 ) {
-    const name = field.name ?? String(field.key);
-    if (field.readOnly && !field.interconnected) {
-        fd.delete(name);
-        return;
-    }
     const key = String(field.key);
+    const formName = field.name ?? key;
+
+    // Form controls may use a custom React Hook Form name, but the server
+    // payload must use the matching database property key.
+    fd.delete(formName);
+    if (formName !== key) fd.delete(key);
+
+    if (field.readOnly && !field.interconnected) return;
     const value = toFieldValue(
         field as FieldConfig<Record<string, unknown>, Record<string, unknown>>,
         (sourceValues as Record<string, unknown>)[key],
@@ -24,13 +27,13 @@ function setFormDataField<R extends Record<string, unknown>, RI extends Record<s
 
     if (field.toFormValue) {
         const mappedValue = field.toFormValue(value);
-        if (mappedValue !== undefined) fd.set(name, mappedValue);
+        if (mappedValue !== undefined) fd.set(key, mappedValue);
     } else if (value === null || value === undefined) {
-        if (!fd.has(name)) fd.set(name, "");
+        fd.set(key, "");
     } else if (isBlob(value)) {
-        fd.set(name, value);
+        fd.set(key, value);
     } else {
-        fd.set(name, String(value));
+        fd.set(key, String(value));
     }
 }
 

@@ -1,42 +1,62 @@
 import { Box, Container } from "@mui/material";
+import { redirect } from "next/navigation";
 
 import Footer from "@/components/Footer";
-import NavBar from "@/components/NavBar";
 import Sidebar from "@/components/Sidebar";
+import { getSession } from "@/lib/dal/auth";
 
-/**
- * Renders the protected application layout shell.
- */
+/** Renders the authenticated application shell. */
 export default async function Layout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    // Route groups do not enforce authorization by themselves. Keep the
+    // authoritative session check in this server layout as well as the proxy.
+    const session = await getSession();
+
+    if (!session) {
+        redirect("/auth/login");
+    }
+
+    const username = session.user.name?.trim() || session.user.email || "User";
+
     return (
         <Box
             sx={{
-                minHeight: "100vh",
+                minHeight: "100dvh",
                 display: "flex",
-                flexDirection: "column",
+                flexDirection: { xs: "column", md: "row" },
             }}
         >
-            <Sidebar />
+            <Sidebar username={username} />
 
-            <Container
-                maxWidth={false}
+            <Box
+                component="main"
                 sx={{
-                    flexGrow: 1,
+                    minWidth: 0,
+                    minHeight: { md: "100dvh" },
+                    flex: 1,
                     display: "flex",
                     flexDirection: "column",
-                    mt: 11,
-                    mb: 4,
-                    gap: 4,
                 }}
             >
-                {children}
-            </Container>
+                <Container
+                    maxWidth={false}
+                    sx={{
+                        flexGrow: 1,
+                        display: "flex",
+                        flexDirection: "column",
+                        mt: { xs: 3, md: 4 },
+                        mb: 4,
+                        gap: 4,
+                    }}
+                >
+                    {children}
+                </Container>
 
-            <Footer />
+                <Footer />
+            </Box>
         </Box>
     );
 }

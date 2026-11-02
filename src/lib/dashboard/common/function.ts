@@ -3,7 +3,7 @@
 import { createAction } from "@/lib/dashboard/common/create";
 import { getRows } from "@/lib/dashboard/common/get";
 import { updateAction } from "@/lib/dashboard/common/update";
-import { DbTarget } from "@/lib/types";
+import type { DbTarget } from "@/lib/types";
 
 /**
  * Gets rows action.

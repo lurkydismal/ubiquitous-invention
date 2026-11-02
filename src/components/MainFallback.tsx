@@ -1,7 +1,7 @@
 "use client";
 
 import { styled, Box, Typography, keyframes } from "@mui/material";
-import { ReactNode, Children } from "react";
+import type { ReactNode } from "react";
 
 type Props = {
     children?: ReactNode;
@@ -68,15 +68,13 @@ const Fancy = styled(Typography)(({ theme }) => ({
 /**
  * Checks whether the value is an empty node.
  */
-function isEmptyNode(node?: ReactNode) {
-    if (node === null || node === undefined) return true;
-    if (typeof node === "string") return node.trim() === "";
-    if (Array.isArray(node)) {
-        // every non-empty child counts as non-empty
-        return node.every(isEmptyNode);
-    }
-    // React element or object assumed non-empty
-    return false;
+function hasRenderableContent(node?: ReactNode): boolean {
+    if (node === null || node === undefined || typeof node === "boolean") return false;
+    if (typeof node === "string") return node.trim().length > 0;
+    if (typeof node === "number") return true;
+    if (Array.isArray(node)) return node.some(hasRenderableContent);
+    // A React element is treated as content; its eventual rendered output is unknown here.
+    return true;
 }
 
 /**
@@ -88,9 +86,10 @@ export default function MainFallback({
     itemsLength,
     className,
 }: Props) {
-    const childrenEmpty = isEmptyNode(children) && Children.count(children) === 0;
-    const countEmpty = itemsLength !== undefined && itemsLength !== null ? itemsLength === 0 : true;
-    const showFallback = childrenEmpty || (itemsLength === undefined ? true : countEmpty);
+    const showFallback =
+        itemsLength !== undefined && itemsLength !== null
+            ? itemsLength === 0
+            : !hasRenderableContent(children);
 
     if (!showFallback) {
         return (

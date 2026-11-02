@@ -1,20 +1,22 @@
-import { headers } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
+import { getSessionCookie } from "better-auth/cookies";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-import auth from "@/lib/auth";
+/**
+ * Performs a cheap early redirect when the session cookie is absent. The cookie
+ * is not proof of a valid session: protected server layouts and data functions
+ * always verify the session with Better Auth.
+ */
+export function proxy(request: NextRequest) {
+    const sessionCookie = getSessionCookie(request);
 
-export async function proxy(request: NextRequest) {
-    const session = await auth.api.getSession({
-        headers: await headers(),
-    });
-
-    if (!session) {
-        return NextResponse.redirect(new URL("/auth/register", request.url));
+    if (!sessionCookie) {
+        return NextResponse.redirect(new URL("/auth/login", request.url));
     }
 
     return NextResponse.next();
 }
 
 export const config = {
-    matcher: ["/((?!api|_next/static|_next/image|favicon.ico|auth).*)"], // Specify the routes the middleware applies to
+    matcher: ["/dashboard/:path*", "/tasks/:path*", "/messages/:path*"],
 };

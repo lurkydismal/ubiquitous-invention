@@ -1,6 +1,6 @@
 import "server-only";
 import { headers } from "next/headers";
-import { unauthorized } from "next/navigation";
+import { redirect } from "next/navigation";
 import { cache } from "react";
 
 import auth from "@/lib/auth";
@@ -15,7 +15,7 @@ export async function getSessionDataOrUnauthorized() {
     const session = await getSession();
 
     if (!session) {
-        return unauthorized();
+        redirect("/auth/login");
     }
 
     return session;

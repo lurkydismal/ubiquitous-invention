@@ -1,7 +1,7 @@
 "use server";
 
 import { parseForm, save } from "@/lib/dashboard/common/update_create";
-import { DbTarget } from "@/lib/types";
+import type { DbTarget } from "@/lib/types";
 
 /**
  * Updates action.
@@ -11,6 +11,6 @@ export async function updateAction(
     idColumnName: string | string[],
     formData: FormData,
 ) {
-    const input = await parseForm(formData);
+    const input = await parseForm(formData, rawTarget);
     return save(rawTarget, input, { isUpdate: true, idColumnName });
 }

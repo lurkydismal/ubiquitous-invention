@@ -1,7 +1,7 @@
-"use server";
+import "server-only";
 
-import { NotificationsRow } from "@/db/types";
-import { DbTarget } from "@/lib/types";
+import type { NotificationsRow } from "@/db/types";
+import type { DbTarget } from "@/lib/types";
 import log from "@/utils/stdlog";
 
 type DashboardChangeEvent = {
