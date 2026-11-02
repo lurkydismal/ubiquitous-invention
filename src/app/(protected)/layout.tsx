@@ -2,6 +2,7 @@ import { Box, Container } from "@mui/material";
 
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
+import Sidebar from "@/components/Sidebar";
 
 /**
  * Renders the protected application layout shell.
@@ -19,7 +20,7 @@ export default async function Layout({
                 flexDirection: "column",
             }}
         >
-            <NavBar />
+            <Sidebar />
 
             <Container
                 maxWidth={false}

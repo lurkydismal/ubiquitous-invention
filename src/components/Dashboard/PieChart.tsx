@@ -113,7 +113,6 @@ export default function MyPieChart({ stats }: MyPieChartProps) {
         for (let i = 0; i < 4; i++) {
             const s = provided[i];
             if (s) {
-                log.debug(1);
                 result.push({
                     label: s.label ?? `Item ${i + 1}`,
                     value: Number.isFinite(s.value) ? Math.max(0, Math.min(100, s.value)) : 0,
@@ -121,7 +120,6 @@ export default function MyPieChart({ stats }: MyPieChartProps) {
                     color: s.color ?? DEFAULT_COLORS[i],
                 });
             } else {
-                log.debug(2);
                 result.push({
                     label: ["In Progress", "Finished", "Cancelled", "Outdated"][i],
                     value: 0,
