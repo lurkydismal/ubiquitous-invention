@@ -10,12 +10,17 @@ export interface NavItem {
 export const items: NavItem[] = [
     {
         name: "This Current Table",
-        href: "/dashboard/tables",
+        href: "/dashboard",
         position: "left",
     },
     {
         name: "The Very Same Table",
-        href: "/dashboard/tables",
+        href: "/messages",
+        position: "right",
+    },
+    {
+        name: "The Very Same Table",
+        href: "/tasks",
         position: "right",
     },
 ];
