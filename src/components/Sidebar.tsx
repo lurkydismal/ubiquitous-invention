@@ -217,7 +217,10 @@ export default async function Sidebar() {
                                             <ListItemText
                                                 primary={item.label}
                                                 slotProps={{
-                                                    primary: { variant: "body2", sx: { fontWeight: 600 } },
+                                                    primary: {
+                                                        variant: "body2",
+                                                        sx: { fontWeight: 600 },
+                                                    },
                                                 }}
                                             />
 
@@ -242,7 +245,9 @@ export default async function Sidebar() {
                                                         selected={
                                                             pathname === child.href.split("?")[0] &&
                                                             (!child.href.includes("?") ||
-                                                                pathnameRaw.includes(child.href.split("?")[1]))
+                                                                pathnameRaw.includes(
+                                                                    child.href.split("?")[1],
+                                                                ))
                                                         }
                                                         sx={{ px: 1.5, py: 0.75 }}
                                                     >

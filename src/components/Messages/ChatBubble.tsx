@@ -13,11 +13,7 @@ export default function ChatBubble(props: ChatBubbleProps) {
 
     return (
         <Box sx={{ maxWidth: "60%", minWidth: 0 }}>
-            <Stack
-                direction="row"
-                spacing={2}
-                sx={{ justifyContent: "space-between", mb: 0.25 }}
-            >
+            <Stack direction="row" spacing={2} sx={{ justifyContent: "space-between", mb: 0.25 }}>
                 <Typography variant="caption" color="text.secondary">
                     {isYou ? "" : sender.name}
                 </Typography>

@@ -27,7 +27,11 @@ export default function MessagesPaneHeader(props: MessagesPaneHeaderProps) {
                 bgcolor: "background.paper",
             }}
         >
-            <Stack direction="row" spacing={{ xs: 1, md: 2 }} sx={{ alignItems: "center", minWidth: 0 }}>
+            <Stack
+                direction="row"
+                spacing={{ xs: 1, md: 2 }}
+                sx={{ alignItems: "center", minWidth: 0 }}
+            >
                 <IconButton
                     aria-label="Back to conversations"
                     color="inherit"
@@ -49,7 +53,10 @@ export default function MessagesPaneHeader(props: MessagesPaneHeaderProps) {
                     <Chip
                         icon={
                             <CircleIcon
-                                sx={{ fontSize: 8, color: isOnline ? "success.main" : "text.disabled" }}
+                                sx={{
+                                    fontSize: 8,
+                                    color: isOnline ? "success.main" : "text.disabled",
+                                }}
                             />
                         }
                         label={isOnline ? "Online" : "Offline"}
