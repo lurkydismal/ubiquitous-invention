@@ -141,9 +141,6 @@ export default function SidebarClient({ username }: SidebarClientProps) {
                     gap: 2,
                     p: 2,
                     overflow: "hidden",
-                    borderRight: { xs: 0, md: "1px solid" },
-                    borderBottom: { xs: "1px solid", md: 0 },
-                    borderColor: "divider",
                     bgcolor: "background.paper",
                 }}
             >
