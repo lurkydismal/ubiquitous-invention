@@ -8,8 +8,9 @@
  */
 import "server-only";
 import "dotenv/config";
-import { DefaultLogger } from "drizzle-orm/logger";
 import type { LogWriter } from "drizzle-orm/logger";
+
+import { DefaultLogger } from "drizzle-orm/logger";
 import { drizzle } from "drizzle-orm/node-postgres";
 
 import log from "@/utils/stdlog";

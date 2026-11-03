@@ -1,11 +1,12 @@
 import { and, asc, count, eq, inArray, sql } from "drizzle-orm";
 import { z } from "zod";
 
+import type { NotificationsRow } from "@/db/types";
+
 import db from "@/db";
 import { notifications } from "@/db/schema";
-import type { NotificationsRow } from "@/db/types";
-import { emitNotificationEvent } from "@/lib/dashboard/common/change-events";
 import { getSession } from "@/lib/dal/auth";
+import { emitNotificationEvent } from "@/lib/dashboard/common/change-events";
 
 const notificationTypes = ["default", "success", "error", "warning", "info"] as const;
 type NotificationType = NotificationsRow["type"];
@@ -36,10 +37,7 @@ export async function GET(): Promise<Response> {
 
     const [rows, unreadResult] = await Promise.all([
         db.select().from(notifications).orderBy(asc(notifications.created_at)),
-        db
-            .select({ total: count() })
-            .from(notifications)
-            .where(eq(notifications.is_read, false)),
+        db.select({ total: count() }).from(notifications).where(eq(notifications.is_read, false)),
     ]);
 
     return Response.json({ rows, unreadCount: unreadResult[0]?.total ?? 0 });

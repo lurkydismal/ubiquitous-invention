@@ -1,13 +1,14 @@
 "use server";
 
-import { tables } from "@/db/schema";
 import type { TablesRowInsert as TableRowInsert } from "@/db/types";
+import type { DbTarget } from "@/lib/types";
+
+import { tables } from "@/db/schema";
 import {
     createRowAction as _createRowAction,
     getRowsAction as _getRowsAction,
     updateRowAction as _updateRowAction,
 } from "@/lib/dashboard/common/function";
-import type { DbTarget } from "@/lib/types";
 
 const target: DbTarget = "tables";
 const idColumn = tables.id;

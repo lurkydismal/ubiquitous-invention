@@ -1,7 +1,8 @@
 "use server";
 
-import { save } from "@/lib/dashboard/common/update_create";
 import type { ActionResult, DbTarget } from "@/lib/types";
+
+import { save } from "@/lib/dashboard/common/update_create";
 
 /**
  * Creates a new row in the target table.

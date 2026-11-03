@@ -1,6 +1,7 @@
+import type { NextRequest } from "next/server";
+
 import { getSessionCookie } from "better-auth/cookies";
 import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
 
 /**
  * Performs a cheap early redirect when the session cookie is absent. The cookie

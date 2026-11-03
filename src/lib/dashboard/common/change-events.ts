@@ -1,7 +1,7 @@
 import "server-only";
-
 import type { NotificationsRow } from "@/db/types";
 import type { DbTarget } from "@/lib/types";
+
 import log from "@/utils/stdlog";
 
 type DashboardChangeEvent = {

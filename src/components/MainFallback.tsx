@@ -1,7 +1,8 @@
 "use client";
 
-import { styled, Box, Typography, keyframes } from "@mui/material";
 import type { ReactNode } from "react";
+
+import { styled, Box, Typography, keyframes } from "@mui/material";
 
 type Props = {
     children?: ReactNode;

@@ -1,5 +1,5 @@
-import { subscribeToDashboardEvents } from "@/lib/dashboard/common/change-events";
 import { getSession } from "@/lib/dal/auth";
+import { subscribeToDashboardEvents } from "@/lib/dashboard/common/change-events";
 
 export const dynamic = "force-dynamic";
 

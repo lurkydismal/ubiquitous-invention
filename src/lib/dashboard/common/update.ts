@@ -1,7 +1,8 @@
 "use server";
 
-import { parseForm, save } from "@/lib/dashboard/common/update_create";
 import type { DbTarget } from "@/lib/types";
+
+import { parseForm, save } from "@/lib/dashboard/common/update_create";
 
 /**
  * Updates action.

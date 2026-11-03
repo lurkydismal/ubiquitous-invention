@@ -1,16 +1,18 @@
 "use server";
 
-import { and, eq, getColumns } from "drizzle-orm";
 import type { AnyColumn, SQL } from "drizzle-orm";
+
+import { and, eq, getColumns } from "drizzle-orm";
 import { createInsertSchema, createUpdateSchema } from "drizzle-orm/zod";
 import z from "zod";
 
+import type { ActionResult, DbTarget } from "@/lib/types";
+
 import db from "@/db";
 import { updateDbCacheTags } from "@/lib/cache";
-import { emitDashboardChange } from "@/lib/dashboard/common/change-events";
 import { getSession } from "@/lib/dal/auth";
+import { emitDashboardChange } from "@/lib/dashboard/common/change-events";
 import { parseRawTarget } from "@/lib/types";
-import type { ActionResult, DbTarget } from "@/lib/types";
 import { toCamelCase } from "@/utils/stdfunc";
 import log from "@/utils/stdlog";
 import { mutationInputSchema } from "@/utils/validate/schemas";
@@ -158,7 +160,10 @@ export async function save(
                 return { ok: false, error: `Unknown id column: ${columnName}` };
             }
             if (!column.primary) {
-                return { ok: false, error: `Update key is not a primary-key column: ${columnName}` };
+                return {
+                    ok: false,
+                    error: `Update key is not a primary-key column: ${columnName}`,
+                };
             }
             idColumns.push(column);
         }
@@ -181,11 +186,7 @@ export async function save(
 
         // RETURNING gives us the affected rows atomically, without a separate
         // existence query that could race with a concurrent delete.
-        const updatedRows = await db
-            .update(table)
-            .set(mutationRow)
-            .where(whereClause)
-            .returning();
+        const updatedRows = await db.update(table).set(mutationRow).where(whereClause).returning();
 
         if (updatedRows.length !== 1) {
             return { ok: false, error: "Update target no longer exists" };
@@ -212,10 +213,7 @@ export async function save(
 /**
  * Parses form.
  */
-export async function parseForm(
-    formData: FormData,
-    rawTarget: DbTarget,
-): Promise<MutationRow> {
+export async function parseForm(formData: FormData, rawTarget: DbTarget): Promise<MutationRow> {
     const table = parseRawTarget(rawTarget);
     const columns = getColumns(table) as Record<string, AnyColumn | undefined>;
     const entries = Object.fromEntries(formData.entries()) as MutationRow;
