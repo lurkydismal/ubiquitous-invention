@@ -40,7 +40,7 @@ importers:
         version: 9.17.0(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.3.1)(supports-color@7.2.0))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.3.1)(supports-color@7.2.0))(@types/react@19.2.14)(react@19.3.1)(supports-color@7.2.0))(@mui/material@9.5.0(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.3.1)(supports-color@7.2.0))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.3.1)(supports-color@7.2.0))(@types/react@19.2.14)(react@19.3.1)(supports-color@7.2.0))(@types/react@19.2.14)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@mui/system@9.5.0(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.3.1)(supports-color@7.2.0))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.3.1)(supports-color@7.2.0))(@types/react@19.2.14)(react@19.3.1)(supports-color@7.2.0))(@types/react@19.2.14)(react@19.3.1))(@types/react@19.2.14)(dayjs@1.11.23)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       '@next-safe-action/adapter-better-auth':
         specifier: ^0.1.7
-        version: 0.1.7(b9a776ffcf24fc07a1c49b8a2b6fe695)
+        version: 0.1.7(de0cc8f208fe0262b0d82e6f0e7484c6)
       '@next-safe-action/adapter-react-hook-form':
         specifier: ^2.1.0
         version: 2.1.0(@hookform/resolvers@7.0.1(@standard-schema/spec@1.1.0)(react-hook-form@7.91.0(@types/react@19.2.14)(react@19.3.1))(zod@4.6.7))(next-safe-action@8.7.3(next@16.4.4(@babel/core@7.29.0(supports-color@7.2.0))(@playwright/test@1.64.1)(@types/node@26.6.6)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(next@16.4.4(@babel/core@7.29.0(supports-color@7.2.0))(@playwright/test@1.64.1)(@types/node@26.6.6)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react-hook-form@7.91.0(@types/react@19.2.14)(react@19.3.1))(react@19.3.1)
@@ -48,14 +48,14 @@ importers:
         specifier: ^3.8.0
         version: 3.8.0(react@19.3.1)
       argon2:
-        specifier: ^0.45.1
-        version: 0.45.1
+        specifier: ^0.45.2
+        version: 0.45.2
       autosuggest-highlight:
         specifier: ^3.3.4
         version: 3.3.4
       better-auth:
         specifier: ^1.7.15
-        version: 1.7.15(drizzle-kit@1.0.0-rc.5(drizzle-orm@1.0.0-rc.5(@types/mssql@9.1.9(@azure/core-client@1.10.1(supports-color@7.2.0))(supports-color@7.2.0))(@types/pg@8.23.1)(mssql@11.0.1(@azure/core-client@1.10.1(supports-color@7.2.0))(supports-color@7.2.0))(pg@8.23.1)(zod@4.6.7)))(drizzle-orm@1.0.0-rc.5(@types/mssql@9.1.9(@azure/core-client@1.10.1(supports-color@7.2.0))(supports-color@7.2.0))(@types/pg@8.23.1)(mssql@11.0.1(@azure/core-client@1.10.1(supports-color@7.2.0))(supports-color@7.2.0))(pg@8.23.1)(zod@4.6.7))(next@16.4.4(@babel/core@7.29.0(supports-color@7.2.0))(@playwright/test@1.64.1)(@types/node@26.6.6)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(pg@8.23.1)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vitest@5.0.5(@types/node@26.6.6)(vite@7.3.1(@types/node@26.6.6)(jiti@2.6.1)(lightningcss@1.31.1)))
+        version: 1.7.15(drizzle-kit@1.0.0-rc.5(drizzle-orm@1.0.0-rc.5(@types/mssql@9.1.9(@azure/core-client@1.10.1(supports-color@7.2.0))(supports-color@7.2.0))(@types/pg@8.23.1)(mssql@11.0.1(@azure/core-client@1.10.1(supports-color@7.2.0))(supports-color@7.2.0))(pg@8.23.1)(zod@4.6.7)))(drizzle-orm@1.0.0-rc.5(@types/mssql@9.1.9(@azure/core-client@1.10.1(supports-color@7.2.0))(supports-color@7.2.0))(@types/pg@8.23.1)(mssql@11.0.1(@azure/core-client@1.10.1(supports-color@7.2.0))(supports-color@7.2.0))(pg@8.23.1)(zod@4.6.7))(next@16.4.4(@babel/core@7.29.0(supports-color@7.2.0))(@playwright/test@1.64.1)(@types/node@26.6.6)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(pg@8.23.1)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vitest@5.1.0(@types/node@26.6.6)(vite@7.3.1(@types/node@26.6.6)(jiti@2.6.1)(lightningcss@1.31.1)))
       cookie:
         specifier: ^2.0.1
         version: 2.0.1
@@ -190,8 +190,8 @@ importers:
         specifier: ^7
         version: 7.0.2
       vitest:
-        specifier: ^5.0.5
-        version: 5.0.5(@types/node@26.6.6)(vite@7.3.1(@types/node@26.6.6)(jiti@2.6.1)(lightningcss@1.31.1))
+        specifier: ^5.1.0
+        version: 5.1.0(@types/node@26.6.6)(vite@7.3.1(@types/node@26.6.6)(jiti@2.6.1)(lightningcss@1.31.1))
 
 packages:
 
@@ -2011,8 +2011,8 @@ packages:
   '@upsetjs/venn.js@2.0.0':
     resolution: {integrity: sha512-WbBhLrooyePuQ1VZxrJjtLvTc4NVfpOyKx0sKqioq9bX1C1m7Jgykkn8gLrtwumBioXIqam8DLxp88Adbue6Hw==}
 
-  '@vitest/mocker@5.0.5':
-    resolution: {integrity: sha512-xLL3lkDegJZw+MGoGaCCsFayDZthGgpAtr3Vziyfc4p7xH89K7KRPcRBBh/kEYm0Aqkt5DtTmkYpBtRV/FrHZg==}
+  '@vitest/mocker@5.1.0':
+    resolution: {integrity: sha512-5umB9/jlWcqVS6fsrFmv5Gdnpu6wAUio/lEOwAmvB7v+lFo/IW2B9FhAD0p19GCULTgMzLCdUmuCDCnAzWgppQ==}
     peerDependencies:
       msw: ^2.4.9 || ^3.0.0
       vite: ^6.0.0 || ^7.0.0 || ^8.0.0
@@ -2022,8 +2022,8 @@ packages:
       vite:
         optional: true
 
-  '@vitest/spy@5.0.5':
-    resolution: {integrity: sha512-lwJRExuH417257Q5wv9QYugN9IMJkoxcrKrYxGPQkBzl7wlNpTUxD/5yNX4ESKVUIShKPgkGchYPFMWOOk0wzw==}
+  '@vitest/spy@5.1.0':
+    resolution: {integrity: sha512-2DPO5OMHWKrBngC+fCmTQqemNF0gidRhp3lxbBmRhW+M1XJrfgPpqNqWVevXtn2f2ufD5ZaR1B6B641aAlcX5A==}
 
   abort-controller@3.0.0:
     resolution: {integrity: sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg==}
@@ -2033,8 +2033,8 @@ packages:
     resolution: {integrity: sha512-MnA+YT8fwfJPgBx3m60MNqakm30XOkyIoH1y6huTQvC0PwZG7ki8NacLBcrPbNoo8vEZy7Jpuk7+jMO+CUovTQ==}
     engines: {node: '>= 14'}
 
-  argon2@0.45.1:
-    resolution: {integrity: sha512-skm+/WCjkGqCQxF7FG1LuZXM5yvbFjgbfiCGsud2oLgaDhh6b6dbH0b1EkghbM+xx4Bj8Ape+KKgixoIlWZicQ==}
+  argon2@0.45.2:
+    resolution: {integrity: sha512-41gOiSQBpQf+7H7HyLZbUqRZxrNk5ps39TsJKILjWuOyAOialUkztuIVL/Y/l+n5iSA2C4/jFg3FUYso/cX7TA==}
     engines: {node: '>=16.17.0'}
 
   assertion-error@2.0.1:
@@ -3809,20 +3809,20 @@ packages:
       yaml:
         optional: true
 
-  vitest@5.0.5:
-    resolution: {integrity: sha512-cPODOMF8YnkiiYtDdHo6n4wWmBrOBBbOIYH2d33M4l3CdNn72h+qMmO6uXffUN6A5AZFXNND/d+krS9mgkXRfg==}
+  vitest@5.1.0:
+    resolution: {integrity: sha512-MzmNFnrwa8v8lF1bLxw3UJ4EREwVOVb75VqJZmUDRjJ6EluK/x9th7qTbaeDk41WxE1GxWqmTXcdsfobfH5sOA==}
     engines: {node: ^22.12.0 || ^24.0.0 || >=26.0.0}
     hasBin: true
     peerDependencies:
       '@edge-runtime/vm': '*'
       '@opentelemetry/api': ^1.9.0
       '@types/node': ^22.0.0 || >=24.0.0
-      '@vitest/browser-playwright': 5.0.5
-      '@vitest/browser-preview': 5.0.5
+      '@vitest/browser-playwright': 5.1.0
+      '@vitest/browser-preview': 5.1.0
       '@vitest/browser-webdriverio': ^5.0.0-beta.5 || >=5.0.0
-      '@vitest/coverage-istanbul': 5.0.5
-      '@vitest/coverage-v8': 5.0.5
-      '@vitest/ui': 5.0.5
+      '@vitest/coverage-istanbul': 5.1.0
+      '@vitest/coverage-v8': 5.1.0
+      '@vitest/ui': 5.1.0
       happy-dom: '*'
       jsdom: '*'
       vite: ^6.4.0 || ^7.0.0 || ^8.0.0
@@ -4831,9 +4831,9 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  '@next-safe-action/adapter-better-auth@0.1.7(b9a776ffcf24fc07a1c49b8a2b6fe695)':
+  '@next-safe-action/adapter-better-auth@0.1.7(de0cc8f208fe0262b0d82e6f0e7484c6)':
     dependencies:
-      better-auth: 1.7.15(drizzle-kit@1.0.0-rc.5(drizzle-orm@1.0.0-rc.5(@types/mssql@9.1.9(@azure/core-client@1.10.1(supports-color@7.2.0))(supports-color@7.2.0))(@types/pg@8.23.1)(mssql@11.0.1(@azure/core-client@1.10.1(supports-color@7.2.0))(supports-color@7.2.0))(pg@8.23.1)(zod@4.6.7)))(drizzle-orm@1.0.0-rc.5(@types/mssql@9.1.9(@azure/core-client@1.10.1(supports-color@7.2.0))(supports-color@7.2.0))(@types/pg@8.23.1)(mssql@11.0.1(@azure/core-client@1.10.1(supports-color@7.2.0))(supports-color@7.2.0))(pg@8.23.1)(zod@4.6.7))(next@16.4.4(@babel/core@7.29.0(supports-color@7.2.0))(@playwright/test@1.64.1)(@types/node@26.6.6)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(pg@8.23.1)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vitest@5.0.5(@types/node@26.6.6)(vite@7.3.1(@types/node@26.6.6)(jiti@2.6.1)(lightningcss@1.31.1)))
+      better-auth: 1.7.15(drizzle-kit@1.0.0-rc.5(drizzle-orm@1.0.0-rc.5(@types/mssql@9.1.9(@azure/core-client@1.10.1(supports-color@7.2.0))(supports-color@7.2.0))(@types/pg@8.23.1)(mssql@11.0.1(@azure/core-client@1.10.1(supports-color@7.2.0))(supports-color@7.2.0))(pg@8.23.1)(zod@4.6.7)))(drizzle-orm@1.0.0-rc.5(@types/mssql@9.1.9(@azure/core-client@1.10.1(supports-color@7.2.0))(supports-color@7.2.0))(@types/pg@8.23.1)(mssql@11.0.1(@azure/core-client@1.10.1(supports-color@7.2.0))(supports-color@7.2.0))(pg@8.23.1)(zod@4.6.7))(next@16.4.4(@babel/core@7.29.0(supports-color@7.2.0))(@playwright/test@1.64.1)(@types/node@26.6.6)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(pg@8.23.1)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vitest@5.1.0(@types/node@26.6.6)(vite@7.3.1(@types/node@26.6.6)(jiti@2.6.1)(lightningcss@1.31.1)))
       next: 16.4.4(@babel/core@7.29.0(supports-color@7.2.0))(@playwright/test@1.64.1)(@types/node@26.6.6)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       next-safe-action: 8.7.3(next@16.4.4(@babel/core@7.29.0(supports-color@7.2.0))(@playwright/test@1.64.1)(@types/node@26.6.6)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
 
@@ -5424,16 +5424,16 @@ snapshots:
       d3-selection: 3.0.0
       d3-transition: 3.0.1(d3-selection@3.0.0)
 
-  '@vitest/mocker@5.0.5(vite@7.3.1(@types/node@26.6.6)(jiti@2.6.1)(lightningcss@1.31.1))':
+  '@vitest/mocker@5.1.0(vite@7.3.1(@types/node@26.6.6)(jiti@2.6.1)(lightningcss@1.31.1))':
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
-      '@vitest/spy': 5.0.5
+      '@vitest/spy': 5.1.0
       estree-walker: 3.0.3
       magic-string: 1.4.5
     optionalDependencies:
       vite: 7.3.1(@types/node@26.6.6)(jiti@2.6.1)(lightningcss@1.31.1)
 
-  '@vitest/spy@5.0.5': {}
+  '@vitest/spy@5.1.0': {}
 
   abort-controller@3.0.0:
     dependencies:
@@ -5443,7 +5443,7 @@ snapshots:
   agent-base@7.1.4:
     optional: true
 
-  argon2@0.45.1:
+  argon2@0.45.2:
     dependencies:
       '@phc/format': 1.0.0
       cross-env: 10.1.0
@@ -5475,7 +5475,7 @@ snapshots:
 
   baseline-browser-mapping@2.10.0: {}
 
-  better-auth@1.7.15(drizzle-kit@1.0.0-rc.5(drizzle-orm@1.0.0-rc.5(@types/mssql@9.1.9(@azure/core-client@1.10.1(supports-color@7.2.0))(supports-color@7.2.0))(@types/pg@8.23.1)(mssql@11.0.1(@azure/core-client@1.10.1(supports-color@7.2.0))(supports-color@7.2.0))(pg@8.23.1)(zod@4.6.7)))(drizzle-orm@1.0.0-rc.5(@types/mssql@9.1.9(@azure/core-client@1.10.1(supports-color@7.2.0))(supports-color@7.2.0))(@types/pg@8.23.1)(mssql@11.0.1(@azure/core-client@1.10.1(supports-color@7.2.0))(supports-color@7.2.0))(pg@8.23.1)(zod@4.6.7))(next@16.4.4(@babel/core@7.29.0(supports-color@7.2.0))(@playwright/test@1.64.1)(@types/node@26.6.6)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(pg@8.23.1)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vitest@5.0.5(@types/node@26.6.6)(vite@7.3.1(@types/node@26.6.6)(jiti@2.6.1)(lightningcss@1.31.1))):
+  better-auth@1.7.15(drizzle-kit@1.0.0-rc.5(drizzle-orm@1.0.0-rc.5(@types/mssql@9.1.9(@azure/core-client@1.10.1(supports-color@7.2.0))(supports-color@7.2.0))(@types/pg@8.23.1)(mssql@11.0.1(@azure/core-client@1.10.1(supports-color@7.2.0))(supports-color@7.2.0))(pg@8.23.1)(zod@4.6.7)))(drizzle-orm@1.0.0-rc.5(@types/mssql@9.1.9(@azure/core-client@1.10.1(supports-color@7.2.0))(supports-color@7.2.0))(@types/pg@8.23.1)(mssql@11.0.1(@azure/core-client@1.10.1(supports-color@7.2.0))(supports-color@7.2.0))(pg@8.23.1)(zod@4.6.7))(next@16.4.4(@babel/core@7.29.0(supports-color@7.2.0))(@playwright/test@1.64.1)(@types/node@26.6.6)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(pg@8.23.1)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vitest@5.1.0(@types/node@26.6.6)(vite@7.3.1(@types/node@26.6.6)(jiti@2.6.1)(lightningcss@1.31.1))):
     dependencies:
       '@better-auth/core': 1.7.15(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.4(zod@4.6.7))(jose@6.2.14)(kysely@0.29.7)(nanostores@1.5.5)
       '@better-auth/drizzle-adapter': 1.7.15(@better-auth/core@1.7.15(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.4(zod@4.6.7))(jose@6.2.14)(kysely@0.29.7)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(drizzle-orm@1.0.0-rc.5(@types/mssql@9.1.9(@azure/core-client@1.10.1(supports-color@7.2.0))(supports-color@7.2.0))(@types/pg@8.23.1)(mssql@11.0.1(@azure/core-client@1.10.1(supports-color@7.2.0))(supports-color@7.2.0))(pg@8.23.1)(zod@4.6.7))
@@ -5501,7 +5501,7 @@ snapshots:
       pg: 8.23.1
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
-      vitest: 5.0.5(@types/node@26.6.6)(vite@7.3.1(@types/node@26.6.6)(jiti@2.6.1)(lightningcss@1.31.1))
+      vitest: 5.1.0(@types/node@26.6.6)(vite@7.3.1(@types/node@26.6.6)(jiti@2.6.1)(lightningcss@1.31.1))
     transitivePeerDependencies:
       - '@opentelemetry/api'
 
@@ -7428,10 +7428,10 @@ snapshots:
       jiti: 2.6.1
       lightningcss: 1.31.1
 
-  vitest@5.0.5(@types/node@26.6.6)(vite@7.3.1(@types/node@26.6.6)(jiti@2.6.1)(lightningcss@1.31.1)):
+  vitest@5.1.0(@types/node@26.6.6)(vite@7.3.1(@types/node@26.6.6)(jiti@2.6.1)(lightningcss@1.31.1)):
     dependencies:
       '@types/chai': 5.2.3
-      '@vitest/mocker': 5.0.5(vite@7.3.1(@types/node@26.6.6)(jiti@2.6.1)(lightningcss@1.31.1))
+      '@vitest/mocker': 5.1.0(vite@7.3.1(@types/node@26.6.6)(jiti@2.6.1)(lightningcss@1.31.1))
       chai: 6.3.0
       es-module-lexer: 2.3.2
       expect-type: 1.4.0

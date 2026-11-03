@@ -30,7 +30,7 @@
         "@next-safe-action/adapter-better-auth": "^0.1.7",
         "@next-safe-action/adapter-react-hook-form": "^2.1.0",
         "@reactour/tour": "^3.8.0",
-        "argon2": "^0.45.1",
+        "argon2": "^0.45.2",
         "autosuggest-highlight": "^3.3.4",
         "better-auth": "^1.7.15",
         "cookie": "^2.0.1",
@@ -79,6 +79,6 @@
         "prettier": "^3.9.10",
         "tailwindcss": "^4",
         "typescript": "^7",
-        "vitest": "^5.0.5"
+        "vitest": "^5.1.0"
     }
 }
