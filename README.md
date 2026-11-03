@@ -158,7 +158,7 @@ Screenshots will be added as the interface develops.
 Install dependencies:
 
 ```bash
-pnpm install
+just packages-install
 ```
 
 Create an environment configuration file:
@@ -170,7 +170,7 @@ cp env.example .env
 Configure your PostgreSQL connection and authentication secret in `.env`:
 
 ```env
-POSTGRES_USER=postgres
+POSTGRES_USER=your_user
 POSTGRES_PASSWORD=your_password
 POSTGRES_DB=appdb
 
@@ -183,7 +183,7 @@ BETTER_AUTH_SECRET=your_secret
 Start PostgreSQL using Docker Compose (optional):
 
 ```bash
-docker compose up -d postgres
+just docker-up
 ```
 
 Apply the database schema:
@@ -195,7 +195,7 @@ pnpm push
 Start the development server:
 
 ```bash
-pnpm dev
+just
 ```
 
 The application will be available at:
@@ -219,28 +219,31 @@ Additional development commands:
 
 ```bash
 # Build the production application
-pnpm build
+just build-release
 
 # Start the production server
-pnpm start
+just run-release
 
 # Run unit tests
-pnpm test --run
+just run-unit-tests
 
 # Generate database migrations
-pnpm generate
+just generate-migration
 
 # Apply database migrations
-pnpm migrate
+just migrate
 
 # Synchronize the database schema
 pnpm push
 
-# Run static analysis
-pnpm lint
+# Run fallow static analysis
+just lint
+
+# Run tsc static analysis
+just hard-lint
 
 # Format source files
-pnpm format
+just format
 ```
 
 ## Project Status
