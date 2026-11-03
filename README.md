@@ -1,6 +1,6 @@
 # ubiquitous-invention
 
-> A configurable admin dashboard starter with reusable data grids, database-backed operations, and real-time updates.
+> An administrative dashboard for monitoring application activity, visualizing operational data, and communicating with users through technical support.
 
 ## Table of Contents
 
@@ -17,13 +17,16 @@
 
 ## General Information
 
-ubiquitous-invention is an in-progress admin dashboard application designed around reusable, configuration-driven data management components.
+ubiquitous-invention is an in-progress administrative interface for the Vigilant Parakeet application.
 
-The main goal is to provide a flexible foundation for building database-backed administrative interfaces without repeatedly implementing table layouts, editing forms, validation, and database operations for every resource.
+The goal is to provide administrators and technical support staff with a centralized interface for monitoring application activity, analyzing operational statistics, managing data, and communicating directly with users.
 
-Its data grid architecture separates field definitions and presentation logic from database operations, allowing different tables to reuse the same components with their own configurations.
+The application is designed around several main areas:
 
-The project also includes a dashboard overview with data visualizations, task management interface, notification system, and a chat-style messaging interface.
+- **Dashboard and Analytics** — Visualize application activity through statistics, charts, and configurable dashboard widgets.
+- **Data Management** — Manage application data through reusable, configuration-driven data grids and editing forms.
+- **Technical Support** — Communicate with application users through direct messages and manage support conversations.
+- **Notifications** — Receive real-time administrative notifications and updates.
 
 ## Technologies Used
 
@@ -60,86 +63,99 @@ The project also includes a dashboard overview with data visualizations, task ma
 - Caddy
 - Vitest
 - Playwright
+- Fallow
+- Oxfmt
 
 ## Features
 
 ### Implemented
 
-#### Authentication and Application Layout
+#### Authentication and Administration
 
-- Email/password registration and authentication using Better Auth.
-- Server-side session validation and protected application routes.
-- Responsive Material UI dashboard layout with navigation and user information.
-- Centralized application theme and reusable UI components.
+- Email/password authentication using Better Auth.
+- Server-side session validation and protected administrative routes.
+- Responsive administrative interface with navigation and reusable Material UI components.
 
-#### Configurable Data Grid
+#### Dashboard and Analytics
 
-- Reusable, strongly typed data grid architecture based on MUI X Data Grid.
-- Configuration-driven column generation and row editing dialogs.
-- Support for multiple field types:
+- Dashboard layout with reusable statistic cards.
+- Line charts, bar charts, and pie charts using MUI X Charts.
+- Task overview with a data grid.
+- Sample metrics and datasets for prototyping dashboard visualizations.
+
+#### Data Management
+
+- Reusable, strongly typed, configuration-driven data grid architecture.
+- Dynamically generated columns and row-editing dialogs.
+- Configurable form fields supporting:
     - Text and multiline text.
     - Markdown with preview.
-    - Numeric fields with minimum and maximum constraints.
-    - Date, time, and datetime fields.
-    - Autocomplete with static or asynchronously loaded options.
+    - Numeric values with range constraints.
+    - Date, time, and datetime.
+    - Autocomplete with configurable options.
     - UUID and hexadecimal values.
     - IPv4 and IPv6 addresses, optionally including ports.
-    - Table-lookup fields with custom validation.
+    - Table lookups with custom validation.
     - Boolean checkboxes, icon checkboxes, and switches.
     - Radio groups and custom-rendered fields.
-- Field-level validation, required field groups, and custom validation functions.
-- Interconnected fields with dependent values, conditional read-only behavior, and relational lookups.
-- Configurable autocomplete options with mutually exclusive selections.
-- Automatic row metadata displaying creation date, modification date, author, and last editor.
+- Field-level validation and configurable required fields.
+- Interconnected fields with dependent values and conditional read-only behavior.
+- Automatic author and last-editor attribution.
 - Quick search, sorting, filtering, CSV export, and printing.
 
-#### Database Operations
+#### Database and Real-Time Infrastructure
 
 - Reusable server-side create, read, and update operations using Drizzle ORM.
-- Runtime input and database schema validation using Zod and Drizzle-Zod.
-- Protected database table allowlisting for generic data operations.
-- Automatic author and last-editor attribution based on authenticated sessions.
-- Automatic modification timestamps.
+- PostgreSQL integration with runtime validation using Zod.
+- Authenticated database operations and protected table allowlisting.
+- Automatic creation and modification metadata.
 - Database cache invalidation after successful mutations.
-- Support for primary-key-based updates, including composite primary keys.
+- Server-Sent Events for broadcasting database changes.
+- Persistent administrative notifications with unread tracking and read-state management.
+- Real-time notification delivery to connected clients.
 
-#### Real-Time Updates and Notifications
+#### Technical Support Interface
 
-- Server-Sent Events for broadcasting dashboard changes.
-- Automatic data grid refresh when database records change.
-- Persistent notification records stored in PostgreSQL.
-- Notification types: default, success, error, warning, and informational.
-- Unread notification count and read/unread state management.
-- Snackbar notifications integrated with the application interface.
-
-#### Dashboard and Data Visualization
-
-- Dashboard overview with reusable statistic cards.
-- Line, bar, and pie chart components using MUI X Charts.
-- Task overview with a data grid.
-- Task status filtering through URL query parameters.
-
-#### Additional Components
-
-- Chat-style messaging interface with a two-pane conversation layout.
-- Markdown rendering with GitHub Flavored Markdown.
-- LaTeX mathematical expressions.
-- Mermaid diagrams.
-- Syntax-highlighted code blocks with clipboard support.
+- Two-pane messaging interface with a conversation list and message history.
+- User avatars and online-status indicators.
+- Conversation selection and message presentation.
+- Responsive layout for desktop and mobile devices.
+- Sample users and conversations for UI prototyping.
 
 ### Planned
 
-- Support for multiple independently configured database tables and dashboard resources.
-- Configurable server-side pagination, sorting, and filtering.
-- Generic record deletion and bulk operations.
+#### Dashboard and Analytics
+
+- Integration with live Vigilant Parakeet application statistics.
+- Real-time monitoring of application activity and user sessions.
+- User statistics, registration trends, and activity history.
+- Configurable dashboards with additional charts and widgets.
+- Historical data analysis and customizable time ranges.
+
+#### Data Management
+
+- Integration with actual Vigilant Parakeet database entities.
+- Dedicated administrative views for application-specific resources.
+- Record deletion and bulk operations.
+- Server-side pagination, sorting, and filtering.
 - Role-based access control and resource-specific permissions.
-- Customizable dashboard layouts and widgets.
-- Database-backed task management with assignments, statuses, tags, and deadlines.
-- Persistent conversations and actual message delivery.
-- Real-time messaging using Server-Sent Events.
-- Improved notification ownership and delivery across multiple application instances.
-- Additional field types and reusable validation rules.
-- Comprehensive automated unit and end-to-end testing.
+
+#### Technical Support
+
+- Integration with Vigilant Parakeet user accounts.
+- Direct communication between users and technical support staff.
+- Persistent conversations and message history.
+- Message sending and receiving through the application's backend.
+- Unread message tracking and conversation status management.
+- Real-time message delivery and notifications.
+- Conversation search and management.
+
+#### Infrastructure
+
+- Improved authorization and administrative permissions.
+- Comprehensive automated unit and end-to-end tests.
+- Production deployment configuration.
+- Improved error handling and operational logging.
 
 ## Screenshots
 
@@ -167,7 +183,7 @@ Create an environment configuration file:
 cp env.example .env
 ```
 
-Configure your PostgreSQL connection and authentication secret in `.env`:
+Configure PostgreSQL and authentication settings in `.env`:
 
 ```env
 POSTGRES_USER=your_user
@@ -180,7 +196,7 @@ DB_PORT=5432
 BETTER_AUTH_SECRET=your_secret
 ```
 
-Start PostgreSQL using Docker Compose (optional):
+Start PostgreSQL using Docker Compose:
 
 ```bash
 just docker-up
@@ -206,14 +222,13 @@ http://localhost:3000
 
 ## Usage
 
-1. Register an account or sign in.
-2. Explore the dashboard overview and data visualizations.
-3. Navigate to the task dashboard and filter tasks by status.
-4. Open the configurable data grid.
-5. Create or edit records using the dynamically generated form dialogs.
-6. Configure fields, validation rules, and custom renderers through field definitions.
-7. Search, filter, sort, export, and print table data.
-8. Explore the notification system and messaging interface.
+1. Register an administrative account or sign in.
+2. Explore the dashboard overview and available visualizations.
+3. Navigate through administrative data tables.
+4. Create and edit records using dynamically generated forms.
+5. Search, filter, sort, and export table data.
+6. Explore the technical support messaging interface.
+7. Monitor administrative notifications.
 
 Additional development commands:
 
@@ -233,7 +248,7 @@ just generate-migration
 # Apply database migrations
 just migrate
 
-# Synchronize the database schema
+# Synchronize database schema
 pnpm push
 
 # Run fallow static analysis
@@ -250,23 +265,24 @@ just format
 
 Project is: _in progress_.
 
-The authentication system, application layout, configurable data grid, database-backed record operations, and basic real-time notification infrastructure are implemented.
+The administrative application foundation is implemented, including authentication, dashboard visualization components, reusable data grids, PostgreSQL operations, and notification infrastructure.
 
-The dashboard visualizations, task management interface, and messaging interface are still being developed. Some of these currently use demonstration data rather than persistent application records.
+The dashboard currently uses demonstration datasets, and the messaging interface uses sample conversations. Integration with the actual Vigilant Parakeet application, its user database, operational metrics, and technical support messaging system is still under development.
 
 ## Room for Improvement
 
 To do:
 
-- Expand the generic data grid architecture to support multiple configurable database resources.
-- Implement record deletion and bulk editing.
-- Add server-side pagination and filtering for large datasets.
-- Introduce role-based and resource-specific authorization.
-- Replace demonstration task data with database-backed task management.
-- Implement persistent messaging and real-time message delivery.
-- Add configurable dashboard layouts and widgets.
-- Improve notification delivery and multi-instance support.
-- Add comprehensive unit and end-to-end tests.
+- Connect dashboard visualizations to live application data.
+- Implement dedicated application monitoring dashboards.
+- Integrate actual Vigilant Parakeet database entities.
+- Implement direct messaging between users and technical support.
+- Add persistent message storage and real-time message delivery.
+- Introduce conversation management and unread message tracking.
+- Expand administrative permissions and access control.
+- Add record deletion and bulk database operations.
+- Implement server-side pagination and filtering.
+- Add comprehensive automated tests.
 - Improve deployment configuration and production documentation.
 
 ## Acknowledgements
